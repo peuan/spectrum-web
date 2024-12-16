@@ -1,14 +1,14 @@
-"use client";
+"use client"
 
-import { createTheme } from "@mui/material/styles";
-import { Noto_Sans_Thai } from "next/font/google";
+import { createTheme } from "@mui/material/styles"
+import { Noto_Sans_Thai } from "next/font/google"
 
 const notoSansThai = Noto_Sans_Thai({
   subsets: ["thai", "latin"],
   weight: ["300", "400", "500", "600", "700"],
   display: "swap",
   variable: "--font-noto-sans-thai",
-});
+})
 
 const theme = createTheme({
   typography: {
@@ -16,16 +16,33 @@ const theme = createTheme({
   },
   palette: {
     primary: {
-      main: "#401CD6",
+      main: "#6A79FA",
     },
     secondary: {
       main: "#D701A2",
+    },
+    grey: {
+      500: "#333336",
     },
   },
   shape: {
     borderRadius: 6,
   },
   components: {
+    MuiChip: {
+      styleOverrides: {
+        root: {
+          fontWeight: 600,
+          fontSize: 22,
+          borderRadius: 6,
+          height: 39,
+        },
+        colorDefault: {
+          backgroundColor: "#333336",
+          color: "#ffffff",
+        },
+      },
+    },
     MuiLink: {
       styleOverrides: {
         root: {
@@ -52,6 +69,14 @@ const theme = createTheme({
     },
     MuiIconButton: {
       styleOverrides: {
+        sizeSmall: {
+          width: 20,
+          height: 20,
+
+          "& .MuiIcon-root": {
+            fontSize: 14,
+          },
+        },
         root: {
           color: "#ADB7BE",
           background: "#333235",
@@ -70,6 +95,6 @@ const theme = createTheme({
       },
     },
   },
-});
+})
 
-export default theme;
+export default theme
