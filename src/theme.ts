@@ -65,6 +65,10 @@ const theme = createTheme({
             background: "linear-gradient(to right, #5562FC 0%, #400ED3 100%)",
           },
         },
+        outlined: {
+          color: "#fff",
+          border: `2px solid #6A79FA`,
+        },
       },
     },
     MuiIconButton: {

@@ -4,6 +4,7 @@ import "./globals.css";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import { ThemeProvider } from "@mui/material";
 import theme from "@/theme";
+import TheMainLayout from "@/components/layouts/TheMainLayout";
 
 const notoSansThai = Noto_Sans_Thai({
   subsets: ["thai", "latin"],
@@ -26,7 +27,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={notoSansThai.className}>
         <AppRouterCacheProvider>
-          <ThemeProvider theme={theme}>{children}</ThemeProvider>
+          <ThemeProvider theme={theme}>
+            <TheMainLayout>{children}</TheMainLayout>
+          </ThemeProvider>
         </AppRouterCacheProvider>
       </body>
     </html>

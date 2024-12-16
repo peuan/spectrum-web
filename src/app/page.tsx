@@ -1,13 +1,18 @@
-"use client"
+"use client";
 
-import Pricing from "@/components/Pricing"
-import { Box, Container } from "@mui/material"
-import Image from "next/image"
+import Pricing from "@/components/Pricing";
+import { Box, Container } from "@mui/material";
 
 export default function Home() {
   return (
-    <>
-      <Image src="/icons/logo.svg" width={77} height={59} alt="logo" />
+    <Box
+      sx={{
+        pt: {
+          xs: "60px",
+          md: "84px",
+        },
+      }}
+    >
       <Container>
         <Box
           sx={{
@@ -70,6 +75,6 @@ export default function Home() {
           />
         </Box>
       </Container>
-    </>
-  )
+    </Box>
+  );
 }
