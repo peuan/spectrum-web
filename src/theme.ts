@@ -53,7 +53,15 @@ const theme = createTheme({
     MuiIconButton: {
       styleOverrides: {
         root: {
-          background: "linear-gradient(to right, #400ED3 0%, #5562FC 100%)", // Optional styling
+          color: "#ADB7BE",
+          background: "#333235",
+
+          "&:hover": {
+            background: "#444444",
+          },
+        },
+        colorPrimary: {
+          background: "linear-gradient(to right, #400ED3 0%, #5562FC 100%)",
           color: "#FFF",
           "&:hover": {
             background: "linear-gradient(to right, #5562FC 0%, #400ED3 100%)",

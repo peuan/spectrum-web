@@ -14,11 +14,13 @@ export default function Home() {
       />
       <Image src="/icons/logo.svg" width={77} height={59} alt="logo" />
       <Box>
-        <IconButton >
-          <Icon
-            sx={{ fontSize: "2rem", color: "" }}
-            component={CheckIcon}
-          />
+        <IconButton color="primary">
+          <Icon component={CheckIcon} />
+        </IconButton>
+      </Box>
+      <Box>
+        <IconButton>
+          <Icon component={CheckIcon} />
         </IconButton>
       </Box>
     </Stack>
