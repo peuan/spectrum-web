@@ -40,6 +40,26 @@ const theme = createTheme({
       defaultProps: {
         disableElevation: true,
       },
+      styleOverrides: {
+        contained: {
+          background: "linear-gradient(to right, #400ED3 0%, #5562FC 100%)",
+
+          "&:hover": {
+            background: "linear-gradient(to right, #5562FC 0%, #400ED3 100%)",
+          },
+        },
+      },
+    },
+    MuiIconButton: {
+      styleOverrides: {
+        root: {
+          background: "linear-gradient(to right, #400ED3 0%, #5562FC 100%)", // Optional styling
+          color: "#FFF",
+          "&:hover": {
+            background: "linear-gradient(to right, #5562FC 0%, #400ED3 100%)",
+          },
+        },
+      },
     },
   },
 });
