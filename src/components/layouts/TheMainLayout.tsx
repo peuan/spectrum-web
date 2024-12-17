@@ -6,7 +6,9 @@ const TheMainLayout = ({ children }: PropsWithChildren) => {
   return (
     <Stack minHeight="100vh">
       <TheMainHeader />
-      <Box flex={1}>{children}</Box>
+      <Box flex={1} sx={{
+        paddingTop: '100px'
+      }}>{children}</Box>
     </Stack>
   )
 }
