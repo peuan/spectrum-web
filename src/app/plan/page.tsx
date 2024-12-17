@@ -3,7 +3,11 @@ import { Container, Grid2, Typography } from '@mui/material'
 
 const Page = () => {
   return (
-    <Container>
+    <Container
+      sx={{
+        paddingTop: '100px',
+      }}
+    >
       <Typography
         variant="h4"
         component="h1"
