@@ -15,6 +15,7 @@ const theme = createTheme({
     fontFamily: notoSansThai.style.fontFamily,
   },
   palette: {
+    mode: 'dark',
     primary: {
       main: '#6A79FA',
     },
@@ -23,6 +24,10 @@ const theme = createTheme({
     },
     grey: {
       500: '#333336',
+    },
+    background: {
+      paper: '#232426',
+      default: '#232426',
     },
   },
   shape: {
@@ -79,6 +84,14 @@ const theme = createTheme({
 
           '& .MuiIcon-root': {
             fontSize: 14,
+          },
+        },
+        sizeMedium: {
+          width: 30,
+          height: 30,
+
+          '& .MuiIcon-root': {
+            fontSize: 24,
           },
         },
         root: {
