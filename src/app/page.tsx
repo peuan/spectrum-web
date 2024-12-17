@@ -56,7 +56,6 @@ export default function Home() {
             variant="h2"
             component="h1"
             fontWeight="bold"
-            gutterBottom
             sx={{
               background:
                 'linear-gradient(180deg, #FFFFFF 50%, #999999 110.42%)',
