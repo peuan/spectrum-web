@@ -59,11 +59,11 @@ const TheMainHeader = () => {
               sx={
                 isActive
                   ? {
-                      color: "#fff",
+                      color: "common.white",
                       backgroundColor: "primary.main",
 
                       "&:hover": {
-                        color: "#fff",
+                        color: "common.white",
                         backgroundColor: "primary.dark",
                       },
                     }
@@ -133,7 +133,10 @@ const TheMainHeader = () => {
                 alignItems: "center",
               }}
             >
-              <Menu sx={{ color: "#fff" }} onClick={handleSidebarToggle} />
+              <Menu
+                sx={{ color: "common.white" }}
+                onClick={handleSidebarToggle}
+              />
               <Drawer
                 variant="temporary"
                 open={isSidebar}
