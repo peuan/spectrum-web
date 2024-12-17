@@ -35,7 +35,5 @@
   "[markdown]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "i18n-ally.localesPaths": ["src/locales"],
-  "i18n-ally.keystyle": "nested",
-  "cSpell.words": ["kingpowerclick", "tanstack"]
+  "cSpell.words": ["tanstack"]
 }
