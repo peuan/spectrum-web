@@ -25,18 +25,29 @@ export default function Home() {
             position: 'absolute',
             inset: 0,
             background:
-              'linear-gradient(90deg, rgba(0,0,0,0.7), rgba(0,0,0,0.2))',
+              'linear-gradient(90deg, rgba(0,0,0,0.5), rgba(0,0,0,0.2))',
             zIndex: 1,
           }}
         />
 
-        <Container sx={{ position: 'relative', zIndex: 2, textAlign: 'left' }}>
+        <Container
+          sx={{
+            position: 'relative',
+            zIndex: 2,
+            textAlign: 'left',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'flex-start',
+            gap: 2,
+          }}
+        >
           {/* Hero Text */}
           <Typography
             variant="h6"
             component="h1"
             fontWeight="bold"
             gutterBottom
+            maxWidth={303}
           >
             รับเงินโดเนทจากผู้ติดตามของคุณได้ง่ายกว่า เร็วกว่า และปลอดภัยกว่า
             ที่
@@ -56,13 +67,43 @@ export default function Home() {
             SPECTRUM
           </Typography>
 
+          <Typography
+            variant="subtitle2"
+            component="h1"
+            fontWeight="bold"
+            gutterBottom
+            maxWidth={419}
+            color="#ADB7BE"
+          >
+            Lorem ipsum dolor sit amet consectetur. Id posuere pretium diam enim
+            proin sed sed nulla. Tortor felis.
+          </Typography>
           {/* Buttons */}
-          <Box display="flex" justifyContent="center" gap={2}>
+          <Box
+            sx={{
+              backgroundColor: 'rgba(0, 0, 0, 0.3)',
+              borderRadius: '6px',
+              paddingY: '8px',
+              paddingX: '12px',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              gap: '40px',
+            }}
+          >
+            <Typography
+              variant="subtitle2"
+              component="h1"
+              fontWeight="bold"
+              gutterBottom
+            >
+              ox.testlink
+            </Typography>
             <Button variant="contained">รับ Link ของคุณ</Button>
-            <Button variant="outlined">ox.app</Button>
           </Box>
         </Container>
       </Box>
+
       <Container sx={{ py: 8 }}>
         <Stack gap={3}>
           <Typography variant="h3">Any questions?</Typography>
