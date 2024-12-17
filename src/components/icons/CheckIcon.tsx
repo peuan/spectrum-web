@@ -13,7 +13,7 @@ const CheckIcon = (props: React.SVGProps<SVGSVGElement>) => {
         fill="currentColor"
       />
     </svg>
-  );
-};
+  )
+}
 
-export default CheckIcon;
+export default CheckIcon

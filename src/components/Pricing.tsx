@@ -1,6 +1,6 @@
-"use client"
+'use client'
 
-import React from "react"
+import React from 'react'
 import {
   Box,
   Typography,
@@ -12,8 +12,8 @@ import {
   Icon,
   Chip,
   IconButton,
-} from "@mui/material"
-import CheckIcon from "./icons/CheckIcon"
+} from '@mui/material'
+import CheckIcon from './icons/CheckIcon'
 
 interface PricingProps {
   isSpecial?: boolean
@@ -36,15 +36,15 @@ const Pricing: React.FC<PricingProps> = ({
     <Card
       sx={{
         width: 300,
-        backgroundColor: "#1a1a1a",
-        color: "#fff",
-        textAlign: "center",
+        backgroundColor: '#1a1a1a',
+        color: '#fff',
+        textAlign: 'center',
         borderRadius: 3,
         padding: 2,
-        boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)",
-        borderStyle: isBordered ? "solid" : "none",
+        boxShadow: '0 4px 10px rgba(0, 0, 0, 0.2)',
+        borderStyle: isBordered ? 'solid' : 'none',
         borderWidth: isBordered ? 1 : 0,
-        borderColor: isBordered ? "secondary.main" : "transparent",
+        borderColor: isBordered ? 'secondary.main' : 'transparent',
       }}
     >
       <CardContent>
@@ -52,9 +52,9 @@ const Pricing: React.FC<PricingProps> = ({
         <Box mb={2}>
           <Chip
             label={title}
-            color={isSpecial ? "secondary" : "default"}
+            color={isSpecial ? 'secondary' : 'default'}
             sx={{
-              width: "100%",
+              width: '100%',
             }}
           />
         </Box>
@@ -62,7 +62,7 @@ const Pricing: React.FC<PricingProps> = ({
         {/* Price */}
         <Typography
           variant="h3"
-          sx={{ fontWeight: "bold", color: "#fff" }}
+          sx={{ fontWeight: 'bold', color: '#fff' }}
           gutterBottom
         >
           {price}
@@ -81,7 +81,7 @@ const Pricing: React.FC<PricingProps> = ({
           {description}
         </Typography>
 
-        <Divider sx={{ borderColor: "#444", mb: 2 }} />
+        <Divider sx={{ borderColor: '#444', mb: 2 }} />
 
         {/* Features */}
         <Stack spacing={1} mb={2} alignItems="start">
@@ -90,14 +90,14 @@ const Pricing: React.FC<PricingProps> = ({
               <Box key={index} display="flex" alignItems="center" gap={1}>
                 <IconButton
                   size="small"
-                  color={feature.active ? "primary" : "default"}
+                  color={feature.active ? 'primary' : 'default'}
                 >
                   <Icon component={CheckIcon} />
                 </IconButton>
 
                 <Typography
                   variant="body2"
-                  color={feature.active ? "#fff" : "#ADB7BE"}
+                  color={feature.active ? '#fff' : '#ADB7BE'}
                 >
                   {feature.label}
                 </Typography>

@@ -1,13 +1,13 @@
-"use client"
+'use client'
 
-import { createTheme } from "@mui/material/styles"
-import { Noto_Sans_Thai } from "next/font/google"
+import { createTheme } from '@mui/material/styles'
+import { Noto_Sans_Thai } from 'next/font/google'
 
 const notoSansThai = Noto_Sans_Thai({
-  subsets: ["thai", "latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  display: "swap",
-  variable: "--font-noto-sans-thai",
+  subsets: ['thai', 'latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  display: 'swap',
+  variable: '--font-noto-sans-thai',
 })
 
 const theme = createTheme({
@@ -16,13 +16,13 @@ const theme = createTheme({
   },
   palette: {
     primary: {
-      main: "#6A79FA",
+      main: '#6A79FA',
     },
     secondary: {
-      main: "#D701A2",
+      main: '#D701A2',
     },
     grey: {
-      500: "#333336",
+      500: '#333336',
     },
   },
   shape: {
@@ -38,17 +38,17 @@ const theme = createTheme({
           height: 39,
         },
         colorDefault: {
-          backgroundColor: "#333336",
-          color: "#ffffff",
+          backgroundColor: '#333336',
+          color: '#ffffff',
         },
       },
     },
     MuiLink: {
       styleOverrides: {
         root: {
-          textDecoration: "none", // Remove underline
-          "&:hover": {
-            textDecoration: "underline",
+          textDecoration: 'none', // Remove underline
+          '&:hover': {
+            textDecoration: 'underline',
           },
         },
       },
@@ -59,14 +59,14 @@ const theme = createTheme({
       },
       styleOverrides: {
         contained: {
-          background: "linear-gradient(to right, #400ED3 0%, #5562FC 100%)",
+          background: 'linear-gradient(to right, #400ED3 0%, #5562FC 100%)',
 
-          "&:hover": {
-            background: "linear-gradient(to right, #5562FC 0%, #400ED3 100%)",
+          '&:hover': {
+            background: 'linear-gradient(to right, #5562FC 0%, #400ED3 100%)',
           },
         },
         outlined: {
-          color: "#fff",
+          color: '#fff',
           border: `2px solid #6A79FA`,
         },
       },
@@ -77,23 +77,23 @@ const theme = createTheme({
           width: 20,
           height: 20,
 
-          "& .MuiIcon-root": {
+          '& .MuiIcon-root': {
             fontSize: 14,
           },
         },
         root: {
-          color: "#ADB7BE",
-          background: "#333235",
+          color: '#ADB7BE',
+          background: '#333235',
 
-          "&:hover": {
-            background: "#444444",
+          '&:hover': {
+            background: '#444444',
           },
         },
         colorPrimary: {
-          background: "linear-gradient(to right, #400ED3 0%, #5562FC 100%)",
-          color: "#FFF",
-          "&:hover": {
-            background: "linear-gradient(to right, #5562FC 0%, #400ED3 100%)",
+          background: 'linear-gradient(to right, #400ED3 0%, #5562FC 100%)',
+          color: '#FFF',
+          '&:hover': {
+            background: 'linear-gradient(to right, #5562FC 0%, #400ED3 100%)',
           },
         },
       },

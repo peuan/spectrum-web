@@ -1,6 +1,6 @@
-"use client";
+'use client'
 
-import { Menu } from "@mui/icons-material";
+import { Menu } from '@mui/icons-material'
 import {
   Avatar,
   Box,
@@ -12,46 +12,46 @@ import {
   ListItem,
   ListItemText,
   Stack,
-} from "@mui/material";
-import { useState } from "react";
-import NextLink from "next/link";
-import { usePathname } from "next/navigation";
+} from '@mui/material'
+import { useState } from 'react'
+import NextLink from 'next/link'
+import { usePathname } from 'next/navigation'
 
 const menuItems = [
   {
-    href: "/how-to-use",
-    label: "How to use",
+    href: '/how-to-use',
+    label: 'How to use',
   },
   {
-    href: "/plan",
-    label: "Plan",
+    href: '/plan',
+    label: 'Plan',
   },
   {
-    href: "/contact",
-    label: "Contact",
+    href: '/contact',
+    label: 'Contact',
   },
-];
+]
 
-const drawerWidth = 262;
+const drawerWidth = 262
 
 const TheMainHeader = () => {
-  const [isSidebar, setSidebarOpen] = useState(false);
-  const pathname = usePathname();
+  const [isSidebar, setSidebarOpen] = useState(false)
+  const pathname = usePathname()
 
   const handleSidebarToggle = () => {
-    setSidebarOpen(!isSidebar);
-  };
+    setSidebarOpen(!isSidebar)
+  }
 
   const menuContent = (
     <List
       sx={{
-        "& a": {
-          textDecoration: "unset",
+        '& a': {
+          textDecoration: 'unset',
         },
       }}
     >
       {menuItems.map((item, index) => {
-        const isActive = pathname === item.href;
+        const isActive = pathname === item.href
 
         return (
           <Link key={index} component={NextLink} href={item.href} passHref>
@@ -59,12 +59,12 @@ const TheMainHeader = () => {
               sx={
                 isActive
                   ? {
-                      color: "common.white",
-                      backgroundColor: "primary.main",
+                      color: 'common.white',
+                      backgroundColor: 'primary.main',
 
-                      "&:hover": {
-                        color: "common.white",
-                        backgroundColor: "primary.dark",
+                      '&:hover': {
+                        color: 'common.white',
+                        backgroundColor: 'primary.dark',
                       },
                     }
                   : {}
@@ -74,17 +74,17 @@ const TheMainHeader = () => {
               <ListItemText
                 slotProps={{
                   primary: {
-                    sx: { color: "common.white", fontWeight: "500" },
+                    sx: { color: 'common.white', fontWeight: '500' },
                   },
                 }}
                 primary={item.label}
               />
             </ListItem>
           </Link>
-        );
+        )
       })}
     </List>
-  );
+  )
 
   const logo = (
     <NextLink href="/">
@@ -97,44 +97,44 @@ const TheMainHeader = () => {
         />
       </Stack>
     </NextLink>
-  );
+  )
 
   return (
     <Box
       component="header"
       sx={{
         zIndex: 3,
-        width: "100%",
-        position: "fixed",
+        width: '100%',
+        position: 'fixed',
         top: 0,
         py: {
           xs: 1,
           md: 1.5,
         },
-        background: "rgba(1, 1, 1, 0.1)",
-        backdropFilter: "blur(10px)",
+        background: 'rgba(1, 1, 1, 0.1)',
+        backdropFilter: 'blur(10px)',
       }}
     >
       <Container>
         <Stack
-          sx={{ minHeight: "40px" }}
+          sx={{ minHeight: '40px' }}
           direction="row"
           justifyContent="space-between"
           alignItems="center"
           gap={2}
         >
-          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
             <Stack
               sx={{
                 display: {
-                  xs: "flex",
-                  md: "none",
+                  xs: 'flex',
+                  md: 'none',
                 },
-                alignItems: "center",
+                alignItems: 'center',
               }}
             >
               <Menu
-                sx={{ color: "common.white" }}
+                sx={{ color: 'common.white' }}
                 onClick={handleSidebarToggle}
               />
               <Drawer
@@ -145,12 +145,12 @@ const TheMainHeader = () => {
                   keepMounted: true, // Better open performance on mobile
                 }}
                 sx={{
-                  "& .MuiDrawer-paper": {
-                    boxSizing: "border-box",
+                  '& .MuiDrawer-paper': {
+                    boxSizing: 'border-box',
                     width: drawerWidth,
                     p: 2,
-                    backgroundColor: "rgba(0, 0, 0, 0.5)",
-                    backdropFilter: "blur(10px)",
+                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                    backdropFilter: 'blur(10px)',
                     gap: 2,
                   },
                 }}
@@ -165,10 +165,10 @@ const TheMainHeader = () => {
             <Stack
               sx={{
                 display: {
-                  xs: "none",
-                  md: "flex",
+                  xs: 'none',
+                  md: 'flex',
                 },
-                alignItems: "center",
+                alignItems: 'center',
               }}
             >
               {logo}
@@ -178,21 +178,21 @@ const TheMainHeader = () => {
             {menuItems.map((menuItem) => {
               return (
                 <Link
-                  sx={{ color: "common.white", fontWeight: "500" }}
+                  sx={{ color: 'common.white', fontWeight: '500' }}
                   key={menuItem.href}
                   component={NextLink}
                   href={menuItem.href}
                 >
                   {menuItem.label}
                 </Link>
-              );
+              )
             })}
             <Button variant="outlined">Login</Button>
           </Stack>
         </Stack>
       </Container>
     </Box>
-  );
-};
+  )
+}
 
-export default TheMainHeader;
+export default TheMainHeader

@@ -1,6 +1,6 @@
-import { Box, Stack } from "@mui/material";
-import { PropsWithChildren } from "react";
-import TheMainHeader from "./TheMainHeader";
+import { Box, Stack } from '@mui/material'
+import { PropsWithChildren } from 'react'
+import TheMainHeader from './TheMainHeader'
 
 const TheMainLayout = ({ children }: PropsWithChildren) => {
   return (
@@ -8,7 +8,7 @@ const TheMainLayout = ({ children }: PropsWithChildren) => {
       <TheMainHeader />
       <Box flex={1}>{children}</Box>
     </Stack>
-  );
-};
+  )
+}
 
-export default TheMainLayout;
+export default TheMainLayout
