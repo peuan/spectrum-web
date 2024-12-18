@@ -1,5 +1,6 @@
 'use client'
 
+import Feature from '@/components/Feature'
 import QuestionAnswer from '@/components/QuestionAnswer'
 import { Box, Button, Container, Grid2, Stack, Typography } from '@mui/material'
 
@@ -69,7 +70,7 @@ export default function Home() {
           <Typography
             variant="subtitle2"
             component="h1"
-            fontWeight="bold"
+            fontWeight={500}
             gutterBottom
             maxWidth={419}
             color="#ADB7BE"
@@ -102,6 +103,45 @@ export default function Home() {
           </Box>
         </Container>
       </Box>
+
+      <Container sx={{ py: 8 }}>
+        <Typography
+          variant="h6"
+          fontWeight="bold"
+          fontSize={'36px'}
+          gutterBottom
+        >
+          ทำไมต้องใช้ SPECTRUM ?{' '}
+        </Typography>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            paddingTop: '1rem',
+          }}
+        >
+          <Feature
+            icon="/icons/setup.png"
+            title="Super Quick Setup"
+            description="Dolor minim in pariatur in deserunt laboris eu pariatur labore excepteur cupidatat cupidatat duis dolor in."
+          />
+          <Feature
+            icon="/icons/hardware.png"
+            title="Premium Hardware"
+            description="Dolor minim in pariatur in deserunt laboris eu pariatur labore excepteur cupidatat cupidatat duis dolor in."
+          />
+          <Feature
+            icon="/icons/protect.png"
+            title="DDos Protection"
+            description="Dolor minim in pariatur in deserunt laboris eu pariatur labore excepteur cupidatat cupidatat duis dolor in."
+          />
+          <Feature
+            icon="/icons/support.png"
+            title="Fast Support"
+            description="Dolor minim in pariatur in deserunt laboris eu pariatur labore excepteur cupidatat cupidatat duis dolor in."
+          />
+        </Box>
+      </Container>
 
       <Container sx={{ py: 8 }}>
         <Stack gap={3}>
