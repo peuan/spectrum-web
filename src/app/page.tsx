@@ -53,17 +53,7 @@ export default function Home() {
             รับเงินโดเนทจากผู้ติดตามของคุณได้ง่ายกว่า เร็วกว่า และปลอดภัยกว่า
             ที่
           </Typography>
-          <Typography
-            variant="h2"
-            component="h1"
-            fontWeight="bold"
-            sx={{
-              background:
-                'linear-gradient(180deg, #FFFFFF 50%, #999999 110.42%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-            }}
-          >
+          <Typography variant="h2" component="h1" fontWeight="bold" isGradient>
             SPECTRUM
           </Typography>
 
@@ -145,7 +135,9 @@ export default function Home() {
 
       <Container sx={{ py: 8 }}>
         <Stack gap={3}>
-          <Typography variant="h3">Any questions?</Typography>
+          <Typography variant="h3" isGradient>
+            Any questions?
+          </Typography>
           <Grid2 container spacing={2}>
             <Grid2 size={{ xs: 12, md: 6 }}>
               <Stack gap={2}>

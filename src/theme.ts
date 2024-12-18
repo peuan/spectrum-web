@@ -111,6 +111,20 @@ const theme = createTheme({
         },
       },
     },
+    MuiTypography: {
+      variants: [
+        {
+          props: {
+            isGradient: true,
+          },
+          style: {
+            background: 'linear-gradient(180deg, #FFFFFF 50%, #999999 110.42%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+          },
+        },
+      ],
+    },
   },
 })
 
