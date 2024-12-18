@@ -2,6 +2,7 @@
 
 import Pricing from '@/components/Pricing'
 import { Box, Container } from '@mui/material'
+import LoginCard from '@/components/login'
 
 export default function Home() {
   return (
@@ -13,6 +14,16 @@ export default function Home() {
         },
       }}
     >
+      <Box
+        sx={{
+          width: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+        }}
+      >
+        <LoginCard />
+      </Box>
+
       <Container>
         <Box
           sx={{
