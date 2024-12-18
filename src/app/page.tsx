@@ -103,34 +103,66 @@ export default function Home() {
         >
           ทำไมต้องใช้ SPECTRUM ?{' '}
         </Typography>
-        <Box
+        <Grid2
+          spacing={4}
+          container
           sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
             paddingTop: '1rem',
           }}
         >
-          <Feature
-            icon="/icons/setup.png"
-            title="Super Quick Setup"
-            description="Dolor minim in pariatur in deserunt laboris eu pariatur labore excepteur cupidatat cupidatat duis dolor in."
-          />
-          <Feature
-            icon="/icons/hardware.png"
-            title="Premium Hardware"
-            description="Dolor minim in pariatur in deserunt laboris eu pariatur labore excepteur cupidatat cupidatat duis dolor in."
-          />
-          <Feature
-            icon="/icons/protect.png"
-            title="DDos Protection"
-            description="Dolor minim in pariatur in deserunt laboris eu pariatur labore excepteur cupidatat cupidatat duis dolor in."
-          />
-          <Feature
-            icon="/icons/support.png"
-            title="Fast Support"
-            description="Dolor minim in pariatur in deserunt laboris eu pariatur labore excepteur cupidatat cupidatat duis dolor in."
-          />
-        </Box>
+          <Grid2
+            size={{
+              xs: 12,
+              md: 6,
+              lg: 3,
+            }}
+          >
+            <Feature
+              icon="/icons/setup.png"
+              title="Super Quick Setup"
+              description="Dolor minim in pariatur in deserunt laboris eu pariatur labore excepteur cupidatat cupidatat duis dolor in."
+            />
+          </Grid2>
+          <Grid2
+            size={{
+              xs: 12,
+              md: 6,
+              lg: 3,
+            }}
+          >
+            <Feature
+              icon="/icons/hardware.png"
+              title="Premium Hardware"
+              description="Dolor minim in pariatur in deserunt laboris eu pariatur labore excepteur cupidatat cupidatat duis dolor in."
+            />
+          </Grid2>
+          <Grid2
+            size={{
+              xs: 12,
+              md: 6,
+              lg: 3,
+            }}
+          >
+            <Feature
+              icon="/icons/protect.png"
+              title="DDos Protection"
+              description="Dolor minim in pariatur in deserunt laboris eu pariatur labore excepteur cupidatat cupidatat duis dolor in."
+            />
+          </Grid2>
+          <Grid2
+            size={{
+              xs: 12,
+              md: 6,
+              lg: 3,
+            }}
+          >
+            <Feature
+              icon="/icons/support.png"
+              title="Fast Support"
+              description="Dolor minim in pariatur in deserunt laboris eu pariatur labore excepteur cupidatat cupidatat duis dolor in."
+            />
+          </Grid2>
+        </Grid2>
       </Container>
 
       <Container sx={{ py: 8 }}>

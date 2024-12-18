@@ -12,15 +12,22 @@ const Feature: React.FC<FeatureProps> = ({ icon, title, description }) => {
   return (
     <Box
       sx={{
-        textAlign: 'left',
         color: '#fff',
-        maxWidth: '250px',
+        width: '100%',
+        textAlign: {
+          xs: 'center',
+          sm: 'left',
+        },
       }}
     >
       <Box
         sx={{
           display: 'flex',
           mb: 2,
+          justifyContent: {
+            xs: 'center',
+            sm: 'left',
+          },
         }}
       >
         <Image src={icon} alt={title} width={64} height={64} />
