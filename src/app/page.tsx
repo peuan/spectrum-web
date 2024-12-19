@@ -1,6 +1,7 @@
 'use client'
 
 import Feature from '@/components/Feature'
+import FeatureHighlight from '@/components/FeatureHighlight'
 import QuestionAnswer from '@/components/QuestionAnswer'
 import { Box, Button, Container, Grid2, Stack, Typography } from '@mui/material'
 
@@ -163,6 +164,15 @@ export default function Home() {
             />
           </Grid2>
         </Grid2>
+      </Container>
+
+      <Container sx={{ py: 8 }}>
+        <FeatureHighlight
+          title="Lorem ipsum dolor sit amet consectetur."
+          description="Aute esse non magna elit dolore dolore dolor sit est. Ea occaecat ea duis laborum reprehenderit id cillum tempor cupidatat qui nisi proident nostrud dolore id do eiusmod. Lorem ipsum non labore."
+          buttonText="Lorem ipsum"
+          highlightImage="/highlight.png"
+        />
       </Container>
 
       <Container sx={{ py: 8 }}>
