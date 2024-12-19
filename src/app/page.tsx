@@ -53,7 +53,7 @@ export default function Home() {
             รับเงินโดเนทจากผู้ติดตามของคุณได้ง่ายกว่า เร็วกว่า และปลอดภัยกว่า
             ที่
           </Typography>
-          <Typography variant="h2" component="h1" fontWeight="bold" isGradient>
+          <Typography variant="h2" component="h1" fontWeight="bold" gradient>
             SPECTRUM
           </Typography>
 
@@ -167,7 +167,7 @@ export default function Home() {
 
       <Container sx={{ py: 8 }}>
         <Stack gap={3}>
-          <Typography variant="h3" isGradient>
+          <Typography variant="h3" gradient>
             Any questions?
           </Typography>
           <Grid2 container spacing={2}>
