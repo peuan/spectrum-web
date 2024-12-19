@@ -32,7 +32,7 @@ const FeatureHighlight = ({
       <Grid2 size={{ xs: 12, md: 6 }}>
         <Stack spacing={4}>
           <Stack spacing={1}>
-            <Typography variant="h3" gradient>
+            <Typography variant="h3" color="gradient">
               {title}
             </Typography>
             <Typography color="grey.400">{description}</Typography>

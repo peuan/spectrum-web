@@ -38,7 +38,7 @@ const Banner: React.FC<BannerProps> = ({
               paddingX: 4,
             }}
           >
-            <Typography variant="h4" gradient fontWeight={600}>
+            <Typography variant="h3" color="gradient" fontWeight={600}>
               {title}
             </Typography>
             <Typography variant="subtitle2" color="grey.400">

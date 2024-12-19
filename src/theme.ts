@@ -116,7 +116,7 @@ const theme = createTheme({
       variants: [
         {
           props: {
-            gradient: true,
+            color: 'gradient',
           },
           style: {
             background: 'linear-gradient(180deg, #FFFFFF 50%, #999999 110.42%)',

@@ -55,7 +55,12 @@ export default function Home() {
             รับเงินโดเนทจากผู้ติดตามของคุณได้ง่ายกว่า เร็วกว่า และปลอดภัยกว่า
             ที่
           </Typography>
-          <Typography variant="h2" component="h1" fontWeight="bold" gradient>
+          <Typography
+            variant="h2"
+            component="h1"
+            fontWeight="bold"
+            color="gradient"
+          >
             SPECTRUM
           </Typography>
 
@@ -98,11 +103,10 @@ export default function Home() {
 
       <Container sx={{ py: 8 }}>
         <Typography
-          variant="h6"
+          variant="h3"
           fontWeight="bold"
-          fontSize={'36px'}
           gutterBottom
-          gradient
+          color="gradient"
         >
           ทำไมต้องใช้ SPECTRUM ?{' '}
         </Typography>
@@ -189,7 +193,7 @@ export default function Home() {
 
       <Container sx={{ py: 8 }}>
         <Stack gap={3}>
-          <Typography variant="h3" gradient>
+          <Typography variant="h3" color="gradient">
             Any questions?
           </Typography>
           <Grid2 container spacing={2}>
