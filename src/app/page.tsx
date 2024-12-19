@@ -1,5 +1,6 @@
 'use client'
 
+import Banner from '@/components/BannerOverlay'
 import Feature from '@/components/Feature'
 import FeatureHighlight from '@/components/FeatureHighlight'
 import QuestionAnswer from '@/components/QuestionAnswer'
@@ -64,7 +65,7 @@ export default function Home() {
             fontWeight={500}
             gutterBottom
             maxWidth={419}
-            color="#ADB7BE"
+            color="grey"
           >
             Lorem ipsum dolor sit amet consectetur. Id posuere pretium diam enim
             proin sed sed nulla. Tortor felis.
@@ -101,7 +102,7 @@ export default function Home() {
           fontWeight="bold"
           fontSize={'36px'}
           gutterBottom
-          isGradient
+          gradient
         >
           ทำไมต้องใช้ SPECTRUM ?{' '}
         </Typography>
@@ -165,6 +166,16 @@ export default function Home() {
             />
           </Grid2>
         </Grid2>
+      </Container>
+
+      <Container sx={{ pb: 8, pt: 10 }}>
+        <Banner
+          title="Unlock Your Gaming Full Potential"
+          description="Aute esse non magna elit dolore dolore dolor sit est. Ea occaecat ea duis laborum reprehenderit id cillum tempor cupidatat qui nisi proident nostrud dolore id do eiusmod. Lorem ipsum non labore."
+          logo="/avatar.png"
+          banner="/bg-banner.png"
+          buttonText="Lorem ipsum"
+        />
       </Container>
 
       <Container sx={{ py: 8 }}>
