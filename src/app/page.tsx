@@ -101,6 +101,7 @@ export default function Home() {
           fontWeight="bold"
           fontSize={'36px'}
           gutterBottom
+          isGradient
         >
           ทำไมต้องใช้ SPECTRUM ?{' '}
         </Typography>
