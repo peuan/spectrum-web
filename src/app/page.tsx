@@ -2,7 +2,9 @@
 
 import Pricing from '@/components/Pricing'
 import { Box, Container } from '@mui/material'
-import LoginCard from '@/components/login'
+import LoginCard from '@/components/loginCard'
+import ReviewsCard from '@/components/reviewsCard'
+import PaymentCard from '@/components/PaymentCard'
 
 export default function Home() {
   return (
@@ -14,14 +16,58 @@ export default function Home() {
         },
       }}
     >
+      {/* test loginCard, reviewsCard and PaymentCard */}
       <Box
         sx={{
           width: '100%',
           display: 'flex',
+          flexDirection: 'column',
           justifyContent: 'center',
+          alignItems: 'center',
+          gap: 1,
+          mb: 2,
         }}
       >
         <LoginCard />
+
+        <Box
+          sx={{
+            display: 'flex',
+            gap: 2,
+          }}
+        >
+          <ReviewsCard
+            score={5}
+            comment="Lorem ipsum dolor sit amet consectetur. Faucibus fermentum donec quam donec arcu leo posuere tempor feugiat. Odio eu velit feugiat mi est. Urna odio in senectus pellentesque lacus varius. Et sed."
+            profilePic="/icons/google-logo.svg"
+            name="Robert L."
+          />
+
+          <ReviewsCard
+            score={3.5}
+            comment="Lorem ipsum dolor sit amet consectetur. Faucibus fermentum donec quam donec arcu leo posuere tempor feugiat. Odio eu velit feugiat mi est. Urna odio in senectus pellentesque lacus varius. Et sed."
+            profilePic="/icons/apple-logo.svg"
+            name="Robert L."
+          />
+        </Box>
+
+        <Box
+          sx={{
+            display: 'flex',
+            gap: 2,
+          }}
+        >
+          <PaymentCard
+            title="TrueMoney Voucher"
+            quote1="ทรูมันนี่ อังเปา"
+            quote2="กับเบอร์ที่คุณยืนยัน"
+          />
+          <PaymentCard
+            title="PromptPay"
+            quote1="ยืนยันสลิปพร้อมเพย์"
+            quote2="กับที่อยู่การรับเงินที่คุณตั้งค่าไว้"
+          />
+        </Box>
       </Box>
 
       <Container>

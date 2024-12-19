@@ -17,7 +17,7 @@ const LoginCard: React.FC = () => {
       sx={{
         width: 572,
         height: 482,
-        borderRadius: 1,
+        borderRadius: '10px',
         bgcolor: '#1C1D1F',
         display: 'flex',
         flexDirection: 'column',
