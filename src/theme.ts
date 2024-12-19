@@ -124,6 +124,14 @@ const theme = createTheme({
             WebkitTextFillColor: 'transparent',
           },
         },
+        {
+          props: {
+            variant: 'h3',
+          },
+          style: {
+            fontSize: 36,
+          },
+        },
       ],
     },
   },
