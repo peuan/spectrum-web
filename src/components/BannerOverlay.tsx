@@ -44,7 +44,7 @@ const Banner: React.FC<BannerProps> = ({
             <Typography variant="subtitle2" color="grey.400">
               {description}
             </Typography>
-            <Button variant="contained" sx={{ width: 'fit-content' }}>
+            <Button variant="contained" sx={{ width: 'fit-content', px: 8 }}>
               {buttonText}
             </Button>
           </Stack>
