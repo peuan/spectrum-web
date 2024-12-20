@@ -39,14 +39,14 @@ export default function Home() {
           <ReviewsCard
             score={5}
             comment="Lorem ipsum dolor sit amet consectetur. Faucibus fermentum donec quam donec arcu leo posuere tempor feugiat. Odio eu velit feugiat mi est. Urna odio in senectus pellentesque lacus varius. Et sed."
-            profilePic="/icons/google-logo.svg"
+            profilePic="/icons/test-profilepic.svg"
             name="Robert L."
           />
 
           <ReviewsCard
             score={3.5}
             comment="Lorem ipsum dolor sit amet consectetur. Faucibus fermentum donec quam donec arcu leo posuere tempor feugiat. Odio eu velit feugiat mi est. Urna odio in senectus pellentesque lacus varius. Et sed."
-            profilePic="/icons/apple-logo.svg"
+            profilePic="/icons/test-profilepic.svg"
             name="Robert L."
           />
         </Box>
@@ -69,7 +69,7 @@ export default function Home() {
           />
         </Box>
       </Box>
-
+      {/* end of test loginCard, reviewsCard and PaymentCard */}
       <Container>
         <Box
           sx={{
