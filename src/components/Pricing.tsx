@@ -35,9 +35,9 @@ const Pricing: React.FC<PricingProps> = ({
   return (
     <Card
       sx={{
-        width: 300,
-        backgroundColor: '#1a1a1a',
-        color: '#fff',
+        width: '100%',
+        backgroundColor: '#1C1D1F',
+        color: 'common.white',
         textAlign: 'center',
         borderRadius: 3,
         padding: 2,

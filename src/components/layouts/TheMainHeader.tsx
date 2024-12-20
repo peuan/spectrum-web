@@ -112,7 +112,7 @@ const TheMainHeader = () => {
           md: 1.5,
         },
         background: 'rgba(1, 1, 1, 0.1)',
-        backdropFilter: 'blur(10px)',
+        backdropFilter: 'blur(1px)',
       }}
     >
       <Container>
@@ -150,7 +150,7 @@ const TheMainHeader = () => {
                     width: drawerWidth,
                     p: 2,
                     backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                    backdropFilter: 'blur(10px)',
+                    backdropFilter: 'blur(4px)',
                     gap: 2,
                   },
                 }}

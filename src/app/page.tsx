@@ -1,137 +1,237 @@
 'use client'
 
-import Pricing from '@/components/Pricing'
-import { Box, Container } from '@mui/material'
-import LoginCard from '@/components/loginCard'
-import ReviewsCard from '@/components/reviewsCard'
-import PaymentCard from '@/components/PaymentCard'
+import Banner from '@/components/BannerOverlay'
+import Feature from '@/components/Feature'
+import FeatureHighlight from '@/components/FeatureHighlight'
+import QuestionAnswer from '@/components/QuestionAnswer'
+import { Box, Button, Container, Grid2, Stack, Typography } from '@mui/material'
 
 export default function Home() {
   return (
-    <Box
-      sx={{
-        pt: {
-          xs: '60px',
-          md: '84px',
-        },
-      }}
-    >
-      {/* test loginCard, reviewsCard and PaymentCard */}
+    <>
       <Box
         sx={{
-          width: '100%',
+          height: '100vh',
           display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
           alignItems: 'center',
-          gap: 1,
-          mb: 2,
+          justifyContent: 'center',
+          backgroundImage: 'url(/bg-1.svg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          color: '#fff',
+          position: 'relative',
+          overflow: 'hidden',
         }}
       >
-        <LoginCard />
-
         <Box
           sx={{
+            position: 'absolute',
+            inset: 0,
+            background:
+              'linear-gradient(90deg, rgba(0,0,0,0.5), rgba(0,0,0,0.2))',
+            zIndex: 1,
+          }}
+        />
+
+        <Container
+          sx={{
+            position: 'relative',
+            zIndex: 2,
+            textAlign: 'left',
             display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'flex-start',
             gap: 2,
           }}
         >
-          <ReviewsCard
-            score={5}
-            comment="Lorem ipsum dolor sit amet consectetur. Faucibus fermentum donec quam donec arcu leo posuere tempor feugiat. Odio eu velit feugiat mi est. Urna odio in senectus pellentesque lacus varius. Et sed."
-            profilePic="/icons/test-profilepic.svg"
-            name="Robert L."
-          />
+          {/* Hero Text */}
+          <Typography
+            variant="h6"
+            component="h1"
+            fontWeight="bold"
+            gutterBottom
+            maxWidth={303}
+          >
+            รับเงินโดเนทจากผู้ติดตามของคุณได้ง่ายกว่า เร็วกว่า และปลอดภัยกว่า
+            ที่
+          </Typography>
+          <Typography
+            variant="h2"
+            component="h1"
+            fontWeight="bold"
+            color="gradient"
+          >
+            SPECTRUM
+          </Typography>
 
-          <ReviewsCard
-            score={3.5}
-            comment="Lorem ipsum dolor sit amet consectetur. Faucibus fermentum donec quam donec arcu leo posuere tempor feugiat. Odio eu velit feugiat mi est. Urna odio in senectus pellentesque lacus varius. Et sed."
-            profilePic="/icons/test-profilepic.svg"
-            name="Robert L."
-          />
-        </Box>
-
-        <Box
-          sx={{
-            display: 'flex',
-            gap: 2,
-          }}
-        >
-          <PaymentCard
-            title="TrueMoney Voucher"
-            quote1="ทรูมันนี่ อังเปา"
-            quote2="กับเบอร์ที่คุณยืนยัน"
-          />
-          <PaymentCard
-            title="PromptPay"
-            quote1="ยืนยันสลิปพร้อมเพย์"
-            quote2="กับที่อยู่การรับเงินที่คุณตั้งค่าไว้"
-          />
-        </Box>
+          <Typography
+            variant="subtitle2"
+            component="h1"
+            fontWeight={500}
+            gutterBottom
+            maxWidth={419}
+            color="grey"
+          >
+            Lorem ipsum dolor sit amet consectetur. Id posuere pretium diam enim
+            proin sed sed nulla. Tortor felis.
+          </Typography>
+          {/* Buttons */}
+          <Box
+            sx={{
+              backgroundColor: 'rgba(0, 0, 0, 0.3)',
+              borderRadius: '6px',
+              paddingY: '8px',
+              paddingX: '12px',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              gap: '40px',
+            }}
+          >
+            <Typography
+              variant="subtitle2"
+              component="h1"
+              fontWeight="bold"
+              gutterBottom
+            >
+              ox.testlink
+            </Typography>
+            <Button variant="contained">รับ Link ของคุณ</Button>
+          </Box>
+        </Container>
       </Box>
-      {/* end of test loginCard, reviewsCard and PaymentCard */}
-      <Container>
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
 
-            gap: 2,
+      <Container sx={{ py: 8 }}>
+        <Typography
+          variant="h3"
+          fontWeight="bold"
+          gutterBottom
+          color="gradient"
+        >
+          ทำไมต้องใช้ SPECTRUM ?{' '}
+        </Typography>
+        <Grid2
+          spacing={4}
+          container
+          sx={{
+            paddingTop: '1rem',
           }}
         >
-          <Pricing
-            title="Basic"
-            price="Free"
-            description="ดีที่สุดสำหรับผู้เริ่มต้น"
-            features={[
-              { label: 'โดเนทขึ้นจอ 20 ครั้ง/เดือน', active: true },
-              { label: 'มีโฆษณาในหน้ารับเงิน', active: false },
-              { label: 'ตั้งค่าเสียงแจ้งเตือนโดเนทไม่ได้', active: false },
-              { label: 'เปลี่ยนรูปปก/พื้นหลังไม่ได้', active: false },
-            ]}
-          />
-
-          <Pricing
-            title="Pro"
-            price="49"
-            description="เพิ่มเติมเล็กน้อย ไปได้ไกลขึ้น"
-            features={[
-              { label: 'โดเนทขึ้นจอ 50 ครั้ง/เดือน', active: true },
-              { label: 'ปิดโฆษณาในหน้ารับเงิน', active: true },
-              { label: 'ตั้งค่าเสียงแจ้งเตือนโดเนท', active: true },
-              { label: 'เปลี่ยนรูปปก/พื้นหลัง', active: true },
-            ]}
-          />
-
-          <Pricing
-            title="Pro Plus"
-            isBordered={true}
-            price="199"
-            description="พิเศษสำหรับระดับโปร"
-            features={[
-              { label: 'โดเนทขึ้นจอ 120 ครั้ง/เดือน', active: true },
-              { label: 'ปิดโฆษณาในหน้ารับเงิน', active: true },
-              { label: 'ตั้งค่าเสียงแจ้งเตือนโดเนท', active: true },
-              { label: 'เปลี่ยนรูปปก/พื้นหลัง', active: true },
-            ]}
-          />
-
-          <Pricing
-            isSpecial={true}
-            isBordered={true}
-            title="Ultra"
-            price="249"
-            description="ปลดล๊อกขีดจำกัดขั้นสุด"
-            features={[
-              { label: 'โดเนทขึ้นจอ ไม่จำกัด', active: true },
-              { label: 'ปิดโฆษณาในหน้ารับเงิน', active: true },
-              { label: 'ตั้งค่าเสียงแจ้งเตือนโดเนท', active: true },
-              { label: 'เปลี่ยนรูปปก/พื้นหลัง', active: true },
-            ]}
-          />
-        </Box>
+          <Grid2
+            size={{
+              xs: 12,
+              md: 6,
+              lg: 3,
+            }}
+          >
+            <Feature
+              icon="/icons/setup.png"
+              title="Super Quick Setup"
+              description="Dolor minim in pariatur in deserunt laboris eu pariatur labore excepteur cupidatat cupidatat duis dolor in."
+            />
+          </Grid2>
+          <Grid2
+            size={{
+              xs: 12,
+              md: 6,
+              lg: 3,
+            }}
+          >
+            <Feature
+              icon="/icons/hardware.png"
+              title="Premium Hardware"
+              description="Dolor minim in pariatur in deserunt laboris eu pariatur labore excepteur cupidatat cupidatat duis dolor in."
+            />
+          </Grid2>
+          <Grid2
+            size={{
+              xs: 12,
+              md: 6,
+              lg: 3,
+            }}
+          >
+            <Feature
+              icon="/icons/protect.png"
+              title="DDos Protection"
+              description="Dolor minim in pariatur in deserunt laboris eu pariatur labore excepteur cupidatat cupidatat duis dolor in."
+            />
+          </Grid2>
+          <Grid2
+            size={{
+              xs: 12,
+              md: 6,
+              lg: 3,
+            }}
+          >
+            <Feature
+              icon="/icons/support.png"
+              title="Fast Support"
+              description="Dolor minim in pariatur in deserunt laboris eu pariatur labore excepteur cupidatat cupidatat duis dolor in."
+            />
+          </Grid2>
+        </Grid2>
       </Container>
-    </Box>
+
+      <Container sx={{ pb: 8, pt: 10 }}>
+        <Banner
+          title="Unlock Your Gaming Full Potential"
+          description="Aute esse non magna elit dolore dolore dolor sit est. Ea occaecat ea duis laborum reprehenderit id cillum tempor cupidatat qui nisi proident nostrud dolore id do eiusmod. Lorem ipsum non labore."
+          logo="/avatar.png"
+          banner="/bg-banner.png"
+          buttonText="Lorem ipsum"
+        />
+      </Container>
+
+      <Container sx={{ py: 8 }}>
+        <FeatureHighlight
+          title="Lorem ipsum dolor sit amet consectetur."
+          description="Aute esse non magna elit dolore dolore dolor sit est. Ea occaecat ea duis laborum reprehenderit id cillum tempor cupidatat qui nisi proident nostrud dolore id do eiusmod. Lorem ipsum non labore."
+          buttonText="Lorem ipsum"
+          highlightImage="/highlight.png"
+        />
+      </Container>
+
+      <Container sx={{ py: 8 }}>
+        <Stack gap={3}>
+          <Typography variant="h3" color="gradient">
+            Any questions?
+          </Typography>
+          <Grid2 container spacing={2}>
+            <Grid2 size={{ xs: 12, md: 6 }}>
+              <Stack gap={2}>
+                <QuestionAnswer
+                  question="What types of games can I host?"
+                  answer="Hosting games can be a great way to bring people together and have fun. Here are some types of games you can consider hosting, depending on the preferences of your group and the available resources"
+                />
+                <QuestionAnswer
+                  question="What types of games can I host?"
+                  answer="Hosting games can be a great way to bring people together and have fun. Here are some types of games you can consider hosting, depending on the preferences of your group and the available resources"
+                />
+                <QuestionAnswer
+                  question="What types of games can I host?"
+                  answer="Hosting games can be a great way to bring people together and have fun. Here are some types of games you can consider hosting, depending on the preferences of your group and the available resources"
+                />
+              </Stack>
+            </Grid2>
+            <Grid2 size={{ xs: 12, md: 6 }}>
+              <Stack gap={2}>
+                <QuestionAnswer
+                  question="What types of games can I host?"
+                  answer="Hosting games can be a great way to bring people together and have fun. Here are some types of games you can consider hosting, depending on the preferences of your group and the available resources"
+                />
+                <QuestionAnswer
+                  question="What types of games can I host?"
+                  answer="Hosting games can be a great way to bring people together and have fun. Here are some types of games you can consider hosting, depending on the preferences of your group and the available resources"
+                />
+                <QuestionAnswer
+                  question="What types of games can I host?"
+                  answer="Hosting games can be a great way to bring people together and have fun. Here are some types of games you can consider hosting, depending on the preferences of your group and the available resources"
+                />
+              </Stack>
+            </Grid2>
+          </Grid2>
+        </Stack>
+      </Container>
+    </>
   )
 }

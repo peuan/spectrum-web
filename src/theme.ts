@@ -15,6 +15,7 @@ const theme = createTheme({
     fontFamily: notoSansThai.style.fontFamily,
   },
   palette: {
+    mode: 'dark',
     primary: {
       main: '#6A79FA',
     },
@@ -22,12 +23,18 @@ const theme = createTheme({
       main: '#D701A2',
     },
     grey: {
+      400: '#ADB7BE',
       500: '#333336',
+    },
+    background: {
+      paper: '#232426',
+      default: '#232426',
     },
   },
   shape: {
     borderRadius: 6,
   },
+  spacing: 8,
   components: {
     MuiChip: {
       styleOverrides: {
@@ -81,6 +88,14 @@ const theme = createTheme({
             fontSize: 14,
           },
         },
+        sizeMedium: {
+          width: 30,
+          height: 30,
+
+          '& .MuiIcon-root': {
+            fontSize: 24,
+          },
+        },
         root: {
           color: '#ADB7BE',
           background: '#333235',
@@ -97,6 +112,28 @@ const theme = createTheme({
           },
         },
       },
+    },
+    MuiTypography: {
+      variants: [
+        {
+          props: {
+            color: 'gradient',
+          },
+          style: {
+            background: 'linear-gradient(180deg, #FFFFFF 50%, #999999 110.42%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+          },
+        },
+        {
+          props: {
+            variant: 'h3',
+          },
+          style: {
+            fontSize: 36,
+          },
+        },
+      ],
     },
   },
 })
