@@ -20,7 +20,7 @@ const Page = () => {
         spacing={2}
         container
         sx={{
-          paddingTop: '64px',
+          pt: 8,
         }}
       >
         <Grid2

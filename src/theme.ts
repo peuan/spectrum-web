@@ -34,6 +34,7 @@ const theme = createTheme({
   shape: {
     borderRadius: 6,
   },
+  spacing: 8,
   components: {
     MuiChip: {
       styleOverrides: {

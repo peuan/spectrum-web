@@ -37,7 +37,7 @@ const Pricing: React.FC<PricingProps> = ({
       sx={{
         width: '100%',
         backgroundColor: '#1C1D1F',
-        color: '#fff',
+        color: 'common.white',
         textAlign: 'center',
         borderRadius: 3,
         padding: 2,
