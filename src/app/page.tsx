@@ -1,5 +1,3 @@
-'use client'
-
 import Banner from '@/components/BannerOverlay'
 import Feature from '@/components/Feature'
 import FeatureHighlight from '@/components/FeatureHighlight'
