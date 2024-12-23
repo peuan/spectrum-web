@@ -1,5 +1,7 @@
 'use client'
 
+import { Route } from '@/enums/route.enum'
+import useUser from '@/hooks/auth/useUser'
 import { Menu } from '@mui/icons-material'
 import {
   Avatar,
@@ -13,21 +15,21 @@ import {
   ListItemText,
   Stack,
 } from '@mui/material'
-import { useState } from 'react'
 import NextLink from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useState } from 'react'
 
 const menuItems = [
   {
-    href: '/how-to-use',
+    href: Route.HOW_TO_USE,
     label: 'How to use',
   },
   {
-    href: '/plan',
+    href: Route.PLAN,
     label: 'Plan',
   },
   {
-    href: '/contact',
+    href: Route.CONTRACT,
     label: 'Contact',
   },
 ]
@@ -37,6 +39,9 @@ const drawerWidth = 262
 const TheMainHeader = () => {
   const [isSidebar, setSidebarOpen] = useState(false)
   const pathname = usePathname()
+  const user = useUser()
+
+  console.log('user', user)
 
   const handleSidebarToggle = () => {
     setSidebarOpen(!isSidebar)

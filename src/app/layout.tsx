@@ -8,7 +8,6 @@ import TheMainLayout from '@/components/layouts/TheMainLayout'
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
 import { getQueryClient } from '@/libs/react-query.lib'
 import ReactQueryProvider from './providers/ReactQueryProvider'
-import NextAuthProvider from './providers/NextAuthProvider'
 
 const notoSansThai = Noto_Sans_Thai({
   subsets: ['thai', 'latin'],
@@ -36,17 +35,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={notoSansThai.className}>
-        <NextAuthProvider>
-          <AppRouterCacheProvider>
-            <ReactQueryProvider>
-              <HydrationBoundary state={dehydratedState}>
-                <ThemeProvider theme={theme}>
-                  <TheMainLayout>{children}</TheMainLayout>
-                </ThemeProvider>
-              </HydrationBoundary>
-            </ReactQueryProvider>
-          </AppRouterCacheProvider>
-        </NextAuthProvider>
+        <AppRouterCacheProvider>
+          <ReactQueryProvider>
+            <HydrationBoundary state={dehydratedState}>
+              <ThemeProvider theme={theme}>
+                <TheMainLayout>{children}</TheMainLayout>
+              </ThemeProvider>
+            </HydrationBoundary>
+          </ReactQueryProvider>
+        </AppRouterCacheProvider>
       </body>
     </html>
   )

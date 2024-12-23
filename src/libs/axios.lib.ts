@@ -1,7 +1,5 @@
 import axios from 'axios'
 
-import { getSession } from 'next-auth/react'
-
 const axiosClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_ENDPOINT,
   headers: {
@@ -13,11 +11,7 @@ const axiosClient = axios.create({
 axiosClient.interceptors.request.use(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async (config: any) => {
-    const session = await getSession()
-
-    if (session) {
-      // Add authorization headers or other request configurations here
-    }
+    // Add authorization headers or other request configurations here
 
     return config
   },
