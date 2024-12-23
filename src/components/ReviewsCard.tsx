@@ -28,11 +28,8 @@ const ReviewsCard: React.FC<ReviewsProps> = ({
   return (
     <Card
       sx={{
-        width: 376,
-        height: 295,
+        width: '100%',
         bgcolor: '#1C1D1F',
-        borderRadius: '0px',
-        alignContent: 'center',
       }}
     >
       <CardContent
@@ -40,7 +37,8 @@ const ReviewsCard: React.FC<ReviewsProps> = ({
           display: 'flex',
           flexDirection: 'column',
           gap: 2,
-          margin: '0px 16px',
+          mr: 2,
+          ml: 2,
         }}
       >
         {/* rating */}
@@ -54,12 +52,11 @@ const ReviewsCard: React.FC<ReviewsProps> = ({
 
         <Box
           sx={{
-            width: 315,
-            height: 132,
+            width: '100%',
           }}
         >
           {/* text */}
-          <Typography variant="body2" color="white" fontSize="16px">
+          <Typography variant="body2" color="common.white">
             {comment}
           </Typography>
         </Box>
@@ -71,21 +68,12 @@ const ReviewsCard: React.FC<ReviewsProps> = ({
             alignItems: 'center',
           }}
         >
-          <Avatar
-            sx={{
-              width: 50,
-              height: 50,
-              borderRadius: '100px',
-            }}
-            src={profilePic}
-          ></Avatar>
+          <Avatar src={profilePic}></Avatar>
 
           <Typography
-            component="span"
             sx={{
-              textAlign: 'left',
-              marginLeft: '20px',
-              color: 'white',
+              ml: 3,
+              color: 'common.white',
             }}
           >
             {name}

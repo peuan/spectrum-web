@@ -135,7 +135,38 @@ const theme = createTheme({
         },
       ],
     },
+    MuiSwitch: {
+      styleOverrides: {
+        root: {
+          width: 50,
+          height: 30,
+          padding: 0,
+          borderRadius: '99px',
+          display: 'flex',
+        },
+        switchBase: {
+          padding: 1,
+          transform: 'translateX(0px)',
+          '&.Mui-checked': {
+            transform: 'translateX(21px)',
+            '& + .MuiSwitch-track': {
+              backgroundColor: '#6A79FA',
+              opacity: 1,
+            },
+          },
+        },
+        thumb: {
+          width: 28,
+          height: 28,
+          backgroundColor: '#ffffff',
+          boxShadow: '0 0 2px 0 rgba(0,0,0,0.5)',
+        },
+        track: {
+          backgroundColor: '#78788029',
+          opacity: 1,
+        },
+      },
+    },
   },
 })
-
 export default theme
