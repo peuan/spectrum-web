@@ -3,18 +3,22 @@
 import { Route } from '@/enums/route.enum'
 import useUser from '@/hooks/auth/useUser'
 import { createClient } from '@/utils/supabase/client.util'
-import { Menu } from '@mui/icons-material'
+import { Menu, ExpandMore } from '@mui/icons-material'
 import {
   Avatar,
   Box,
   Button,
   Container,
+  Divider,
   Drawer,
   Link,
   List,
   ListItem,
   ListItemText,
+  MenuItem,
   Stack,
+  Menu as MuiMenu,
+  Typography,
 } from '@mui/material'
 import NextLink from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -39,6 +43,17 @@ const drawerWidth = 262
 
 const TheMainHeader = () => {
   const [isSidebar, setSidebarOpen] = useState(false)
+
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget)
+  }
+
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
+
   const pathname = usePathname()
   const { user } = useUser()
 
@@ -185,7 +200,17 @@ const TheMainHeader = () => {
               {logo}
             </Stack>
           </Box>
-          <Stack alignItems="center" direction="row" gap={1}>
+          <Stack
+            alignItems="center"
+            direction="row"
+            gap={1}
+            sx={{
+              display: {
+                xs: 'none',
+                md: 'flex',
+              },
+            }}
+          >
             {menuItems.map((menuItem) => {
               return (
                 <Link
@@ -208,9 +233,86 @@ const TheMainHeader = () => {
               </Button>
             )}
             {!!user && (
-              <Button variant="outlined" onClick={handleSignOut}>
-                Sign out
-              </Button>
+              <>
+                <Box
+                  onClick={handleClick}
+                  sx={{
+                    borderColor: 'primary.main',
+                    borderWidth: 2,
+                    borderStyle: 'solid',
+                    backgroundColor: 'grey.600',
+                    borderRadius: '100px',
+                    height: '58px',
+                    px: 2,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    gap: 2,
+                    cursor: 'pointer',
+                  }}
+                >
+                  <Button
+                    variant="contained"
+                    sx={{
+                      borderRadius: '50%',
+                      width: '36px',
+                      height: '36px',
+                      minWidth: '36px',
+                    }}
+                  >
+                    <Avatar
+                      src="/icons/user-01.png"
+                      sx={{
+                        width: '24px',
+                        height: '24px',
+                        borderRadius: '50%',
+                      }}
+                    />
+                  </Button>
+                  <Stack>
+                    <Typography
+                      sx={{ color: 'common.white' }}
+                      fontWeight={600}
+                      fontSize={16}
+                    >
+                      {user.email}
+                    </Typography>
+                    <Typography
+                      sx={{ color: 'common.white' }}
+                      variant="caption"
+                    >
+                      0 Credit
+                    </Typography>
+                  </Stack>
+
+                  <ExpandMore />
+                </Box>
+                <MuiMenu
+                  anchorEl={anchorEl}
+                  onClose={handleClose}
+                  elevation={0}
+                  anchorOrigin={{
+                    vertical: 'bottom', // Adjust menu vertical alignment
+                    horizontal: 'right', // Adjust menu horizontal alignment
+                  }}
+                  transformOrigin={{
+                    vertical: 'top', // Adjust transformation alignment
+                    horizontal: 'right', // Adjust transformation alignment
+                  }}
+                  open={Boolean(anchorEl)} // Ensure the menu opens only when anchorEl is set
+                  sx={{
+                    '& .MuiPaper-root': {
+                      minWidth: '200px',
+                    },
+                  }}
+                >
+                  <MenuItem disableRipple>Account</MenuItem>
+                  <Divider sx={{ my: 0.5 }} />
+                  <MenuItem disableRipple onClick={handleSignOut}>
+                    Sign out
+                  </MenuItem>
+                </MuiMenu>
+              </>
             )}
           </Stack>
         </Stack>
