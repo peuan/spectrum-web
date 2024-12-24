@@ -19,6 +19,7 @@ import {
   Stack,
   Menu as MuiMenu,
   Typography,
+  Skeleton,
 } from '@mui/material'
 import NextLink from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -55,7 +56,7 @@ const TheMainHeader = () => {
   }
 
   const pathname = usePathname()
-  const { user } = useUser()
+  const { user, isLoading } = useUser()
 
   const handleSidebarToggle = () => {
     setSidebarOpen(!isSidebar)
@@ -223,7 +224,7 @@ const TheMainHeader = () => {
                 </Link>
               )
             })}
-            {!user && (
+            {!user && !isLoading && (
               <Button
                 LinkComponent={NextLink}
                 href={Route.SIGN_IN}
@@ -232,7 +233,12 @@ const TheMainHeader = () => {
                 Sign in
               </Button>
             )}
-            {!!user && (
+            {isLoading && (
+              <Skeleton>
+                <Button> Sign in</Button>
+              </Skeleton>
+            )}
+            {!!user && !isLoading && (
               <>
                 <Box
                   onClick={handleClick}
