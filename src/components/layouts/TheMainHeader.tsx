@@ -2,6 +2,7 @@
 
 import { Route } from '@/enums/route.enum'
 import useUser from '@/hooks/auth/useUser'
+import { createClient } from '@/utils/supabase/client.util'
 import { Menu } from '@mui/icons-material'
 import {
   Avatar,
@@ -39,12 +40,17 @@ const drawerWidth = 262
 const TheMainHeader = () => {
   const [isSidebar, setSidebarOpen] = useState(false)
   const pathname = usePathname()
-  const user = useUser()
-
-  console.log('user', user)
+  const { user } = useUser()
 
   const handleSidebarToggle = () => {
     setSidebarOpen(!isSidebar)
+  }
+
+  const handleSignOut = async () => {
+    const supabase = createClient()
+
+    await supabase.auth.signOut()
+    window.location.reload()
   }
 
   const menuContent = (
@@ -192,7 +198,20 @@ const TheMainHeader = () => {
                 </Link>
               )
             })}
-            <Button variant="outlined">Login</Button>
+            {!user && (
+              <Button
+                LinkComponent={NextLink}
+                href={Route.SIGN_IN}
+                variant="outlined"
+              >
+                Sign in
+              </Button>
+            )}
+            {!!user && (
+              <Button variant="outlined" onClick={handleSignOut}>
+                Sign out
+              </Button>
+            )}
           </Stack>
         </Stack>
       </Container>

@@ -6,14 +6,12 @@ import { Button, Container } from '@mui/material'
 const SignInPage = () => {
   const handleSignIn = async () => {
     const supabase = createClient()
-    const { data, error } = await supabase.auth.signInWithOAuth({
+    await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: 'http://localhost:3000/auth/callback',
+        redirectTo: `${process.env.NEXT_PUBLIC_BASE_URL}/auth/callback`,
       },
     })
-    console.log('data', data)
-    console.log('error', error)
   }
 
   return (

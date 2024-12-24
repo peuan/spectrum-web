@@ -4,18 +4,23 @@ import { useEffect, useState } from 'react'
 
 const useUser = () => {
   const [user, setUser] = useState<User | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
   const supabase = createClient()
 
   useEffect(() => {
     const getUser = async () => {
       const { data } = await supabase.auth.getUser()
       setUser(data.user)
+      setIsLoading(false)
     }
 
     getUser()
   }, [supabase])
 
-  return user
+  return {
+    user,
+    isLoading,
+  }
 }
 
 export default useUser

@@ -1,3 +1,4 @@
+import { Route } from '@/enums/route.enum'
 import { createClient } from '@/utils/supabase/server.util'
 import { redirect } from 'next/navigation'
 import { PropsWithChildren } from 'react'
@@ -7,10 +8,11 @@ const ProtectedLayout = async ({ children }: PropsWithChildren) => {
 
   const {
     data: { user },
+    error,
   } = await supabase.auth.getUser()
 
-  if (!user) {
-    return redirect('/sign-in')
+  if (!user || !!error) {
+    return redirect(Route.SIGN_IN)
   }
 
   return children

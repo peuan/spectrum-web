@@ -1,3 +1,4 @@
+import { Route } from '@/enums/route.enum'
 import { createServerClient } from '@supabase/ssr'
 import { type NextRequest, NextResponse } from 'next/server'
 
@@ -41,12 +42,12 @@ export const updateSession = async (request: NextRequest) => {
 
     // protected routes
     if (request.nextUrl.pathname.startsWith('/protected') && user.error) {
-      return NextResponse.redirect(new URL('/sign-in', request.url))
+      return NextResponse.redirect(new URL(Route.SIGN_IN, request.url))
     }
 
-    if (request.nextUrl.pathname === '/' && !user.error) {
-      return NextResponse.redirect(new URL('/protected', request.url))
-    }
+    // if (request.nextUrl.pathname === '/' && !user.error) {
+    //   return NextResponse.redirect(new URL('/protected', request.url))
+    // }
 
     return response
   } catch (e) {
