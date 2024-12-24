@@ -12,18 +12,35 @@ const TheMainFooter = () => {
       }}
     >
       <Container>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
+        >
           <Image
             src="/spectrum-footer.svg"
             alt="logo"
             width={100}
             height={24}
           />
-          <Typography variant="body2" color="grey.400" fontWeight={500}>
+          <Typography
+            variant="body2"
+            color="grey.400"
+            fontWeight={500}
+            textAlign={{ xs: 'center', sm: 'left' }}
+            sx={{ fontSize: { xs: '0.5rem', sm: '0.875rem' } }}
+          >
             Copyright &#169; 2024 - Spectrumlive
           </Typography>
           <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
-            <Typography variant="body2" color="grey.400" fontWeight={500}>
+            <Typography
+              variant="body2"
+              color="grey.400"
+              fontWeight={500}
+              sx={{ fontSize: { xs: '0.5rem', sm: '0.875rem' } }}
+            >
               Terms of Service
             </Typography>
             <Box
@@ -33,7 +50,12 @@ const TheMainFooter = () => {
                 backgroundColor: 'grey.400',
               }}
             />
-            <Typography variant="body2" color="grey.400" fontWeight={500}>
+            <Typography
+              variant="body2"
+              color="grey.400"
+              fontWeight={500}
+              sx={{ fontSize: { xs: '0.5rem', sm: '0.875rem' } }}
+            >
               Privacy Policy
             </Typography>
           </Box>
