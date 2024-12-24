@@ -234,8 +234,8 @@ const TheMainHeader = () => {
               </Button>
             )}
             {isLoading && (
-              <Skeleton>
-                <Button> Sign in</Button>
+              <Skeleton width={80}>
+                <Box sx={{ pt: 6 }}></Box>
               </Skeleton>
             )}
             {!!user && !isLoading && (
