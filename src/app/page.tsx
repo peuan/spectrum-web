@@ -2,7 +2,82 @@ import Banner from '@/components/BannerOverlay'
 import Feature from '@/components/Feature'
 import FeatureHighlight from '@/components/FeatureHighlight'
 import QuestionAnswer from '@/components/QuestionAnswer'
+import SwiperComponent from '@/components/Swiper'
 import { Box, Button, Container, Grid2, Stack, Typography } from '@mui/material'
+
+const reviews = [
+  {
+    score: 5,
+    comment:
+      'Dolor minim in pariatur in deserunt laboris eu pariatur labore excepteur cupidatat cupidatat duis dolor in.',
+    profilePic: '/avatar.png',
+    name: 'John Doe',
+  },
+  {
+    score: 4,
+    comment:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum.',
+    profilePic: '/avatar.png',
+    name: 'Jane Smith',
+  },
+  {
+    score: 5,
+    comment:
+      'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.',
+    profilePic: '/avatar.png',
+    name: 'Robert Brown',
+  },
+  {
+    score: 3,
+    comment:
+      'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    profilePic: '/avatar.png',
+    name: 'Emily Davis',
+  },
+  {
+    score: 4,
+    comment:
+      'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+    profilePic: '/avatar.png',
+    name: 'Michael Lee',
+  },
+  {
+    score: 5,
+    comment:
+      'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    profilePic: '/avatar.png',
+    name: 'Sarah Wilson',
+  },
+  {
+    score: 4,
+    comment:
+      'Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra.',
+    profilePic: '/avatar.png',
+    name: 'Chris Johnson',
+  },
+  {
+    score: 5,
+    comment:
+      'Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh.',
+    profilePic: '/avatar.png',
+    name: 'Anna Taylor',
+  },
+  {
+    score: 3,
+    comment:
+      'Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc.',
+    profilePic: '/avatar.png',
+    name: 'Mark Allen',
+  },
+  {
+    score: 5,
+    comment:
+      'Suspendisse potenti. Sed lectus. Integer euismod lacus luctus magna. Quisque cursus, metus vitae pharetra auctor.',
+    profilePic: '/avatar.png',
+    name: 'Olivia Harris',
+  },
+]
+// Import Swiper core and required modules
 
 export default function Home() {
   return (
@@ -179,6 +254,20 @@ export default function Home() {
           buttonText="Lorem ipsum"
         />
       </Container>
+
+      <Container sx={{ py: 2 }}>
+        <Typography
+          variant="h3"
+          fontWeight="bold"
+          gutterBottom
+          color="gradient"
+        >
+          Customer reviews
+        </Typography>
+      </Container>
+      <Box>
+        <SwiperComponent reviews={reviews} />
+      </Box>
 
       <Container sx={{ py: 8 }}>
         <FeatureHighlight

@@ -29,7 +29,7 @@ const ReviewsCard: React.FC<ReviewsProps> = ({
     <Card
       sx={{
         width: '100%',
-        bgcolor: '#1C1D1F',
+        bgcolor: 'grey.600',
       }}
     >
       <CardContent
