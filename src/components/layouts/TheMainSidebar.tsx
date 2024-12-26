@@ -1,10 +1,13 @@
 'use client'
 
 import { Route } from '@/enums/route.enum'
+import { Dashboard } from '@mui/icons-material'
 import {
   Box,
   Container,
+  Drawer,
   Grid2,
+  IconButton,
   List,
   ListItem,
   ListItemButton,
@@ -36,8 +39,13 @@ interface TheMainSidebarProps {
 
 const TheMainSidebar = ({ title, children }: TheMainSidebarProps) => {
   const pathname = usePathname()
+  const [isSidebarOpen, setSidebarOpen] = React.useState(false)
 
-  const sideMenuList = React.useMemo(() => {
+  const handleSidebarToggle = () => {
+    setSidebarOpen(!isSidebarOpen)
+  }
+
+  const sideMenuContent = React.useMemo(() => {
     return (
       <List sx={{ py: 0 }}>
         {menuItems.map((item) => (
@@ -82,16 +90,61 @@ const TheMainSidebar = ({ title, children }: TheMainSidebarProps) => {
     <Container
       sx={{
         pt: { xs: 9, md: 10, lg: 11 },
+        pb: 3,
       }}
     >
       <Grid2 container spacing={2}>
+        <Grid2
+          size={12}
+          sx={{
+            display: {
+              xs: 'flex',
+              md: 'none',
+            },
+            alignItems: 'center',
+            position: 'sticky',
+            top: 60,
+          }}
+        >
+          <IconButton color="primary" onClick={handleSidebarToggle}>
+            <Dashboard sx={{ fontSize: 20 }} />
+          </IconButton>
+          <Drawer
+            variant="temporary"
+            open={isSidebarOpen}
+            onClose={handleSidebarToggle}
+            ModalProps={{
+              keepMounted: true, // Better open performance on mobile
+            }}
+            sx={{
+              '& .MuiDrawer-paper': {
+                boxSizing: 'border-box',
+                width: 262,
+                p: 2,
+                backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                backdropFilter: 'blur(4px)',
+                gap: 2,
+              },
+            }}
+          >
+            {sideMenuContent}
+          </Drawer>
+        </Grid2>
         <Grid2 size={12}>
           <Typography variant="h3" color="gradient" textAlign="center">
             {title}
           </Typography>
         </Grid2>
         <Grid2 container size={12}>
-          <Grid2 size={{ xs: 12, md: 3 }}>
+          <Grid2
+            size={{ xs: 12, md: 3 }}
+            sx={{
+              display: {
+                xs: 'none',
+                md: 'block',
+              },
+            }}
+          >
             <Box
               sx={{
                 bgcolor: 'grey.600',
@@ -101,7 +154,7 @@ const TheMainSidebar = ({ title, children }: TheMainSidebarProps) => {
                 top: 88,
               }}
             >
-              {sideMenuList}
+              {sideMenuContent}
             </Box>
           </Grid2>
           <Grid2 size={{ xs: 12, md: 9 }}>{children}</Grid2>

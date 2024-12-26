@@ -20,6 +20,7 @@ const useUser = () => {
   return {
     user,
     isLoading,
+    isAuthenticated: !!user,
   }
 }
 

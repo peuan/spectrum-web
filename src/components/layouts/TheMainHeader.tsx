@@ -23,7 +23,7 @@ import {
 } from '@mui/material'
 import NextLink from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 
 const menuItems = [
   {
@@ -44,11 +44,11 @@ const drawerWidth = 262
 
 const TheMainHeader = () => {
   const router = useRouter()
-  const [isSidebar, setSidebarOpen] = useState(false)
+  const [isSidebarOpen, setSidebarOpen] = useState(false)
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
 
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+  const handleOpenMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget)
   }
 
@@ -57,22 +57,120 @@ const TheMainHeader = () => {
   }
 
   const pathname = usePathname()
-  const { user, isLoading } = useUser()
+  const { user, isLoading, isAuthenticated } = useUser()
 
   const handleSidebarToggle = () => {
-    setSidebarOpen(!isSidebar)
+    setSidebarOpen(!isSidebarOpen)
+  }
+
+  const handleCloseSidebar = () => {
+    setSidebarOpen(false)
   }
 
   const handleSignOut = async () => {
+    setSidebarOpen(false)
     const supabase = createClient()
 
     await supabase.auth.signOut()
     window.location.reload()
   }
 
-  const handleGotoAccount = () => {
+  const handleGotoAccount = useCallback(() => {
     router.push(Route.ACCOUNT)
-  }
+    handleCloseSidebar()
+  }, [router])
+
+  const accountMenuContent = useCallback(
+    (isHeader: boolean) => {
+      if (isLoading || !user) {
+        return
+      }
+
+      return (
+        <>
+          <Box
+            onClick={isHeader ? handleOpenMenu : handleGotoAccount}
+            sx={{
+              borderColor: 'primary.main',
+              borderWidth: 2,
+              borderStyle: 'solid',
+              backgroundColor: 'grey.600',
+              borderRadius: '100px',
+              height: '58px',
+              px: 2,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: 2,
+              cursor: 'pointer',
+            }}
+          >
+            <Button
+              variant="contained"
+              sx={{
+                borderRadius: '50%',
+                width: '36px',
+                height: '36px',
+                minWidth: '36px',
+              }}
+            >
+              <Avatar
+                src="/icons/user-01.png"
+                sx={{
+                  width: '24px',
+                  height: '24px',
+                  borderRadius: '50%',
+                }}
+              />
+            </Button>
+            <Stack sx={{ overflow: 'hidden' }}>
+              <Typography
+                sx={{ color: 'common.white' }}
+                fontWeight={600}
+                fontSize={16}
+                noWrap
+              >
+                {user?.email}
+              </Typography>
+              <Typography sx={{ color: 'common.white' }} variant="caption">
+                0 Credit
+              </Typography>
+            </Stack>
+
+            {isHeader && <ExpandMore />}
+          </Box>
+          <MuiMenu
+            anchorEl={anchorEl}
+            onClose={handleClose}
+            elevation={0}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'right',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            open={Boolean(anchorEl)}
+            sx={{
+              '& .MuiPaper-root': {
+                minWidth: '200px',
+              },
+            }}
+          >
+            <MenuItem disableRipple onClick={handleGotoAccount}>
+              Account
+            </MenuItem>
+            <Divider sx={{ my: 0.5 }} />
+            <MenuItem disableRipple onClick={handleSignOut}>
+              Sign out
+            </MenuItem>
+          </MuiMenu>
+        </>
+      )
+    },
+    [anchorEl, handleGotoAccount, user, isLoading]
+  )
 
   const menuContent = (
     <List
@@ -119,7 +217,7 @@ const TheMainHeader = () => {
   )
 
   const logo = (
-    <NextLink href="/">
+    <NextLink href="/" onClick={handleCloseSidebar}>
       <Stack direction="row" alignItems="center" gap={1}>
         <Avatar sx={{ width: 78, height: 60 }} src="/icons/logo.svg" />
         <Avatar
@@ -171,7 +269,7 @@ const TheMainHeader = () => {
               />
               <Drawer
                 variant="temporary"
-                open={isSidebar}
+                open={isSidebarOpen}
                 onClose={handleSidebarToggle}
                 ModalProps={{
                   keepMounted: true, // Better open performance on mobile
@@ -188,9 +286,24 @@ const TheMainHeader = () => {
                 }}
               >
                 {logo}
-                <Stack gap={1}>
+                <Stack gap={1} flex={1}>
                   {menuContent}
-                  <Button variant="outlined">Login</Button>
+                  {isAuthenticated && !isLoading && (
+                    <Button variant="outlined" onClick={handleSignOut}>
+                      Sign out
+                    </Button>
+                  )}
+                  {!isAuthenticated && !isLoading && (
+                    <Button
+                      LinkComponent={NextLink}
+                      href={Route.SIGN_IN}
+                      variant="outlined"
+                      onClick={handleSidebarToggle}
+                    >
+                      Sign in
+                    </Button>
+                  )}
+                  <Box mt="auto">{accountMenuContent(false)}</Box>
                 </Stack>
               </Drawer>
             </Stack>
@@ -243,90 +356,7 @@ const TheMainHeader = () => {
                 <Box sx={{ pt: 6 }}></Box>
               </Skeleton>
             )}
-            {!!user && !isLoading && (
-              <>
-                <Box
-                  onClick={handleClick}
-                  sx={{
-                    borderColor: 'primary.main',
-                    borderWidth: 2,
-                    borderStyle: 'solid',
-                    backgroundColor: 'grey.600',
-                    borderRadius: '100px',
-                    height: '58px',
-                    px: 2,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    gap: 2,
-                    cursor: 'pointer',
-                  }}
-                >
-                  <Button
-                    variant="contained"
-                    sx={{
-                      borderRadius: '50%',
-                      width: '36px',
-                      height: '36px',
-                      minWidth: '36px',
-                    }}
-                  >
-                    <Avatar
-                      src="/icons/user-01.png"
-                      sx={{
-                        width: '24px',
-                        height: '24px',
-                        borderRadius: '50%',
-                      }}
-                    />
-                  </Button>
-                  <Stack>
-                    <Typography
-                      sx={{ color: 'common.white' }}
-                      fontWeight={600}
-                      fontSize={16}
-                    >
-                      {user.email}
-                    </Typography>
-                    <Typography
-                      sx={{ color: 'common.white' }}
-                      variant="caption"
-                    >
-                      0 Credit
-                    </Typography>
-                  </Stack>
-
-                  <ExpandMore />
-                </Box>
-                <MuiMenu
-                  anchorEl={anchorEl}
-                  onClose={handleClose}
-                  elevation={0}
-                  anchorOrigin={{
-                    vertical: 'bottom', // Adjust menu vertical alignment
-                    horizontal: 'right', // Adjust menu horizontal alignment
-                  }}
-                  transformOrigin={{
-                    vertical: 'top', // Adjust transformation alignment
-                    horizontal: 'right', // Adjust transformation alignment
-                  }}
-                  open={Boolean(anchorEl)} // Ensure the menu opens only when anchorEl is set
-                  sx={{
-                    '& .MuiPaper-root': {
-                      minWidth: '200px',
-                    },
-                  }}
-                >
-                  <MenuItem disableRipple onClick={handleGotoAccount}>
-                    Account
-                  </MenuItem>
-                  <Divider sx={{ my: 0.5 }} />
-                  <MenuItem disableRipple onClick={handleSignOut}>
-                    Sign out
-                  </MenuItem>
-                </MuiMenu>
-              </>
-            )}
+            {accountMenuContent(true)}
           </Stack>
         </Stack>
       </Container>
