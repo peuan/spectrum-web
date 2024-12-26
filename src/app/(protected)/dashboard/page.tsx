@@ -16,7 +16,7 @@ const DashboardPage = () => {
   }
 
   return (
-    <TheMainSidebar>
+    <TheMainSidebar title="Welcome back Rosaria Rose">
       <Box>
         <Typography
           variant="h4"
