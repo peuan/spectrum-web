@@ -22,7 +22,7 @@ import {
   Skeleton,
 } from '@mui/material'
 import NextLink from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 const menuItems = [
@@ -43,6 +43,7 @@ const menuItems = [
 const drawerWidth = 262
 
 const TheMainHeader = () => {
+  const router = useRouter()
   const [isSidebar, setSidebarOpen] = useState(false)
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
@@ -67,6 +68,10 @@ const TheMainHeader = () => {
 
     await supabase.auth.signOut()
     window.location.reload()
+  }
+
+  const handleGotoAccount = () => {
+    router.push(Route.ACCOUNT)
   }
 
   const menuContent = (
@@ -312,7 +317,9 @@ const TheMainHeader = () => {
                     },
                   }}
                 >
-                  <MenuItem disableRipple>Account</MenuItem>
+                  <MenuItem disableRipple onClick={handleGotoAccount}>
+                    Account
+                  </MenuItem>
                   <Divider sx={{ my: 0.5 }} />
                   <MenuItem disableRipple onClick={handleSignOut}>
                     Sign out
