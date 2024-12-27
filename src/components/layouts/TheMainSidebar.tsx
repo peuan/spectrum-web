@@ -110,7 +110,7 @@ const TheMainSidebar = ({ title, children }: TheMainSidebarProps) => {
             bottom: 10,
             left: 0,
             right: 0,
-            height: '100px',
+            height: '200px',
             pointerEvents: 'none',
             background:
               'linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 100%)',
