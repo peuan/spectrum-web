@@ -1,4 +1,3 @@
-import LoginCard from '@/components/LoginCard'
 import Paymentcard from '@/components/PaymentCard'
 import ReviewsCard from '@/components/ReviewsCard'
 import { Container, Box, Grid2 } from '@mui/material'
@@ -20,7 +19,6 @@ const Page = () => {
         }}
       >
         {/*login card*/}
-        <LoginCard />
       </Box>
 
       {/*payment card*/}

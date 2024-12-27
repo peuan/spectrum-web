@@ -167,9 +167,9 @@ export default function Home() {
               fontWeight="bold"
               gutterBottom
             >
-              ox.testlink
+              ox.[your link here]
             </Typography>
-            <Button variant="contained">รับ Link ของคุณ</Button>
+            <Button variant="contained">Get Your Link</Button>
           </Box>
         </Container>
       </Box>
