@@ -9,6 +9,7 @@ const Page = async () => {
     <Container
       sx={{
         paddingTop: '100px',
+        height: '100vh',
       }}
     >
       <Typography
