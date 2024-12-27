@@ -17,7 +17,6 @@ import {
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import * as React from 'react'
-import TheMainFooter from './TheMainFooter'
 
 const menuItems = [
   { label: 'Dashboard', route: Route.DASHBOARD },
@@ -196,7 +195,6 @@ const TheMainSidebar = ({ title, children }: TheMainSidebarProps) => {
           </Grid2>
         </Grid2>
       </Container>
-      <TheMainFooter />
     </>
   )
 }

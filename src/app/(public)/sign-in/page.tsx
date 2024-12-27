@@ -21,8 +21,8 @@ const SignInPage = () => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        height: 'calc(100vh - 84px)',
-        marginTop: '84px',
+        height: '100%',
+        marginTop: 5,
       }}
     >
       <LoginCard onClickGoogle={handleSignIn} />

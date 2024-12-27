@@ -1,7 +1,6 @@
 import Banner from '@/components/BannerOverlay'
 import Feature from '@/components/Feature'
 import FeatureHighlight from '@/components/FeatureHighlight'
-import TheMainFooter from '@/components/layouts/TheMainFooter'
 import QuestionAnswer from '@/components/QuestionAnswer'
 import SwiperComponent from '@/components/Swiper'
 import { Box, Button, Container, Grid2, Stack, Typography } from '@mui/material'
@@ -319,7 +318,6 @@ export default function Home() {
           </Grid2>
         </Stack>
       </Container>
-      <TheMainFooter />
     </>
   )
 }

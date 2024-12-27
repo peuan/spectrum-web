@@ -11,7 +11,7 @@ export default function Layout({ children }: Props) {
         backgroundImage: 'url(/plan-bg.png)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        height: '100vh', // Adjust height as needed
+        height: 'calc(100vh - 108px)',
         width: '100%',
       }}
     >
