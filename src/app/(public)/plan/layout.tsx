@@ -5,14 +5,36 @@ interface Props {
 }
 export default function Layout({ children }: Props) {
   return (
-    <>
+    <Box
+      sx={{
+        position: 'relative',
+        backgroundImage: 'url(/plan-bg.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        height: '100vh', // Adjust height as needed
+        width: '100%',
+      }}
+    >
+      {/* Overlay */}
       <Box
         sx={{
-          backgroundImage: 'url(/plan-bg.png)',
+          position: 'absolute',
+          inset: 0,
+          background:
+            'linear-gradient(90deg, rgba(0,0,0,0.6), rgba(0,0,0,0.2))',
+          zIndex: 1, // Overlay is below children
+        }}
+      />
+
+      {/* Children */}
+      <Box
+        sx={{
+          position: 'relative',
+          zIndex: 2, // Children are above the overlay
         }}
       >
         {children}
       </Box>
-    </>
+    </Box>
   )
 }
