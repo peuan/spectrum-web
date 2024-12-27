@@ -3,7 +3,7 @@ export enum Route {
   PLAN = '/plan',
   HOW_TO_USE = '/how-to-use',
   CONTRACT = '/contract',
-
+  TOP_UP = '/top-up',
   SIGN_IN = '/sign-in',
   DASHBOARD = '/dashboard',
   ACCOUNT = '/account',

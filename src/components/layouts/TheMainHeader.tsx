@@ -38,6 +38,10 @@ const menuItems = [
     href: Route.CONTRACT,
     label: 'Contact',
   },
+  {
+    href: Route.TOP_UP,
+    label: 'Top up',
+  },
 ]
 
 const drawerWidth = 262

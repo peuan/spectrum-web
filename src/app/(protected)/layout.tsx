@@ -5,12 +5,12 @@ import { PropsWithChildren } from 'react'
 
 const ProtectedLayout = async ({ children }: PropsWithChildren) => {
   const supabase = await createClient()
-
   const {
     data: { user },
     error,
   } = await supabase.auth.getUser()
 
+  console.log(user)
   if (!user || !!error) {
     return redirect(Route.SIGN_IN)
   }
