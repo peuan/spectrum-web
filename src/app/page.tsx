@@ -1,6 +1,7 @@
 import Banner from '@/components/BannerOverlay'
 import Feature from '@/components/Feature'
 import FeatureHighlight from '@/components/FeatureHighlight'
+import TheMainFooter from '@/components/layouts/TheMainFooter'
 import QuestionAnswer from '@/components/QuestionAnswer'
 import SwiperComponent from '@/components/Swiper'
 import { Box, Button, Container, Grid2, Stack, Typography } from '@mui/material'
@@ -101,7 +102,7 @@ export default function Home() {
             position: 'absolute',
             inset: 0,
             background:
-              'linear-gradient(90deg, rgba(0,0,0,0.5), rgba(0,0,0,0.2))',
+              'linear-gradient(90deg, rgba(0,0,0,0.6), rgba(0,0,0,0.2))',
             zIndex: 1,
           }}
         />
@@ -125,8 +126,7 @@ export default function Home() {
             gutterBottom
             maxWidth={303}
           >
-            รับเงินโดเนทจากผู้ติดตามของคุณได้ง่ายกว่า เร็วกว่า และปลอดภัยกว่า
-            ที่
+            Stream Smarter, Earn Faster: Simplify Donations Today!
           </Typography>
           <Typography
             variant="h2"
@@ -143,10 +143,10 @@ export default function Home() {
             fontWeight={500}
             gutterBottom
             maxWidth={419}
-            color="grey"
+            color="grey.300"
           >
-            Lorem ipsum dolor sit amet consectetur. Id posuere pretium diam enim
-            proin sed sed nulla. Tortor felis.
+            Your one-stop solution to securely and easily receive donations from
+            your fans. Fast, reliable, and hassle-free!
           </Typography>
           {/* Buttons */}
           <Box
@@ -319,6 +319,7 @@ export default function Home() {
           </Grid2>
         </Stack>
       </Container>
+      <TheMainFooter />
     </>
   )
 }

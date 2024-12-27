@@ -4,11 +4,17 @@ import { Button, Box, Avatar, Typography } from '@mui/material'
 interface CustomLoginButton {
   logo: string
   text: string
+  onClick?: () => void
 }
 
-const CustomLoginButton: React.FC<CustomLoginButton> = ({ logo, text }) => {
+const CustomLoginButton: React.FC<CustomLoginButton> = ({
+  logo,
+  text,
+  onClick,
+}) => {
   return (
     <Button
+      onClick={onClick}
       sx={{
         width: '100%',
         borderRadius: 10,

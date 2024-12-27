@@ -1,7 +1,8 @@
 'use client'
 
+import LoginCard from '@/components/LoginCard'
 import { createClient } from '@/utils/supabase/client.util'
-import { Button, Container } from '@mui/material'
+import { Container } from '@mui/material'
 
 const SignInPage = () => {
   const handleSignIn = async () => {
@@ -15,8 +16,16 @@ const SignInPage = () => {
   }
 
   return (
-    <Container sx={{ pt: 10, textAlign: 'center' }}>
-      <Button onClick={handleSignIn}>Sign in</Button>
+    <Container
+      sx={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: 'calc(100vh - 84px)',
+        marginTop: '84px',
+      }}
+    >
+      <LoginCard onClickGoogle={handleSignIn} />
     </Container>
   )
 }

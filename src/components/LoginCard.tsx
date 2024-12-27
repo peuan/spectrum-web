@@ -4,13 +4,17 @@ import React from 'react'
 import { Avatar, Typography, Card, CardContent, Stack } from '@mui/material'
 import CustomLoginButton from './CustomLoginButton'
 
-const LoginCard: React.FC = () => {
+interface LoginCardProps {
+  onClickGoogle: () => void
+}
+
+const LoginCard: React.FC<LoginCardProps> = ({ onClickGoogle }) => {
   return (
     <Card
       sx={{
         width: '100%',
         maxWidth: 572,
-        bgcolor: '#1C1D1F',
+        bgcolor: 'grey.600',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
@@ -36,13 +40,14 @@ const LoginCard: React.FC = () => {
           width: '100%',
         }}
       >
-        <Typography mt={-4} variant="body2">
+        <Typography variant="body2" fontWeight={600}>
           Sign in to your Account
         </Typography>
 
         {/* Buttons */}
         <Stack spacing={2} mt={2}>
           <CustomLoginButton
+            onClick={onClickGoogle}
             logo="/icons/google-logo.svg"
             text="Continue with Google"
           />
