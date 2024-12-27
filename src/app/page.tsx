@@ -10,70 +10,70 @@ const reviews = [
   {
     score: 5,
     comment:
-      'Dolor minim in pariatur in deserunt laboris eu pariatur labore excepteur cupidatat cupidatat duis dolor in.',
+      'Setting up my donation page was incredibly easy! I was up and running in just minutes, and my viewers love how simple it is to support me now.',
     profilePic: '/avatar.png',
-    name: 'John Doe',
+    name: 'Alex Carter',
   },
   {
     score: 4,
     comment:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum.',
+      'The platform works great and looks professional. My only suggestion would be to add more customization options for the donation page.',
     profilePic: '/avatar.png',
-    name: 'Jane Smith',
+    name: 'Jessica Martinez',
   },
   {
     score: 5,
     comment:
-      'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.',
+      'I’ve tried other donation systems, but this is by far the best. The notifications are instant, and it integrates perfectly with my Twitch stream!',
     profilePic: '/avatar.png',
-    name: 'Robert Brown',
+    name: 'Michael Zhang',
   },
   {
     score: 3,
     comment:
-      'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      'The setup process was smooth, but I had some issues with the payment gateway at first. Support was helpful, though, and resolved it quickly.',
     profilePic: '/avatar.png',
-    name: 'Emily Davis',
+    name: 'Emily Watson',
   },
   {
     score: 4,
     comment:
-      'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+      'I really like how secure this platform feels compared to others I’ve used. Would love to see PayPal as an additional payment option in the future.',
     profilePic: '/avatar.png',
-    name: 'Michael Lee',
+    name: 'Daniel Green',
   },
   {
     score: 5,
     comment:
-      'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      'This platform has made such a difference for me as a small streamer. I’ve already received so much support from my viewers!',
     profilePic: '/avatar.png',
-    name: 'Sarah Wilson',
+    name: 'Sophia Reed',
   },
   {
     score: 4,
     comment:
-      'Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra.',
+      'Great platform overall! The real-time notifications are a nice touch. My only wish is for more themes to match my channel branding.',
     profilePic: '/avatar.png',
     name: 'Chris Johnson',
   },
   {
     score: 5,
     comment:
-      'Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh.',
+      'The DDoS protection gives me peace of mind. My donation page has been rock solid, even during high-traffic streams.',
     profilePic: '/avatar.png',
     name: 'Anna Taylor',
   },
   {
     score: 3,
     comment:
-      'Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc.',
+      'It works fine, but I had some trouble linking it to my YouTube channel. Support eventually helped me out, but it took longer than expected.',
     profilePic: '/avatar.png',
     name: 'Mark Allen',
   },
   {
     score: 5,
     comment:
-      'Suspendisse potenti. Sed lectus. Integer euismod lacus luctus magna. Quisque cursus, metus vitae pharetra auctor.',
+      'Absolutely love this! My viewers keep telling me how easy it is to donate. It’s been a game-changer for my content creation journey.',
     profilePic: '/avatar.png',
     name: 'Olivia Harris',
   },
@@ -181,7 +181,7 @@ export default function Home() {
           gutterBottom
           color="gradient"
         >
-          ทำไมต้องใช้ SPECTRUM ?{' '}
+          Why Choose SPECTRUM?
         </Typography>
         <Grid2
           spacing={4}
@@ -200,7 +200,7 @@ export default function Home() {
             <Feature
               icon="/icons/setup.png"
               title="Super Quick Setup"
-              description="Dolor minim in pariatur in deserunt laboris eu pariatur labore excepteur cupidatat cupidatat duis dolor in."
+              description="Get started with donations in just a few minutes, thanks to our fast and hassle-free setup process."
             />
           </Grid2>
           <Grid2
@@ -213,7 +213,7 @@ export default function Home() {
             <Feature
               icon="/icons/hardware.png"
               title="Premium Hardware"
-              description="Dolor minim in pariatur in deserunt laboris eu pariatur labore excepteur cupidatat cupidatat duis dolor in."
+              description="We use cutting-edge, reliable systems to ensure a seamless experience for you and your supporters."
             />
           </Grid2>
           <Grid2
@@ -226,7 +226,7 @@ export default function Home() {
             <Feature
               icon="/icons/protect.png"
               title="DDos Protection"
-              description="Dolor minim in pariatur in deserunt laboris eu pariatur labore excepteur cupidatat cupidatat duis dolor in."
+              description="Feel secure with advanced cyberattack protection that keeps your donation system safe at all times."
             />
           </Grid2>
           <Grid2
@@ -239,7 +239,7 @@ export default function Home() {
             <Feature
               icon="/icons/support.png"
               title="Fast Support"
-              description="Dolor minim in pariatur in deserunt laboris eu pariatur labore excepteur cupidatat cupidatat duis dolor in."
+              description="Our dedicated team is always ready to assist you, so you can focus on streaming without any worries."
             />
           </Grid2>
         </Grid2>
@@ -248,10 +248,10 @@ export default function Home() {
       <Container sx={{ pb: 8, pt: 10 }}>
         <Banner
           title="Unlock Your Gaming Full Potential"
-          description="Aute esse non magna elit dolore dolore dolor sit est. Ea occaecat ea duis laborum reprehenderit id cillum tempor cupidatat qui nisi proident nostrud dolore id do eiusmod. Lorem ipsum non labore."
+          description="Step into a world where your gaming journey knows no limits. Whether you're a casual player or a pro, our platform is designed to level up your experience. From seamless integration to advanced tools, we provide everything you need to elevate your stream and connect with your community."
           logo="/avatar.png"
           banner="/bg-banner.png"
-          buttonText="Lorem ipsum"
+          buttonText="Level Up Now"
         />
       </Container>
 
@@ -271,9 +271,9 @@ export default function Home() {
 
       <Container sx={{ py: 8 }}>
         <FeatureHighlight
-          title="Lorem ipsum dolor sit amet consectetur."
-          description="Aute esse non magna elit dolore dolore dolor sit est. Ea occaecat ea duis laborum reprehenderit id cillum tempor cupidatat qui nisi proident nostrud dolore id do eiusmod. Lorem ipsum non labore."
-          buttonText="Lorem ipsum"
+          title="Power Your Streams with Cutting-Edge Technology"
+          description="Experience the ultimate in speed and reliability with our state-of-the-art servers. Designed to handle high-demand streaming, we ensure seamless performance for your audience and peace of mind for you."
+          buttonText="Explore Features"
           highlightImage="/highlight.png"
         />
       </Container>

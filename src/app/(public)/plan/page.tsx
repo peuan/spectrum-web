@@ -17,7 +17,7 @@ const Page = async () => {
         textAlign={'center'}
         fontWeight={600}
       >
-        สนับสนุนแพลตฟอร์มได้ง่ายๆเพียงแค่สมัครแพลน!
+        Support the Platform Easily by Subscribing to a Plan!
       </Typography>
       <Grid2
         spacing={2}
