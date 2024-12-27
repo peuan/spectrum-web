@@ -322,7 +322,7 @@ const TheMainHeader = () => {
           <Stack
             alignItems="center"
             direction="row"
-            gap={1}
+            gap={3}
             sx={{
               display: {
                 xs: 'none',
