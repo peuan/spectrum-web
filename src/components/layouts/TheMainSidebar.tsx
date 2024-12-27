@@ -93,6 +93,31 @@ const TheMainSidebar = ({ title, children }: TheMainSidebarProps) => {
         pb: 3,
       }}
     >
+      <Box
+        sx={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundImage: 'url(/bg-main.png)',
+          width: '100%',
+          height: { xs: '300px', md: '300px' },
+          zIndex: -1,
+          '&::after': {
+            content: '""',
+            position: 'absolute',
+            bottom: 10,
+            left: 0,
+            right: 0,
+            height: '100px',
+            pointerEvents: 'none',
+            background:
+              'linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 100%)',
+            filter: 'blur(10px)',
+          },
+        }}
+      />
       <Grid2 container spacing={2}>
         <Grid2
           size={12}
@@ -130,7 +155,15 @@ const TheMainSidebar = ({ title, children }: TheMainSidebarProps) => {
             {sideMenuContent}
           </Drawer>
         </Grid2>
-        <Grid2 size={12}>
+        <Grid2
+          sx={{
+            minHeight: { xs: '100px', md: '150px' },
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+          size={12}
+        >
           <Typography variant="h3" color="gradient" textAlign="center">
             {title}
           </Typography>
