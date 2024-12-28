@@ -162,7 +162,13 @@ const TheMainHeader = () => {
               },
             }}
           >
-            <MenuItem disableRipple onClick={handleGotoAccount}>
+            <MenuItem
+              disableRipple
+              onClick={() => {
+                handleGotoAccount()
+                handleClose()
+              }}
+            >
               Account
             </MenuItem>
             <Divider sx={{ my: 0.5 }} />
