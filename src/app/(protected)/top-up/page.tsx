@@ -1,14 +1,14 @@
-import {
-  Button,
-  Card,
-  CardContent,
-  Container,
-  Grid2,
-  TextField,
-  Typography,
-} from '@mui/material'
+'use client'
+
+import TopUpForm from '@/components/TopUpForm'
+import { TopUpFormValues } from '@/interfaces/top-up.interface'
+import { Container, Grid2, Typography } from '@mui/material'
 
 const TopUp = () => {
+  const handleSubmitTopUp = (formValues: TopUpFormValues) => {
+    console.log('formValues', formValues)
+  }
+
   return (
     <Container
       sx={{
@@ -36,113 +36,11 @@ const TopUp = () => {
         experience.
       </Typography>
 
-      <Card
-        sx={{
-          textAlign: 'center',
-          width: {
-            xs: '100%',
-            md: '50%',
-          },
-        }}
-      >
-        <CardContent
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 2,
-          }}
-        >
-          <TextField
-            fullWidth
-            id="outlined-basic"
-            label="Amount"
-            variant="outlined"
-            placeholder="Amount to Top Up"
-            sx={{
-              '& .MuiInputBase-root': {
-                py: 1,
-              },
-            }}
-            slotProps={{
-              inputLabel: {
-                shrink: true,
-              },
-            }}
-          />
-          <Grid2 container spacing={2}>
-            <Grid2
-              size={{
-                xs: 4,
-                md: 4,
-                lg: 4,
-              }}
-            >
-              <Button
-                variant="outlined"
-                fullWidth
-                sx={{
-                  borderColor: 'grey.300',
-                  py: 2,
-                  fontSize: '16px',
-                  fontWeight: 600,
-                }}
-              >
-                +49
-              </Button>
-            </Grid2>
-            <Grid2
-              size={{
-                xs: 4,
-                md: 4,
-                lg: 4,
-              }}
-            >
-              <Button
-                variant="outlined"
-                fullWidth
-                sx={{
-                  borderColor: 'grey.300',
-                  py: 2,
-                  fontSize: '16px',
-                  fontWeight: 600,
-                }}
-              >
-                +199
-              </Button>
-            </Grid2>
-            <Grid2
-              size={{
-                xs: 4,
-                md: 4,
-                lg: 4,
-              }}
-            >
-              <Button
-                variant="outlined"
-                fullWidth
-                sx={{
-                  borderColor: 'grey.300',
-                  py: 2,
-                  fontSize: '16px',
-                  fontWeight: 600,
-                }}
-              >
-                +249
-              </Button>
-            </Grid2>
-          </Grid2>
-          <Button
-            variant="contained"
-            fullWidth
-            sx={{
-              fontWeight: 600,
-              textTransform: 'none',
-            }}
-          >
-            Top up
-          </Button>
-        </CardContent>
-      </Card>
+      <Grid2 width="100%" container justifyContent="center">
+        <Grid2 size={{ xs: 12, md: 6 }}>
+          <TopUpForm onSubmit={handleSubmitTopUp} />
+        </Grid2>
+      </Grid2>
     </Container>
   )
 }
