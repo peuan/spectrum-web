@@ -23,6 +23,7 @@ const theme = createTheme({
       main: '#D701A2',
     },
     grey: {
+      300: '#333235',
       400: '#ADB7BE',
       500: '#333336',
       600: '#1C1D1F',
@@ -187,6 +188,51 @@ theme.components = {
             fontWeight: 600,
           },
         },
+      },
+    },
+  },
+
+  MuiPaper: {
+    variants: [
+      {
+        props: {
+          variant: 'haftGradient',
+        },
+        style: {
+          background: 'linear-gradient(to right, #212243 0%, #1C1D1F 100%)',
+        },
+      },
+      {
+        props: {
+          variant: 'primaryGradient',
+        },
+        style: {
+          background: 'linear-gradient(to right, #292D5C 0%, #212142 100%)',
+        },
+      },
+      {
+        props: {
+          variant: 'elevation',
+        },
+        style: {
+          backgroundColor: 'grey.600',
+          color: 'common.white',
+          boxShadow: '0 4px 10px rgba(0, 0, 0, 0.2)',
+        },
+      },
+    ],
+    styleOverrides: {
+      root: {
+        backgroundImage: 'none',
+      },
+    },
+  },
+
+  MuiCard: {
+    styleOverrides: {
+      root: {
+        borderRadius: 12,
+        padding: 16,
       },
     },
   },

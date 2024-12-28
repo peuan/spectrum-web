@@ -1,9 +1,10 @@
 'use client'
 
+import EmailPhoneForm from '@/components/EmailPhoneForm'
 import TheMainSidebar from '@/components/layouts/TheMainSidebar'
 import PageLoading from '@/components/PageLoading'
 import useGetPlanList from '@/hooks/plan/useGetPlanList'
-import { Box } from '@mui/material'
+import { Card, Grid2 } from '@mui/material'
 
 const DashboardPage = () => {
   const getPlanListHook = useGetPlanList()
@@ -16,7 +17,14 @@ const DashboardPage = () => {
 
   return (
     <TheMainSidebar title="Account">
-      <Box>eiei</Box>
+      <Grid2 container spacing={2}>
+        <Grid2 size={12}>In formation here</Grid2>
+        <Grid2 size={{ xs: 12, md: 6 }}>
+          <Card variant="haftGradient">
+            <EmailPhoneForm />
+          </Card>
+        </Grid2>
+      </Grid2>
     </TheMainSidebar>
   )
 }
