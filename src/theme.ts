@@ -245,6 +245,16 @@ theme.components = {
       },
     },
   },
+
+  MuiTextField: {
+    defaultProps: {
+      slotProps: {
+        inputLabel: {
+          shrink: true,
+        },
+      },
+    },
+  },
 }
 
 export default theme

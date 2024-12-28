@@ -55,11 +55,6 @@ const EmailPhoneForm = ({ defaultValues, onSubmit }: EmailPhoneFormProps) => {
             label="Email"
             variant="outlined"
             placeholder="Fill in email address"
-            slotProps={{
-              inputLabel: {
-                shrink: true,
-              },
-            }}
           />
         </Grid2>
         <Grid2 size={12}>
@@ -73,9 +68,6 @@ const EmailPhoneForm = ({ defaultValues, onSubmit }: EmailPhoneFormProps) => {
             variant="outlined"
             placeholder="Fill in phone number"
             slotProps={{
-              inputLabel: {
-                shrink: true,
-              },
               input: {
                 inputComponent: IMaskInput,
                 inputProps: {
