@@ -32,12 +32,7 @@ const TopUp = () => {
 
       <Card
         sx={{
-          backgroundColor: 'grey.600',
-          color: 'common.white',
           textAlign: 'center',
-          borderRadius: 3,
-          padding: 2,
-          boxShadow: '0 4px 10px rgba(0, 0, 0, 0.2)',
           width: {
             xs: '100%',
             md: '50%',
