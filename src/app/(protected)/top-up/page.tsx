@@ -12,7 +12,6 @@ const TopUp = () => {
     <Container
       sx={{
         height: '100vh',
-
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
@@ -56,6 +55,7 @@ const TopUp = () => {
             id="outlined-basic"
             label="Amount"
             variant="outlined"
+            placeholder="Amount to Top Up"
             slotProps={{
               inputLabel: {
                 shrink: true,

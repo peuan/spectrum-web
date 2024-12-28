@@ -8,7 +8,11 @@ const Page = async () => {
   return (
     <Container
       sx={{
-        paddingTop: '100px',
+        height: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        gap: 4,
       }}
     >
       <Typography
@@ -19,13 +23,7 @@ const Page = async () => {
       >
         Support the Platform Easily by Subscribing to a Plan!
       </Typography>
-      <Grid2
-        spacing={2}
-        container
-        sx={{
-          pt: 8,
-        }}
-      >
+      <Grid2 spacing={2} container>
         {plans.map((plan) => (
           <Grid2
             key={plan.id}
