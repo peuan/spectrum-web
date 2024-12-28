@@ -137,6 +137,15 @@ theme.components = {
           fontSize: 36,
         },
       },
+      {
+        props: {
+          variant: 'h6',
+        },
+        style: {
+          fontSize: 16,
+          fontWeight: 600,
+        },
+      },
     ],
   },
   MuiSwitch: {
