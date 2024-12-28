@@ -1,18 +1,24 @@
 import Pricing from '@/components/Pricing'
 import { getPlanList } from '@/services/plan.service'
-import { Container, Grid2, Typography } from '@mui/material'
+import { Box, Container, Grid2, Typography } from '@mui/material'
 
 const Page = async () => {
   const plans = await getPlanList()
 
   return (
-    <Container
+    <Box
+      component={Container}
+      justifyContent={{ lg: 'center', xs: 'flex-start' }}
       sx={{
         height: '100vh',
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'center',
         gap: 4,
+        paddingTop: {
+          xs: '80px',
+          md: 0,
+          lg: 0,
+        },
       }}
     >
       <Typography
@@ -20,6 +26,12 @@ const Page = async () => {
         component="h1"
         textAlign={'center'}
         fontWeight={600}
+        sx={{
+          fontSize: {
+            xs: '24px',
+            lg: '36px',
+          },
+        }}
       >
         Support the Platform Easily by Subscribing to a Plan!
       </Typography>
@@ -44,7 +56,7 @@ const Page = async () => {
           </Grid2>
         ))}
       </Grid2>
-    </Container>
+    </Box>
   )
 }
 

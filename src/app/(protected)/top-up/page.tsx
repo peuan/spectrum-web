@@ -25,6 +25,12 @@ const TopUp = () => {
         component="h1"
         textAlign={'center'}
         fontWeight={600}
+        sx={{
+          fontSize: {
+            xs: '24px',
+            lg: '36px',
+          },
+        }}
       >
         Top up your account credits for a more convenient monthly payment
         experience.

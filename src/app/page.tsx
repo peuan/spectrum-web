@@ -142,7 +142,7 @@ export default function Home() {
             fontWeight={500}
             gutterBottom
             maxWidth={419}
-            color="grey.300"
+            color="grey.400"
           >
             Your one-stop solution to securely and easily receive donations from
             your fans. Fast, reliable, and hassle-free!
