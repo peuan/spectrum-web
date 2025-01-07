@@ -1,3 +1,4 @@
+import { createUserIfNotExists } from '@/server/services/user.service'
 import { createClient } from '@/utils/supabase/server.util'
 import { NextResponse } from 'next/server'
 
@@ -13,6 +14,16 @@ export async function GET(request: Request) {
   if (code) {
     const supabase = await createClient()
     await supabase.auth.exchangeCodeForSession(code)
+    const {
+      data: { user },
+    } = await supabase.auth.getUser()
+
+    if (user) {
+      createUserIfNotExists({
+        providerId: user.id,
+        email: user.email,
+      })
+    }
   }
 
   if (redirectTo) {
