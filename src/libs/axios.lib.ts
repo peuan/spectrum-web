@@ -10,24 +10,20 @@ const axiosClient = axios.create({
 
 axiosClient.interceptors.request.use(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  async (config: any) => {
+  async (config: any) => 
     // Add authorization headers or other request configurations here
 
-    return config
-  },
-  (error) => {
-    return Promise.reject(error)
-  }
+     config
+  ,
+  (error) => Promise.reject(error)
 )
 
 axiosClient.interceptors.response.use(
-  (response) => {
+  (response) => 
     // Handle responses or errors globally
-    return response
-  },
-  (error) => {
-    return Promise.reject(error)
-  }
+     response
+  ,
+  (error) => Promise.reject(error)
 )
 
 export default axiosClient

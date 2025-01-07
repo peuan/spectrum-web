@@ -1,6 +1,5 @@
 'use client'
 
-import React, { useState } from 'react'
 import {
   Card,
   CardContent,
@@ -9,6 +8,7 @@ import {
   Typography,
   Switch,
 } from '@mui/material'
+import React, { useState } from 'react'
 
 interface PaymentProps {
   title: string
@@ -71,7 +71,7 @@ const PaymentCard: React.FC<PaymentProps> = ({ title, quote1, quote2 }) => {
             </Typography>
           </Stack>
 
-          <Switch checked={isChecked} onChange={handleChange}></Switch>
+          <Switch checked={isChecked} onChange={handleChange} />
         </Stack>
       </CardContent>
     </Card>

@@ -1,7 +1,9 @@
+import type { UseQueryOptions } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query'
+
 import { QueryKey } from '@/enums/mutation-key.enum'
-import { Plan } from '@/interfaces/plan.interface'
+import type { Plan } from '@/interfaces/plan.interface'
 import { getPlanList } from '@/services/plan.service'
-import { useQuery, UseQueryOptions } from '@tanstack/react-query'
 
 interface UseGetPlanListProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -9,13 +11,11 @@ interface UseGetPlanListProps {
   options?: Omit<UseQueryOptions<Plan[]>, 'queryKey' | 'queryFn'>
 }
 
-const useGetPlanList = ({ request, options }: UseGetPlanListProps = {}) => {
-  return useQuery({
+const useGetPlanList = ({ request, options }: UseGetPlanListProps = {}) => useQuery({
     queryKey: [QueryKey.GET_PLAN_LIST, request],
     queryFn: () => getPlanList(request),
     refetchOnMount: 'always',
     ...options,
   })
-}
 
 export default useGetPlanList

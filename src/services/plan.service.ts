@@ -1,6 +1,7 @@
-import { Plan } from '@/interfaces/plan.interface'
-import axiosClient from '@/libs/axios.lib'
 import { isAxiosError } from 'axios'
+
+import type { Plan } from '@/interfaces/plan.interface'
+import axiosClient from '@/libs/axios.lib'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getPlanList = async (request?: any) => {

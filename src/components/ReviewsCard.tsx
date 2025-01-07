@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import StarIcon from '@mui/icons-material/Star'
 import {
   Avatar,
   Box,
@@ -10,7 +10,7 @@ import {
   Stack,
   Rating,
 } from '@mui/material'
-import StarIcon from '@mui/icons-material/Star'
+import React from 'react'
 
 interface ReviewsProps {
   score: number
@@ -24,8 +24,7 @@ const ReviewsCard: React.FC<ReviewsProps> = ({
   comment,
   profilePic,
   name,
-}) => {
-  return (
+}) => (
     <Card
       sx={{
         width: '100%',
@@ -68,7 +67,7 @@ const ReviewsCard: React.FC<ReviewsProps> = ({
             alignItems: 'center',
           }}
         >
-          <Avatar src={profilePic}></Avatar>
+          <Avatar src={profilePic} />
 
           <Typography
             sx={{
@@ -82,6 +81,5 @@ const ReviewsCard: React.FC<ReviewsProps> = ({
       </CardContent>
     </Card>
   )
-}
 
 export default ReviewsCard

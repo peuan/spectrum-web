@@ -16,8 +16,7 @@ const FeatureHighlight = ({
   buttonText,
   highlightImage,
   href,
-}: FeatureHighlightProps) => {
-  return (
+}: FeatureHighlightProps) => (
     <Grid2 container spacing={{ xs: 2, md: 3, lg: 4 }}>
       <Grid2 size={{ xs: 12, md: 6 }}>
         <Image
@@ -51,6 +50,5 @@ const FeatureHighlight = ({
       </Grid2>
     </Grid2>
   )
-}
 
 export default FeatureHighlight

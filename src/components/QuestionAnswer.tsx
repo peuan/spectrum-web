@@ -12,8 +12,7 @@ interface QuestionAnswerProps {
   answer: string
 }
 
-const QuestionAnswer = ({ question, answer }: QuestionAnswerProps) => {
-  return (
+const QuestionAnswer = ({ question, answer }: QuestionAnswerProps) => (
     <Accordion sx={{ borderRadius: 1, '&.Mui-expanded': { m: 0 } }}>
       <AccordionSummary
         expandIcon={
@@ -30,6 +29,5 @@ const QuestionAnswer = ({ question, answer }: QuestionAnswerProps) => {
       </AccordionDetails>
     </Accordion>
   )
-}
 
 export default QuestionAnswer

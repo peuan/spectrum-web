@@ -1,9 +1,10 @@
 'use client'
 
+import { Typography } from '@mui/material'
+
 import TheMainSidebar from '@/components/layouts/TheMainSidebar'
 import PageLoading from '@/components/PageLoading'
 import useGetPlanList from '@/hooks/plan/useGetPlanList'
-import { Typography } from '@mui/material'
 
 const DashboardPage = () => {
   const getPlanListHook = useGetPlanList()

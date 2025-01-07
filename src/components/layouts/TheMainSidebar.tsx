@@ -1,6 +1,5 @@
 'use client'
 
-import { Route } from '@/enums/route.enum'
 import { Dashboard } from '@mui/icons-material'
 import {
   Box,
@@ -17,6 +16,8 @@ import {
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import * as React from 'react'
+
+import { Route } from '@/enums/route.enum'
 
 const menuItems = [
   { label: 'Dashboard', route: Route.DASHBOARD },
@@ -45,8 +46,7 @@ const TheMainSidebar = ({ title, children }: TheMainSidebarProps) => {
     setSidebarOpen(!isSidebarOpen)
   }
 
-  const sideMenuContent = React.useMemo(() => {
-    return (
+  const sideMenuContent = React.useMemo(() => (
       <List sx={{ py: 0 }}>
         {menuItems.map((item) => (
           <ListItem disablePadding key={item.label}>
@@ -83,12 +83,10 @@ const TheMainSidebar = ({ title, children }: TheMainSidebarProps) => {
           </ListItem>
         ))}
       </List>
-    )
-  }, [pathname])
+    ), [pathname])
 
   return (
-    <>
-      <Container
+    <Container
         sx={{
           pt: { xs: 9, md: 10, lg: 11 },
           pb: 3,
@@ -195,7 +193,6 @@ const TheMainSidebar = ({ title, children }: TheMainSidebarProps) => {
           </Grid2>
         </Grid2>
       </Container>
-    </>
   )
 }
 

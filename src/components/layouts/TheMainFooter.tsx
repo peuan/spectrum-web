@@ -1,8 +1,7 @@
 import { Box, Container, Typography } from '@mui/material'
 import Image from 'next/image'
 
-const TheMainFooter = () => {
-  return (
+const TheMainFooter = () => (
     <Box
       sx={{
         height: '108px',
@@ -63,6 +62,5 @@ const TheMainFooter = () => {
       </Container>
     </Box>
   )
-}
 
 export default TheMainFooter

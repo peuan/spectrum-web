@@ -1,9 +1,9 @@
-import Paymentcard from '@/components/PaymentCard'
-import ReviewsCard from '@/components/ReviewsCard'
 import { Container, Box, Grid2 } from '@mui/material'
 
-const Page = () => {
-  return (
+import Paymentcard from '@/components/PaymentCard'
+import ReviewsCard from '@/components/ReviewsCard'
+
+const Page = () => (
     <>
       <Box
         sx={{
@@ -129,6 +129,5 @@ const Page = () => {
       </Container>
     </>
   )
-}
 
 export default Page

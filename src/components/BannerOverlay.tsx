@@ -14,15 +14,14 @@ const Banner: React.FC<BannerProps> = ({
   logo,
   banner,
   buttonText,
-}) => {
-  return (
+}) => (
     <Grid2
       container
       spacing={2}
       sx={{
         display: 'flex',
         justifyContent: 'space-between',
-        backgroundImage: 'url(' + banner + ')',
+        backgroundImage: `url(${  banner  })`,
         backgroundSize: 'cover',
         height: '439px',
         position: 'relative',
@@ -31,7 +30,7 @@ const Banner: React.FC<BannerProps> = ({
       <Grid2 size={{ xs: 12, md: 6 }}>
         <Container>
           <Stack
-            height={'439px'}
+            height="439px"
             spacing={4}
             sx={{
               justifyContent: 'center',
@@ -65,6 +64,5 @@ const Banner: React.FC<BannerProps> = ({
       </Grid2>
     </Grid2>
   )
-}
 
 export default Banner

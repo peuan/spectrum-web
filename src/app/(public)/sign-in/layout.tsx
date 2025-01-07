@@ -5,8 +5,7 @@ interface Props {
 }
 export default function Layout({ children }: Props) {
   return (
-    <>
-      <Box
+    <Box
         sx={{
           backgroundImage: 'url(/login-bg.png)',
           height: 'calc(100vh - 108px)',
@@ -14,6 +13,5 @@ export default function Layout({ children }: Props) {
       >
         {children}
       </Box>
-    </>
   )
 }

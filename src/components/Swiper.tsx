@@ -1,8 +1,8 @@
 'use client'
 import React from 'react'
-import { Swiper, SwiperSlide } from 'swiper/react'
 import SwiperCore from 'swiper'
 import { Navigation, Pagination, Autoplay } from 'swiper/modules'
+import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper-bundle.css'
 
 import ReviewsCard from './ReviewsCard' // Import your review card component

@@ -1,6 +1,7 @@
-import { FormEvent, forwardRef } from 'react'
-
-import { IMaskInput as ReactIMaskInput, IMaskInputProps } from 'react-imask'
+import type { FormEvent} from 'react';
+import { forwardRef } from 'react'
+import type { IMaskInputProps } from 'react-imask';
+import { IMaskInput as ReactIMaskInput } from 'react-imask'
 
 const IMaskInput = forwardRef<
   HTMLInputElement,
@@ -21,11 +22,9 @@ const IMaskInput = forwardRef<
   return (
     <ReactIMaskInput
       inputRef={ref}
-      onAccept={(value) => {
-        return onChange?.({
+      onAccept={(value) => onChange?.({
           target: { value },
-        } as unknown as FormEvent<HTMLInputElement>)
-      }}
+        } as unknown as FormEvent<HTMLInputElement>)}
       {...defaultOptions}
       {...rest}
     />

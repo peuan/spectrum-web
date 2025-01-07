@@ -1,8 +1,7 @@
 import { Box, Button, Stack, Typography } from '@mui/material'
 import Link from 'next/link'
 
-const NotFoundPage = () => {
-  return (
+const NotFoundPage = () => (
     <Box
       sx={{
         flex: 1,
@@ -22,6 +21,5 @@ const NotFoundPage = () => {
       </Stack>
     </Box>
   )
-}
 
 export default NotFoundPage

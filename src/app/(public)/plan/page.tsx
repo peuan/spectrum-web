@@ -1,6 +1,7 @@
+import { Box, Container, Grid2, Typography } from '@mui/material'
+
 import Pricing from '@/components/Pricing'
 import { getPlanList } from '@/services/plan.service'
-import { Box, Container, Grid2, Typography } from '@mui/material'
 
 const Page = async () => {
   const plans = await getPlanList()
@@ -24,7 +25,7 @@ const Page = async () => {
       <Typography
         variant="h4"
         component="h1"
-        textAlign={'center'}
+        textAlign="center"
         fontWeight={600}
         sx={{
           fontSize: {

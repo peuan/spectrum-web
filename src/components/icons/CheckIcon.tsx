@@ -1,5 +1,4 @@
-const CheckIcon = (props: React.SVGProps<SVGSVGElement>) => {
-  return (
+const CheckIcon = (props: React.SVGProps<SVGSVGElement>) => (
     <svg
       width="1em"
       height="1em"
@@ -14,6 +13,5 @@ const CheckIcon = (props: React.SVGProps<SVGSVGElement>) => {
       />
     </svg>
   )
-}
 
 export default CheckIcon

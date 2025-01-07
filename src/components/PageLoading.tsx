@@ -1,7 +1,6 @@
 import { CircularProgress, Container } from '@mui/material'
 
-const PageLoading = () => {
-  return (
+const PageLoading = () => (
     <Container
       sx={{
         flex: 1,
@@ -13,6 +12,5 @@ const PageLoading = () => {
       <CircularProgress />
     </Container>
   )
-}
 
 export default PageLoading

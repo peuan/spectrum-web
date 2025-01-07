@@ -1,15 +1,15 @@
 'use client'
 
-import React from 'react'
 import { Avatar, Typography, Card, CardContent, Stack } from '@mui/material'
+import React from 'react'
+
 import CustomLoginButton from './CustomLoginButton'
 
 interface LoginCardProps {
   onClickGoogle: () => void
 }
 
-const LoginCard: React.FC<LoginCardProps> = ({ onClickGoogle }) => {
-  return (
+const LoginCard: React.FC<LoginCardProps> = ({ onClickGoogle }) => (
     <Card
       sx={{
         width: '100%',
@@ -32,7 +32,7 @@ const LoginCard: React.FC<LoginCardProps> = ({ onClickGoogle }) => {
           maxHeight: 258,
         }}
         src="/icons/full-logo.svg"
-      ></Avatar>
+       />
 
       {/* Content */}
       <CardContent
@@ -59,6 +59,5 @@ const LoginCard: React.FC<LoginCardProps> = ({ onClickGoogle }) => {
       </CardContent>
     </Card>
   )
-}
 
 export default LoginCard

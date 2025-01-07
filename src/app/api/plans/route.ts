@@ -1,4 +1,4 @@
-import { Plan } from '@/interfaces/plan.interface'
+import type { Plan } from '@/interfaces/plan.interface'
 
 export const GET = () => {
   const plans: Plan[] = [

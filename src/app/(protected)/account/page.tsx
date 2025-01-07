@@ -1,11 +1,12 @@
 'use client'
 
+import { Card, Grid2 } from '@mui/material'
+
 import EmailPhoneForm from '@/components/EmailPhoneForm'
 import TheMainSidebar from '@/components/layouts/TheMainSidebar'
 import PageLoading from '@/components/PageLoading'
 import useGetPlanList from '@/hooks/plan/useGetPlanList'
-import { EmailPhoneFormValues } from '@/interfaces/account.interface'
-import { Card, Grid2 } from '@mui/material'
+import type { EmailPhoneFormValues } from '@/interfaces/account.interface'
 
 const AccountPage = () => {
   const getPlanListHook = useGetPlanList()

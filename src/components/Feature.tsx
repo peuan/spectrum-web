@@ -8,8 +8,7 @@ interface FeatureProps {
   description: string
 }
 
-const Feature: React.FC<FeatureProps> = ({ icon, title, description }) => {
-  return (
+const Feature: React.FC<FeatureProps> = ({ icon, title, description }) => (
     <Box
       sx={{
         color: '#fff',
@@ -37,7 +36,7 @@ const Feature: React.FC<FeatureProps> = ({ icon, title, description }) => {
       <Typography
         variant="h6"
         fontWeight="bold"
-        fontSize={'20px'}
+        fontSize="20px"
         gutterBottom
         sx={{ color: '#fff' }}
       >
@@ -45,11 +44,10 @@ const Feature: React.FC<FeatureProps> = ({ icon, title, description }) => {
       </Typography>
 
       {/* Description */}
-      <Typography variant="body2" fontSize={'16px'} color="grey">
+      <Typography variant="body2" fontSize="16px" color="grey">
         {description}
       </Typography>
     </Box>
   )
-}
 
 export default Feature

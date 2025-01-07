@@ -1,8 +1,5 @@
 'use client'
 
-import { Route } from '@/enums/route.enum'
-import useUser from '@/hooks/auth/useUser'
-import { createClient } from '@/utils/supabase/client.util'
 import { Menu, ExpandMore } from '@mui/icons-material'
 import {
   Avatar,
@@ -24,6 +21,10 @@ import {
 import NextLink from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { useCallback, useState } from 'react'
+
+import { Route } from '@/enums/route.enum'
+import useUser from '@/hooks/auth/useUser'
+import { createClient } from '@/utils/supabase/client.util'
 
 const menuItems = [
   {
@@ -48,7 +49,7 @@ const drawerWidth = 262
 
 const TheMainHeader = () => {
   const router = useRouter()
-  const [isSidebarOpen, setSidebarOpen] = useState(false)
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
 
@@ -64,15 +65,15 @@ const TheMainHeader = () => {
   const { user, isLoading, isAuthenticated } = useUser()
 
   const handleSidebarToggle = () => {
-    setSidebarOpen(!isSidebarOpen)
+    setIsSidebarOpen(!isSidebarOpen)
   }
 
   const handleCloseSidebar = () => {
-    setSidebarOpen(false)
+    setIsSidebarOpen(false)
   }
 
   const handleSignOut = async () => {
-    setSidebarOpen(false)
+    setIsSidebarOpen(false)
     const supabase = createClient()
 
     await supabase.auth.signOut()
@@ -340,18 +341,16 @@ const TheMainHeader = () => {
               },
             }}
           >
-            {menuItems.map((menuItem) => {
-              return (
-                <Link
-                  sx={{ color: 'common.white', fontWeight: '500' }}
-                  key={menuItem.href}
-                  component={NextLink}
-                  href={menuItem.href}
-                >
-                  {menuItem.label}
-                </Link>
-              )
-            })}
+            {menuItems.map((menuItem) => (
+              <Link
+                sx={{ color: 'common.white', fontWeight: '500' }}
+                key={menuItem.href}
+                component={NextLink}
+                href={menuItem.href}
+              >
+                {menuItem.label}
+              </Link>
+            ))}
             {!user && !isLoading && (
               <Button
                 LinkComponent={NextLink}
@@ -363,7 +362,7 @@ const TheMainHeader = () => {
             )}
             {isLoading && (
               <Skeleton width={80}>
-                <Box sx={{ pt: 6 }}></Box>
+                <Box sx={{ pt: 6 }} />
               </Skeleton>
             )}
             {accountMenuContent(true)}

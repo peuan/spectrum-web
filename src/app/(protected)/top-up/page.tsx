@@ -1,8 +1,9 @@
 'use client'
 
-import TopUpForm from '@/components/TopUpForm'
-import { TopUpFormValues } from '@/interfaces/top-up.interface'
 import { Container, Grid2, Typography } from '@mui/material'
+
+import TopUpForm from '@/components/TopUpForm'
+import type { TopUpFormValues } from '@/interfaces/top-up.interface'
 
 const TopUp = () => {
   const handleSubmitTopUp = (formValues: TopUpFormValues) => {
@@ -23,7 +24,7 @@ const TopUp = () => {
       <Typography
         variant="h4"
         component="h1"
-        textAlign={'center'}
+        textAlign="center"
         fontWeight={600}
         sx={{
           fontSize: {

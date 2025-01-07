@@ -1,4 +1,5 @@
 import prisma from '@/server/libs/prisma/db'
+
 import { generateDonationSlug } from '../utils/generate-donation-slug.util'
 
 export const createUserIfNotExists = async ({

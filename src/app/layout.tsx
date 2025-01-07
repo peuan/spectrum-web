@@ -3,10 +3,14 @@ import { Noto_Sans_Thai } from 'next/font/google'
 import './globals.css'
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter'
 import { ThemeProvider } from '@mui/material'
-import theme from '@/theme'
+
 import TheMainLayout from '@/components/layouts/TheMainLayout'
-import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
 import { getQueryClient } from '@/libs/react-query.lib'
+import theme from '@/theme'
+
+import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
+
+
 import ReactQueryProvider from './providers/ReactQueryProvider'
 
 const notoSansThai = Noto_Sans_Thai({

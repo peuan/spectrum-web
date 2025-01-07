@@ -1,11 +1,15 @@
 'use client'
 
-import { EMAIL_ERROR, REQUIRED_ERROR } from '@/constants/message.constant'
-import { EmailPhoneFormValues } from '@/interfaces/account.interface'
-import { Box, Button, Grid2, TextField, Typography } from '@mui/material'
-import { z, ZodType } from 'zod'
-import { useController, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Box, Button, Grid2, TextField, Typography } from '@mui/material'
+import { useController, useForm } from 'react-hook-form'
+import type { ZodType } from 'zod';
+import { z } from 'zod'
+
+import { EMAIL_ERROR, REQUIRED_ERROR } from '@/constants/message.constant'
+import type { EmailPhoneFormValues } from '@/interfaces/account.interface'
+
+
 import IMaskInput from './IMaskInput'
 
 const schema: ZodType<EmailPhoneFormValues> = z.object({

@@ -1,8 +1,9 @@
 'use client'
 
+import { Container } from '@mui/material'
+
 import LoginCard from '@/components/LoginCard'
 import { createClient } from '@/utils/supabase/client.util'
-import { Container } from '@mui/material'
 
 const SignInPage = () => {
   const handleSignIn = async () => {

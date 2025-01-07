@@ -1,10 +1,12 @@
-import { TopUpFormValues } from '@/interfaces/top-up.interface'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button, Card, CardContent, Grid2, TextField } from '@mui/material'
 import { useController, useForm } from 'react-hook-form'
 import { z } from 'zod'
-import IMaskInput from './IMaskInput'
+
 import { REQUIRED_ERROR } from '@/constants/message.constant'
+import type { TopUpFormValues } from '@/interfaces/top-up.interface'
+
+import IMaskInput from './IMaskInput'
 
 const schema = z.object({
   amount: z

@@ -1,6 +1,5 @@
 'use client'
 
-import React from 'react'
 import {
   Box,
   Typography,
@@ -13,6 +12,8 @@ import {
   Chip,
   IconButton,
 } from '@mui/material'
+import React from 'react'
+
 import CheckIcon from './icons/CheckIcon'
 
 interface PricingProps {
@@ -31,8 +32,7 @@ const Pricing: React.FC<PricingProps> = ({
   price,
   description,
   features,
-}) => {
-  return (
+}) => (
     <Card
       sx={{
         width: '100%',
@@ -85,8 +85,7 @@ const Pricing: React.FC<PricingProps> = ({
 
         {/* Features */}
         <Stack spacing={1} mb={2} alignItems="start">
-          {features.map((feature, index) => {
-            return (
+          {features.map((feature, index) => (
               <Box key={index} display="flex" alignItems="center" gap={1}>
                 <IconButton
                   size="small"
@@ -102,8 +101,7 @@ const Pricing: React.FC<PricingProps> = ({
                   {feature.label}
                 </Typography>
               </Box>
-            )
-          })}
+            ))}
         </Stack>
 
         <Button variant="contained" fullWidth>
@@ -112,6 +110,5 @@ const Pricing: React.FC<PricingProps> = ({
       </CardContent>
     </Card>
   )
-}
 
 export default Pricing
