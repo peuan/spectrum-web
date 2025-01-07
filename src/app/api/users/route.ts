@@ -1,8 +1,11 @@
+import { createClient } from '@/utils/supabase/server.util'
 import { NextResponse } from 'next/server'
 
 export const GET = async () => {
-  return NextResponse.json([
-    { id: 1, name: 'John Doe' },
-    { id: 2, name: 'Jane Doe 2' },
-  ])
+  const supabase = await createClient()
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+  return NextResponse.json([user])
 }

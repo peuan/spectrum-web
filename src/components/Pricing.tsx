@@ -57,7 +57,7 @@ const Pricing: React.FC<PricingProps> = ({
         {/* Price */}
         <Typography
           variant="h3"
-          sx={{ fontWeight: 'bold', color: '#fff' }}
+          sx={{ fontWeight: 'bold', color: 'common.white' }}
           gutterBottom
         >
           {price}
@@ -72,7 +72,12 @@ const Pricing: React.FC<PricingProps> = ({
         </Typography>
 
         {/* Description */}
-        <Typography variant="body2" color="#fff" fontWeight={600} mb={2}>
+        <Typography
+          variant="body2"
+          color="common.white"
+          fontWeight={600}
+          mb={2}
+        >
           {description}
         </Typography>
 
@@ -92,7 +97,7 @@ const Pricing: React.FC<PricingProps> = ({
 
                 <Typography
                   variant="body2"
-                  color={feature.active ? '#fff' : '#ADB7BE'}
+                  color={feature.active ? 'common.white' : 'grey.400'}
                 >
                   {feature.label}
                 </Typography>
