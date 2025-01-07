@@ -17,7 +17,7 @@ const compat = new FlatCompat({
 const eslintConfig = [
   // Base configurations
   ...compat.extends('next/core-web-vitals'),
-  
+
   // JavaScript/TypeScript configurations
   {
     files: ['**/*.{js,jsx,ts,tsx}'],
@@ -34,25 +34,31 @@ const eslintConfig = [
     rules: {
       // TypeScript specific rules
       '@typescript-eslint/no-explicit-any': 'warn',
-      '@typescript-eslint/explicit-function-return-type': ['warn', {
-        allowExpressions: true,
-        allowTypedFunctionExpressions: true,
-      }],
-      '@typescript-eslint/no-unused-vars': ['error', {
-        argsIgnorePattern: '^_',
-        varsIgnorePattern: '^_',
-      }],
-      '@typescript-eslint/consistent-type-imports': ['error', {
-        prefer: 'type-imports',
-      }],
+      '@typescript-eslint/explicit-function-return-type': 'off',
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+        },
+      ],
+      '@typescript-eslint/consistent-type-imports': [
+        'error',
+        {
+          prefer: 'type-imports',
+        },
+      ],
 
       // React specific rules
       'react/jsx-boolean-value': ['error', 'never'],
       'react/self-closing-comp': 'error',
-      'react/jsx-curly-brace-presence': ['error', {
-        props: 'never',
-        children: 'never',
-      }],
+      'react/jsx-curly-brace-presence': [
+        'error',
+        {
+          props: 'never',
+          children: 'never',
+        },
+      ],
       'react/hook-use-state': 'error',
       'react/jsx-fragments': ['error', 'syntax'],
       'react/jsx-no-useless-fragment': 'error',
@@ -62,14 +68,24 @@ const eslintConfig = [
       'react-hooks/exhaustive-deps': 'warn',
 
       // Import/Export
-      'import/order': ['error', {
-        groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
-        'newlines-between': 'always',
-        alphabetize: {
-          order: 'asc',
-          caseInsensitive: true,
+      'import/order': [
+        'error',
+        {
+          groups: [
+            'builtin',
+            'external',
+            'internal',
+            'parent',
+            'sibling',
+            'index',
+          ],
+          'newlines-between': 'always',
+          alphabetize: {
+            order: 'asc',
+            caseInsensitive: true,
+          },
         },
-      }],
+      ],
       'import/no-duplicates': 'error',
 
       // General code quality
@@ -78,7 +94,7 @@ const eslintConfig = [
       'no-alert': 'error',
       'prefer-const': 'error',
       'no-var': 'error',
-      'eqeqeq': ['error', 'always', { null: 'ignore' }],
+      eqeqeq: ['error', 'always', { null: 'ignore' }],
 
       // Code style
       'arrow-body-style': ['error', 'as-needed'],
