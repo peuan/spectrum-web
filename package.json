@@ -14,7 +14,8 @@
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --coverage --watchAll",
-    "coverage:serve": "http-server ./coverage -p 4000"
+    "coverage:serve": "http-server ./coverage -p 4000",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@emotion/cache": "^11.14.0",
