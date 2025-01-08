@@ -2,7 +2,8 @@ import type { Role } from '@prisma/client'
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 
-import { AuthErrorCode, AUTH_ERROR_MESSAGES } from '@/server/constants/auth.constant'
+import { AuthErrorCode } from '@/enums/auth.enum'
+import { AUTH_ERROR_MESSAGES } from '@/server/constants/auth.constant'
 import { getUserByProviderId } from '@/server/services/user.service'
 import { createClient } from '@/utils/supabase/server.util'
 import { extractBearerToken, getAuthHeader } from '@/utils/token.util'
@@ -25,11 +26,11 @@ export const withAuth =
 
       if (!token) {
         return NextResponse.json(
-          { 
+          {
             error: {
               code: AuthErrorCode.NO_TOKEN,
-              message: AUTH_ERROR_MESSAGES[AuthErrorCode.NO_TOKEN]
-            }
+              message: AUTH_ERROR_MESSAGES[AuthErrorCode.NO_TOKEN],
+            },
           },
           { status: 401 }
         )
@@ -46,8 +47,8 @@ export const withAuth =
           {
             error: {
               code: AuthErrorCode.INVALID_TOKEN,
-              message: AUTH_ERROR_MESSAGES[AuthErrorCode.INVALID_TOKEN]
-            }
+              message: AUTH_ERROR_MESSAGES[AuthErrorCode.INVALID_TOKEN],
+            },
           },
           { status: 401 }
         )
@@ -60,8 +61,8 @@ export const withAuth =
           {
             error: {
               code: AuthErrorCode.USER_NOT_FOUND,
-              message: AUTH_ERROR_MESSAGES[AuthErrorCode.USER_NOT_FOUND]
-            }
+              message: AUTH_ERROR_MESSAGES[AuthErrorCode.USER_NOT_FOUND],
+            },
           },
           { status: 404 }
         )
@@ -74,8 +75,8 @@ export const withAuth =
             {
               error: {
                 code: AuthErrorCode.ROLE_NOT_DEFINED,
-                message: AUTH_ERROR_MESSAGES[AuthErrorCode.ROLE_NOT_DEFINED]
-              }
+                message: AUTH_ERROR_MESSAGES[AuthErrorCode.ROLE_NOT_DEFINED],
+              },
             },
             { status: 403 }
           )
@@ -86,8 +87,9 @@ export const withAuth =
             {
               error: {
                 code: AuthErrorCode.INSUFFICIENT_PERMISSIONS,
-                message: AUTH_ERROR_MESSAGES[AuthErrorCode.INSUFFICIENT_PERMISSIONS]
-              }
+                message:
+                  AUTH_ERROR_MESSAGES[AuthErrorCode.INSUFFICIENT_PERMISSIONS],
+              },
             },
             { status: 403 }
           )
@@ -106,8 +108,8 @@ export const withAuth =
         {
           error: {
             code: AuthErrorCode.INTERNAL_ERROR,
-            message: AUTH_ERROR_MESSAGES[AuthErrorCode.INTERNAL_ERROR]
-          }
+            message: AUTH_ERROR_MESSAGES[AuthErrorCode.INTERNAL_ERROR],
+          },
         },
         { status: 500 }
       )
