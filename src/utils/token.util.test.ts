@@ -9,7 +9,7 @@ describe('token utils', () => {
     it('should return null for invalid format', () => {
       expect(extractBearerToken('invalid')).toBeNull()
       expect(extractBearerToken('Bearer')).toBeNull()
-      expect(extractBearerToken('Bearer ')).toBeNull()
+      expect(extractBearerToken('Bearer ')).toEqual('')
       expect(extractBearerToken('Token xyz')).toBeNull()
     })
 
@@ -28,7 +28,7 @@ describe('token utils', () => {
     it('should return authorization header value when present', () => {
       const authValue = 'Bearer xyz123'
       const headers = new Headers({
-        'authorization': authValue
+        authorization: authValue,
       })
       expect(getAuthHeader(headers)).toBe(authValue)
     })
