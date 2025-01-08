@@ -3,6 +3,8 @@ import { Box, Container, Grid2, Typography } from '@mui/material'
 import Pricing from '@/components/Pricing'
 import { getPlanList } from '@/services/plan.service'
 
+export const dynamic = 'force-dynamic'
+
 const Page = async () => {
   const plans = await getPlanList()
 
