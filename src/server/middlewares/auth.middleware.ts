@@ -2,6 +2,7 @@ import type { Role } from '@prisma/client'
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 
+import { AuthErrorCode, AUTH_ERROR_MESSAGES } from '@/server/constants/auth.constant'
 import { getUserByProviderId } from '@/server/services/user.service'
 import { createClient } from '@/utils/supabase/server.util'
 import { extractBearerToken, getAuthHeader } from '@/utils/token.util'
@@ -24,7 +25,12 @@ export const withAuth =
 
       if (!token) {
         return NextResponse.json(
-          { error: 'No authorization token provided' },
+          { 
+            error: {
+              code: AuthErrorCode.NO_TOKEN,
+              message: AUTH_ERROR_MESSAGES[AuthErrorCode.NO_TOKEN]
+            }
+          },
           { status: 401 }
         )
       }
@@ -37,7 +43,12 @@ export const withAuth =
 
       if (error || !supabaseUser) {
         return NextResponse.json(
-          { error: 'Invalid or expired token' },
+          {
+            error: {
+              code: AuthErrorCode.INVALID_TOKEN,
+              message: AUTH_ERROR_MESSAGES[AuthErrorCode.INVALID_TOKEN]
+            }
+          },
           { status: 401 }
         )
       }
@@ -45,21 +56,39 @@ export const withAuth =
       const user = await getUserByProviderId(supabaseUser.id)
 
       if (!user) {
-        return NextResponse.json({ error: 'User not found' }, { status: 404 })
+        return NextResponse.json(
+          {
+            error: {
+              code: AuthErrorCode.USER_NOT_FOUND,
+              message: AUTH_ERROR_MESSAGES[AuthErrorCode.USER_NOT_FOUND]
+            }
+          },
+          { status: 404 }
+        )
       }
 
       // Check role authorization if roles are specified
       if (options.roles && options.roles.length > 0) {
         if (!user.role) {
           return NextResponse.json(
-            { error: 'User role not defined' },
+            {
+              error: {
+                code: AuthErrorCode.ROLE_NOT_DEFINED,
+                message: AUTH_ERROR_MESSAGES[AuthErrorCode.ROLE_NOT_DEFINED]
+              }
+            },
             { status: 403 }
           )
         }
 
         if (!options.roles.includes(user.role)) {
           return NextResponse.json(
-            { error: 'Insufficient permissions' },
+            {
+              error: {
+                code: AuthErrorCode.INSUFFICIENT_PERMISSIONS,
+                message: AUTH_ERROR_MESSAGES[AuthErrorCode.INSUFFICIENT_PERMISSIONS]
+              }
+            },
             { status: 403 }
           )
         }
@@ -74,7 +103,12 @@ export const withAuth =
     } catch (error) {
       console.error('Auth Middleware Error:', error)
       return NextResponse.json(
-        { error: 'Internal Server Error' },
+        {
+          error: {
+            code: AuthErrorCode.INTERNAL_ERROR,
+            message: AUTH_ERROR_MESSAGES[AuthErrorCode.INTERNAL_ERROR]
+          }
+        },
         { status: 500 }
       )
     }
