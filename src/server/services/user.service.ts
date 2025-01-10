@@ -7,6 +7,8 @@ import { ERROR_MESSAGES } from '../constants/error.constant'
 import { NotFoundException } from '../errors/http-exceptions.error'
 import { generateDonationSlug } from '../utils/generate-donation-slug.util'
 
+import { createWallet } from './http.service'
+
 export const createUserIfNotExists = async ({
   providerId,
   email,
@@ -21,7 +23,7 @@ export const createUserIfNotExists = async ({
   })
 
   if (!user) {
-    await prisma.user.create({
+    const newUser = await prisma.user.create({
       data: {
         donationSlug: generateDonationSlug(providerId),
         providerId,
@@ -29,6 +31,29 @@ export const createUserIfNotExists = async ({
         role: Role.USER,
       },
     })
+    const walletAddress = await createWallet()
+    await prisma.user.update({
+      where: {
+        id: newUser.id,
+      },
+      data: {
+        walletAddress,
+      },
+    })
+  } else if (!user.walletAddress) {
+    try {
+      const walletAddress = await createWallet()
+      await prisma.user.update({
+        where: {
+          id: user.id,
+        },
+        data: {
+          walletAddress,
+        },
+      })
+    } catch (error) {
+      console.error(error)
+    }
   }
 }
 

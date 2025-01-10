@@ -71,3 +71,21 @@ export const postDonationMessage = async ({
     throw error // Rethrow to handle it in the calling function
   }
 }
+
+export const createWallet = async () => {
+  const url = 'https://dev-engine.dome.cloud/backend-wallet/create'
+  const headers = {
+    // TODO: replace with the actual authorization header via env
+    Authorization:
+      'Bearer eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiIweGI2QjlhM0E5ODQxYUE0MDE5MTdEYkFEMTZiNUI1ZUU1NTkwRkEzQjMiLCJzdWIiOiIweEMzMzE3MDYyRTE3MGY1Nzk0ODI1ZEM1RDkzRDZiMDQ1ZjA2QmYzYTUiLCJhdWQiOiJ0aGlyZHdlYi5jb20iLCJleHAiOjQ4ODg4MTM0OTAsIm5iZiI6MTczNTIxMzQ5MCwiaWF0IjoxNzM1MjEzNDkwLCJqdGkiOiJkYWYxN2E1My04Mzg4LTRkNTItOTYxNy03MzEyYzZmZDhlZmMiLCJjdHgiOnsicGVybWlzc2lvbnMiOiJBRE1JTiJ9fQ.MHg4NmYzM2Y5NDZkNjhiODM3MDQxYmM1ZjE2Yjc1MGUzMjUwZjNkZGVmMThhYzEwYTJjNmRiNjJkM2Q3MThkNDBhNTA4NzdkMjdmNmE4YTQxMmVlMTI0Mzg0NWI2NzdkNmFjN2M0MjA2NTBhOTgzMTY0YzUwODdhNTY3ZDg0ZWI3YTFj',
+    'Content-Type': 'application/json',
+  }
+
+  try {
+    const { data } = await axios.post(url, {}, { headers })
+    return data.result.walletAddress
+  } catch (error) {
+    console.error('Wallet creation error:', error)
+    throw error // Rethrow to handle it in the calling function
+  }
+}
