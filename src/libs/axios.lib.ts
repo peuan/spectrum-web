@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+import { createClient } from '@/utils/supabase/client.util'
+
 const axiosClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_ENDPOINT,
   headers: {
@@ -9,20 +11,26 @@ const axiosClient = axios.create({
 })
 
 axiosClient.interceptors.request.use(
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  async (config: any) => 
-    // Add authorization headers or other request configurations here
+  async (config: any) => {
+    if (typeof window === 'undefined') {
+      return config
+    }
 
-     config
-  ,
+    const supabase = createClient()
+
+    const token = (await supabase.auth.getSession()).data.session?.access_token
+    if (token) {
+      config.headers['Authorization'] = `Bearer ${token}`
+    }
+    return config
+  },
   (error) => Promise.reject(error)
 )
 
 axiosClient.interceptors.response.use(
-  (response) => 
+  (response) =>
     // Handle responses or errors globally
-     response
-  ,
+    response,
   (error) => Promise.reject(error)
 )
 
