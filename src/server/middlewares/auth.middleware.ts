@@ -1,12 +1,17 @@
 import type { Role } from '@prisma/client'
-import type { NextRequest } from 'next/server'
-import { NextResponse } from 'next/server'
+import type { NextRequest, NextResponse } from 'next/server'
 
-import { AuthErrorCode } from '@/enums/auth.enum'
-import { AUTH_ERROR_MESSAGES } from '@/server/constants/auth.constant'
+import { ErrorCode } from '@/enums/error-code.enum'
+import { ERROR_MESSAGES } from '@/server/constants/error.constant'
 import { getUserByProviderId } from '@/server/services/user.service'
 import { createClient } from '@/utils/supabase/server.util'
 import { extractBearerToken, getAuthHeader } from '@/utils/token.util'
+
+import {
+  ForbiddenException,
+  UnauthorizedException,
+} from '../errors/http-exceptions.error'
+import { handleError } from '../utils/handle-error.util'
 
 type RouteHandler = (req: NextRequest) => Promise<NextResponse>
 
@@ -25,15 +30,7 @@ export const withAuth =
       const token = extractBearerToken(authHeader)
 
       if (!token) {
-        return NextResponse.json(
-          {
-            error: {
-              code: AuthErrorCode.NO_TOKEN,
-              message: AUTH_ERROR_MESSAGES[AuthErrorCode.NO_TOKEN],
-            },
-          },
-          { status: 401 }
-        )
+        throw new UnauthorizedException(ERROR_MESSAGES[ErrorCode.NO_TOKEN])
       }
 
       // Verify the token and get user
@@ -43,55 +40,28 @@ export const withAuth =
       } = await supabase.auth.getUser(token)
 
       if (error || !supabaseUser) {
-        return NextResponse.json(
-          {
-            error: {
-              code: AuthErrorCode.INVALID_TOKEN,
-              message: AUTH_ERROR_MESSAGES[AuthErrorCode.INVALID_TOKEN],
-            },
-          },
-          { status: 401 }
-        )
+        throw new UnauthorizedException(ERROR_MESSAGES[ErrorCode.INVALID_TOKEN])
       }
 
       const user = await getUserByProviderId(supabaseUser.id)
 
       if (!user) {
-        return NextResponse.json(
-          {
-            error: {
-              code: AuthErrorCode.USER_NOT_FOUND,
-              message: AUTH_ERROR_MESSAGES[AuthErrorCode.USER_NOT_FOUND],
-            },
-          },
-          { status: 404 }
+        throw new UnauthorizedException(
+          ERROR_MESSAGES[ErrorCode.USER_NOT_FOUND]
         )
       }
 
       // Check role authorization if roles are specified
       if (options.roles && options.roles.length > 0) {
         if (!user.role) {
-          return NextResponse.json(
-            {
-              error: {
-                code: AuthErrorCode.ROLE_NOT_DEFINED,
-                message: AUTH_ERROR_MESSAGES[AuthErrorCode.ROLE_NOT_DEFINED],
-              },
-            },
-            { status: 403 }
+          throw new ForbiddenException(
+            ERROR_MESSAGES[ErrorCode.ROLE_NOT_DEFINED]
           )
         }
 
         if (!options.roles.includes(user.role)) {
-          return NextResponse.json(
-            {
-              error: {
-                code: AuthErrorCode.INSUFFICIENT_PERMISSIONS,
-                message:
-                  AUTH_ERROR_MESSAGES[AuthErrorCode.INSUFFICIENT_PERMISSIONS],
-              },
-            },
-            { status: 403 }
+          throw new ForbiddenException(
+            ERROR_MESSAGES[ErrorCode.INSUFFICIENT_PERMISSIONS]
           )
         }
       }
@@ -104,14 +74,6 @@ export const withAuth =
       return handler(req)
     } catch (error) {
       console.error('Auth Middleware Error:', error)
-      return NextResponse.json(
-        {
-          error: {
-            code: AuthErrorCode.INTERNAL_ERROR,
-            message: AUTH_ERROR_MESSAGES[AuthErrorCode.INTERNAL_ERROR],
-          },
-        },
-        { status: 500 }
-      )
+      return handleError(error)
     }
   }

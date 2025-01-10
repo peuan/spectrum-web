@@ -36,8 +36,8 @@ export async function POST(request: NextRequest) {
     const body = await request.formData()
     const customerEmail = body.get('customeremail')
     const merchantId = body.get('merchantid')
-    const productDetail = body.get('productdetail')
-    const total = body.get('total')
+    const productDetail = String(body.get('productdetail'))
+    const total = Number(body.get('total'))
     const signature = body.get('signature')
 
     console.log('productDetail', productDetail)
@@ -110,7 +110,7 @@ export async function POST(request: NextRequest) {
     if (text.length > 0) {
       const urlMsg = 'https://dream.tk9.us/api/donations'
       const base64Decoded = Buffer.from(text, 'base64').toString('utf8')
-      const numberInt = parseInt(total)
+      const numberInt = total
 
       console.log('base64Decoded', base64Decoded)
 
