@@ -12,13 +12,13 @@ import { handleError } from '@/server/utils/handle-error.util'
 
 interface AddressPair {
   slug: string
-  donator: string
+  donatorWalletAddress: string
   text: string
 }
 
 function splitAddress(addressString: string): AddressPair {
-  const [slug, text, donator] = addressString.split('/')
-  return { slug, text, donator }
+  const [slug, text, donatorWalletAddress] = addressString.split('/')
+  return { slug, text, donatorWalletAddress }
 }
 
 function isValidEthereumAddress(address: string): boolean {
@@ -48,11 +48,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const {
-      slug,
-      donator: donatorWalletAddress,
-      text,
-    } = splitAddress(productDetail)
+    const { slug, donatorWalletAddress, text } = splitAddress(productDetail)
 
     const streamer = await getUserBySlug(slug)
 
