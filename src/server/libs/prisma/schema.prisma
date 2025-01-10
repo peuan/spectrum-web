@@ -21,11 +21,12 @@ enum Role {
 }
 
 model User {
-  id           Int      @id @default(autoincrement())
-  providerId   String   @db.Uuid // ID provided by the authentication provider
-  donationSlug String
-  email        String?
-  role         Role     @default(USER)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @default(now()) @updatedAt
+  id            Int      @id @default(autoincrement())
+  providerId    String   @db.Uuid // ID provided by the authentication provider
+  donationSlug  String
+  walletAddress String?
+  email         String?
+  role          Role     @default(USER)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @default(now()) @updatedAt
 }
