@@ -11,4 +11,5 @@ export const ERROR_MESSAGES: Record<ErrorCode, string> = {
   [ErrorCode.UNAUTHORIZED]: 'Unauthorized',
   [ErrorCode.FORBIDDEN]: 'Forbidden',
   [ErrorCode.NOT_FOUND]: 'Not Found',
+  [ErrorCode.METHOD_NOT_ALLOWED]: 'Method Not Allowed',
 }

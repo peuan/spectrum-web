@@ -2,6 +2,7 @@ import { ethers } from 'ethers'
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 
+import { MethodNotAllowedException } from '@/server/errors/http-exceptions.error'
 import {
   transferL3USD,
   transferSPL,
@@ -42,10 +43,7 @@ export async function POST(request: NextRequest) {
       merchantId !== '72600138' ||
       signature !== 'mnXSHypdDVApP1k8MuURZo9aztNTf3MjNU'
     ) {
-      return NextResponse.json(
-        { error: 'Incorrect merchantId' },
-        { status: 405 }
-      )
+      throw new MethodNotAllowedException('Incorrect merchantId')
     }
 
     const { slug, donatorWalletAddress, text } = splitAddress(productDetail)
@@ -76,12 +74,11 @@ export async function POST(request: NextRequest) {
     // Handle text message if present
     if (text.length > 0) {
       const base64Decoded = Buffer.from(text, 'base64').toString('utf8')
-      const numberInt = total
 
       postDonationMessage({
         donorName: 'จ่อย',
         donorMessage: base64Decoded,
-        amount: numberInt,
+        amount: total,
         clientSecret: 'roblox',
       })
     }

@@ -34,6 +34,14 @@ export class NotFoundException extends CustomError {
   public status = 404
 }
 
+export class MethodNotAllowedException extends CustomError {
+  constructor(message: string) {
+    super(ErrorCode.METHOD_NOT_ALLOWED, 405, message)
+    this.name = 'MethodNotAllowedException'
+  }
+  public status = 405
+}
+
 export class InternalServerErrorException extends CustomError {
   constructor(message: string) {
     super(ErrorCode.INTERNAL_ERROR, 500, message)
