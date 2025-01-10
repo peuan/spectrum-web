@@ -13,8 +13,11 @@ export const handleError = (error: any) => {
     )
   }
 
-  return NextResponse.json({
-    code: ErrorCode.INTERNAL_ERROR,
-    message: ERROR_MESSAGES[ErrorCode.INTERNAL_ERROR],
-  })
+  return NextResponse.json(
+    {
+      code: ErrorCode.INTERNAL_ERROR,
+      message: ERROR_MESSAGES[ErrorCode.INTERNAL_ERROR],
+    },
+    { status: 500 }
+  )
 }
