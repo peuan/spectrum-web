@@ -5,7 +5,7 @@ import { ErrorCode } from '@/enums/error-code.enum'
 import { ERROR_MESSAGES } from '../constants/error.constant'
 import { CustomError } from '../errors/custom-error.error'
 
-export const handleError = (error: any) => {
+export const handleError = (error: unknown) => {
   if (error instanceof CustomError) {
     return NextResponse.json(
       { code: error.code, message: error.message },

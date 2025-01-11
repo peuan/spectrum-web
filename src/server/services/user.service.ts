@@ -84,3 +84,17 @@ export const getUserBySlug = async (slug: string) => {
 
   return user
 }
+
+export const getUserById = async (userId: number) => {
+  const user = await prisma.user.findUnique({
+    where: {
+      id: userId,
+    },
+  })
+
+  if (!user) {
+    throw new NotFoundException(ERROR_MESSAGES[ErrorCode.USER_NOT_FOUND])
+  }
+
+  return user
+}

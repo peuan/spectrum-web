@@ -3,6 +3,7 @@ import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 
 import { MethodNotAllowedException } from '@/server/errors/http-exceptions.error'
+import { createDonationTransaction } from '@/server/services/donation-transaction.service'
 import {
   transferL3USD,
   transferSPL,
@@ -29,11 +30,15 @@ function isValidEthereumAddress(address: string): boolean {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.formData()
-    // const customerEmail = body.get('customeremail')
+    const customerName = String(body.get('customername'))
     const merchantId = body.get('merchantid')
     const productDetail = String(body.get('productdetail'))
     const total = Number(body.get('total'))
     const signature = body.get('signature')
+    const referenceNo = String(body.get('referenceno'))
+
+    console.log('customerName', customerName)
+    console.log('referenceNo', referenceNo)
 
     const usdRate = 35
     const airDropStreamer = 10
@@ -49,6 +54,17 @@ export async function POST(request: NextRequest) {
     const { slug, donatorWalletAddress, text } = splitAddress(productDetail)
 
     const streamer = await getUserBySlug(slug)
+
+    const textDecoded = Buffer.from(text, 'base64').toString('utf8')
+    // store donation transaction
+    createDonationTransaction({
+      amount: total,
+      userId: streamer.id,
+      referenceNo,
+      text: textDecoded,
+      donator: customerName,
+      donatorWalletAddress,
+    })
 
     // L3USD Transfer
     if (
@@ -73,11 +89,9 @@ export async function POST(request: NextRequest) {
 
     // Handle text message if present
     if (text.length > 0) {
-      const base64Decoded = Buffer.from(text, 'base64').toString('utf8')
-
       postDonationMessage({
         donorName: 'จ่อย',
-        donorMessage: base64Decoded,
+        donorMessage: textDecoded,
         amount: total,
         clientSecret: 'roblox',
       })
