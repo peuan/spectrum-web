@@ -30,23 +30,25 @@ function isValidEthereumAddress(address: string): boolean {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.formData()
-    const customerName = String(body.get('customername'))
+    const customerName = String(body.get('customeremail'))
     const merchantId = body.get('merchantid')
     const productDetail = String(body.get('productdetail'))
     const total = Number(body.get('total'))
     const signature = body.get('signature')
-    const referenceNo = String(body.get('referenceno'))
-
-    console.log('customerName', customerName)
-    console.log('referenceNo', referenceNo)
+    const referenceNo = String(body.get('refno'))
+    const status = String(body.get('status'))
 
     const usdRate = 35
     const airDropStreamer = 10
     const airDropDonator = 5
 
+    if (status !== 'CP') {
+      throw new MethodNotAllowedException('Incorrect status')
+    }
+
     if (
-      merchantId !== '72600138' ||
-      signature !== 'mnXSHypdDVApP1k8MuURZo9aztNTf3MjNU'
+      merchantId !== process.env.NEXT_PUBLIC_PAY_SOLUTIONS_MERCHANT_ID ||
+      signature !== process.env.PAY_SOLUTIONS_SIGNATURE
     ) {
       throw new MethodNotAllowedException('Incorrect merchantId')
     }
@@ -96,6 +98,8 @@ export async function POST(request: NextRequest) {
         clientSecret: 'roblox',
       })
     }
+
+    console.log('Post created successfully')
 
     return NextResponse.json(
       { message: 'Post created successfully' },
