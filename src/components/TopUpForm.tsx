@@ -1,6 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button, Card, CardContent, Grid2, TextField } from '@mui/material'
 import { useController, useForm } from 'react-hook-form'
+import type { ZodType } from 'zod'
 import { z } from 'zod'
 
 import { REQUIRED_ERROR } from '@/constants/message.constant'
@@ -8,7 +9,7 @@ import type { TopUpFormValues } from '@/interfaces/top-up.interface'
 
 import IMaskInput from './IMaskInput'
 
-const schema = z.object({
+const schema: ZodType<TopUpFormValues> = z.object({
   amount: z
     .string({
       required_error: REQUIRED_ERROR,

@@ -14,14 +14,19 @@ import axios from 'axios'
 import { useParams } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
+import type { ZodType } from 'zod'
 import { z } from 'zod'
 
 import IMaskInput from '@/components/IMaskInput'
+import NotFound from '@/components/NotFound'
+import PageLoading from '@/components/PageLoading'
 import QrCodePopup from '@/components/QrCodePopup'
 import { REQUIRED_ERROR } from '@/constants/message.constant'
+import useGetUserBySlug from '@/hooks/user/useGetUserBySlug'
+import type { DonateFormValues } from '@/interfaces/donate.interface'
 import { createClient } from '@/utils/supabase/client.util'
 
-const schema = z.object({
+const schema: ZodType<DonateFormValues> = z.object({
   name: z
     .string({
       required_error: REQUIRED_ERROR,
@@ -48,6 +53,20 @@ const schema = z.object({
 const supabase = createClient()
 
 const SlugPage = () => {
+  const [openPopup, setOpenPopup] = useState(false)
+  const [qrData, setQrData] = useState('')
+  const [qrMessage, setQrMessage] = useState('')
+  const params = useParams()
+  const [loading, setLoading] = useState(false)
+  const [referenceNo, setReferenceNo] = useState('')
+  const slug = String(params.slug)
+
+  const {
+    data: user,
+    isError,
+    isLoading,
+  } = useGetUserBySlug({ request: { slug } })
+
   const {
     register,
     handleSubmit,
@@ -58,32 +77,25 @@ const SlugPage = () => {
   } = useForm({
     resolver: zodResolver(schema),
     defaultValues: {
-      name: 'Anonymous',
+      name: user?.email ?? '',
       amount: '',
       message: '',
     },
   })
 
-  const [openPopup, setOpenPopup] = useState(false)
-  const [qrData, setQrData] = useState('')
-  const [qrMessage, setQrMessage] = useState('')
-  const params = useParams()
-  const [loading, setLoading] = useState(false)
-  const [referenceNo, setReferenceNo] = useState('')
-  const slug = params.slug
-
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (formValues: DonateFormValues) => {
     const referenceNo = String(Date.now()).slice(-6)
     setReferenceNo(referenceNo)
-    const encoded = Buffer.from(data.message).toString('base64')
+    const encoded = Buffer.from(formValues.message).toString('base64')
     const combinedProductDetail = `${slug}/${encoded}/0xC3317062E170f5794825dC5D93D6b045f06Bf3a5`
+    // TODO: Get wallet from some where
 
-    const payso = {
-      merchantID: '72600138',
+    const payso: Record<string, string> = {
+      merchantID: process.env.NEXT_PUBLIC_PAY_SOLUTIONS_MERCHANT_ID ?? '',
       productDetail: combinedProductDetail,
-      customerEmail: data.name,
-      customerName: data.name,
-      total: data.amount,
+      customerEmail: formValues.name,
+      customerName: formValues.name,
+      total: formValues.amount,
       referenceNo,
     }
 
@@ -109,10 +121,12 @@ const SlugPage = () => {
       setLoading(false)
     }
   }
+
   const handleClosePopup = () => {
     setOpenPopup(false)
     setQrMessage('')
   }
+
   useEffect(() => {
     const subscription = supabase
       .channel('db-changes')
@@ -138,6 +152,40 @@ const SlugPage = () => {
       supabase.removeChannel(subscription)
     }
   }, [referenceNo, reset])
+
+  if (isLoading) {
+    return (
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          flexDirection: 'column',
+          minHeight: '100vh',
+          px: 4,
+        }}
+      >
+        <PageLoading />
+      </Box>
+    )
+  }
+
+  if (isError || !user) {
+    return (
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          flexDirection: 'column',
+          minHeight: '100vh',
+          px: 4,
+        }}
+      >
+        <NotFound />
+      </Box>
+    )
+  }
 
   return (
     <>

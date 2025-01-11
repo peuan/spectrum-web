@@ -6,15 +6,13 @@ import type { User } from '@/interfaces/user.interface'
 import { getMe } from '@/services/user.service'
 
 interface UseGetMeProps {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  request?: any
   options?: Omit<UseQueryOptions<User>, 'queryKey' | 'queryFn'>
 }
 
-const useGetMe = ({ request, options }: UseGetMeProps = {}) =>
+const useGetMe = ({ options }: UseGetMeProps = {}) =>
   useQuery({
-    queryKey: [QueryKey.GET_ME, request],
-    queryFn: () => getMe(request),
+    queryKey: [QueryKey.GET_ME],
+    queryFn: () => getMe(),
     refetchOnMount: 'always',
     ...options,
   })
