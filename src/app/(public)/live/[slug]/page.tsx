@@ -2,8 +2,10 @@
 
 import { Box, Typography, LinearProgress } from '@mui/material'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useParams } from 'next/navigation'
 import { useCallback, useEffect, useState } from 'react'
 
+import useGetUserBySlug from '@/hooks/user/useGetUserBySlug'
 import { createClient } from '@/utils/supabase/client.util'
 
 const MIN_TTS_AMOUNT = 1
@@ -11,29 +13,40 @@ const DISPLAY_DURATION = 5000 // 5 seconds
 const supabase = createClient()
 
 const LivePage = () => {
+  const param = useParams()
+  const slug = param.slug as string
+
+  const {
+    data: user,
+    isError,
+    isLoading,
+  } = useGetUserBySlug({ request: { slug } })
+
   const [currentDonation, setCurrentDonation] = useState<{
     timestamp: number
     amount: string
     name: string
     message: string
-  } | null>({
-    timestamp: 0,
-    amount: '0',
-    name: 'Anonymous',
-    message: 'สวัสดีครับ',
-  })
+  } | null>(null)
   const [isDisplaying, setIsDisplaying] = useState(false)
-  const [userId, setUserId] = useState(0)
 
-  const showDonation = useCallback((donation: any) => {
-    if (Number(donation.amount) >= MIN_TTS_AMOUNT) {
-      playTTS(
-        `${donation.donorName} บริจาค ${donation.amount} บาท: ${donation.donorMessage}`
-      )
-    }
+  const showDonation = useCallback(
+    (donation: {
+      timestamp: number
+      amount: string
+      name: string
+      message: string
+    }) => {
+      if (Number(donation.amount) >= MIN_TTS_AMOUNT) {
+        playTTS(
+          `${donation.name} บริจาค ${donation.amount} บาท: ${donation.message}`
+        )
+      }
 
-    setTimeout(() => hideDonation(), DISPLAY_DURATION)
-  }, [])
+      setTimeout(() => hideDonation(), DISPLAY_DURATION)
+    },
+    []
+  )
 
   useEffect(() => {
     const subscription = supabase
@@ -44,15 +57,15 @@ const LivePage = () => {
           event: 'INSERT',
           schema: 'public',
           table: 'DonationTransaction',
-          filter: `userId=eq.${userId}`,
+          filter: `userId=eq.${user?.id}`,
         },
-        () => {
+        (payload: any) => {
           hideDonation()
           const donation = {
-            timestamp: Date.now(),
-            amount: '100',
-            name: 'John Doe',
-            message: 'Keep up the great work!',
+            timestamp: payload.new.createdAt,
+            amount: payload.new.amount,
+            name: payload.new.donator,
+            message: payload.new.text,
           }
           setCurrentDonation(donation)
           setIsDisplaying(true)
@@ -64,7 +77,7 @@ const LivePage = () => {
     return () => {
       supabase.removeChannel(subscription)
     }
-  }, [showDonation, userId])
+  }, [showDonation, user?.id])
 
   const hideDonation = () => {
     setCurrentDonation(null)
@@ -84,33 +97,40 @@ const LivePage = () => {
     }
   }
 
+  isLoading && <div>Loading...</div>
+  isError && <div>Error: {isError}</div>
   return (
     <Box
       sx={{
+        position: 'relative',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'flex-end', // Align items at the bottom
         height: '100vh',
-        bgcolor: '#1E1E1E',
+        bgcolor: 'common.black',
         color: 'white',
+        overflow: 'hidden',
       }}
     >
       <AnimatePresence>
         {currentDonation && (
           <motion.div
             key="donation"
-            initial={{ opacity: 0, scale: 0.9, y: -50 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 50 }}
+            initial={{ opacity: 0, y: '100%' }} // Start below the screen
+            animate={{ opacity: 1, y: '0%' }} // Slide to the bottom center
+            exit={{ opacity: 0, y: '100%' }} // Exit downward
             transition={{ duration: 0.5, ease: 'easeOut' }}
+            style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
           >
             <Box
               sx={{
                 textAlign: 'center',
+                overflow: 'hidden',
                 p: 3,
+                mb: 2, // Add margin from the bottom
                 borderRadius: 3,
-                bgcolor: 'rgba(0, 0, 0, 0.8)',
+                bgcolor: 'primary.main',
                 boxShadow: '0px 4px 15px rgba(0,0,0,0.5)',
                 width: '80vw',
                 maxWidth: '500px',
@@ -122,8 +142,7 @@ const LivePage = () => {
                 sx={{
                   mb: 2,
                   fontWeight: 700,
-                  color: '#FFD700',
-                  textShadow: '2px 2px 5px rgba(255, 215, 0, 0.8)',
+                  color: 'secondary.main',
                 }}
               >
                 🎉 {currentDonation.name} บริจาค {currentDonation.amount} บาท!
@@ -163,7 +182,7 @@ const LivePage = () => {
                   height: '8px',
                   bgcolor: 'rgba(255, 255, 255, 0.2)',
                   '& .MuiLinearProgress-bar': {
-                    bgcolor: '#FFD700',
+                    bgcolor: 'secondary.main',
                     animation: `progress ${DISPLAY_DURATION / 1000}s linear`,
                   },
                   '@keyframes progress': {
