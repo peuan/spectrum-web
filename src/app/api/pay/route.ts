@@ -4,11 +4,7 @@ import { NextResponse } from 'next/server'
 
 import { MethodNotAllowedException } from '@/server/errors/http-exceptions.error'
 import { createDonationTransaction } from '@/server/services/donation-transaction.service'
-import {
-  transferL3USD,
-  transferSPL,
-  postDonationMessage,
-} from '@/server/services/http.service'
+import { transferL3USD, transferSPL } from '@/server/services/http.service'
 import { getUserBySlug } from '@/server/services/user.service'
 import { handleError } from '@/server/utils/handle-error.util'
 
@@ -92,16 +88,6 @@ export async function POST(request: NextRequest) {
     // SPL Transfer for donator
     if (isValidEthereumAddress(donatorWalletAddress)) {
       transferSPL(donatorWalletAddress, total / usdRate / airDropDonator)
-    }
-
-    // Handle text message if present
-    if (text.length > 0) {
-      postDonationMessage({
-        donorName: 'จ่อย',
-        donorMessage: textDecoded,
-        amount: total,
-        clientSecret: 'roblox',
-      })
     }
 
     console.log('Post created successfully')
