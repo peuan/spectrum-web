@@ -16,11 +16,13 @@ interface AddressPair {
   slug: string
   donatorWalletAddress: string
   text: string
+  customerName: string
 }
 
 function splitAddress(addressString: string): AddressPair {
-  const [slug, text, donatorWalletAddress] = addressString.split('/')
-  return { slug, text, donatorWalletAddress }
+  const [slug, text, donatorWalletAddress, customerName] =
+    addressString.split('/')
+  return { slug, text, donatorWalletAddress, customerName }
 }
 
 function isValidEthereumAddress(address: string): boolean {
@@ -30,7 +32,6 @@ function isValidEthereumAddress(address: string): boolean {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.formData()
-    const customerName = String(body.get('customeremail'))
     const merchantId = body.get('merchantid')
     const productDetail = String(body.get('productdetail'))
     const total = Number(body.get('total'))
@@ -53,18 +54,22 @@ export async function POST(request: NextRequest) {
       throw new MethodNotAllowedException('Incorrect merchantId')
     }
 
-    const { slug, donatorWalletAddress, text } = splitAddress(productDetail)
+    const { slug, donatorWalletAddress, text, customerName } =
+      splitAddress(productDetail)
 
     const streamer = await getUserBySlug(slug)
 
     const textDecoded = Buffer.from(text, 'base64').toString('utf8')
+    const customerNameDecoded = Buffer.from(customerName, 'base64').toString(
+      'utf8'
+    )
     // store donation transaction
     createDonationTransaction({
       amount: total,
       userId: streamer.id,
       referenceNo,
       text: textDecoded,
-      donator: customerName,
+      donator: customerNameDecoded,
       donatorWalletAddress,
     })
 

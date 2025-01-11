@@ -1,54 +1,17 @@
 'use client'
 
-import { zodResolver } from '@hookform/resolvers/zod'
-import {
-  Box,
-  Typography,
-  TextField,
-  Button,
-  Stack,
-  Grid2,
-  Card,
-} from '@mui/material'
+import { Box, Card, Grid2, Typography } from '@mui/material'
 import axios from 'axios'
 import { useParams } from 'next/navigation'
-import { useState, useEffect } from 'react'
-import { useForm } from 'react-hook-form'
-import type { ZodType } from 'zod'
-import { z } from 'zod'
+import { useEffect, useState } from 'react'
 
-import IMaskInput from '@/components/IMaskInput'
+import DonateForm from '@/components/DonateForm'
 import NotFound from '@/components/NotFound'
 import PageLoading from '@/components/PageLoading'
 import QrCodePopup from '@/components/QrCodePopup'
-import { REQUIRED_ERROR } from '@/constants/message.constant'
 import useGetUserBySlug from '@/hooks/user/useGetUserBySlug'
 import type { DonateFormValues } from '@/interfaces/donate.interface'
 import { createClient } from '@/utils/supabase/client.util'
-
-const schema: ZodType<DonateFormValues> = z.object({
-  name: z
-    .string({
-      required_error: REQUIRED_ERROR,
-      invalid_type_error: REQUIRED_ERROR,
-    })
-    .trim()
-    .min(1, REQUIRED_ERROR),
-  amount: z
-    .string({
-      required_error: REQUIRED_ERROR,
-      invalid_type_error: REQUIRED_ERROR,
-    })
-    .trim()
-    .min(1, REQUIRED_ERROR),
-  message: z
-    .string({
-      required_error: REQUIRED_ERROR,
-      invalid_type_error: REQUIRED_ERROR,
-    })
-    .trim()
-    .min(1, REQUIRED_ERROR),
-})
 
 const supabase = createClient()
 
@@ -60,6 +23,7 @@ const SlugPage = () => {
   const [loading, setLoading] = useState(false)
   const [referenceNo, setReferenceNo] = useState('')
   const slug = String(params.slug)
+  const [isSuccess, setIsSuccess] = useState(false)
 
   const {
     data: user,
@@ -67,34 +31,20 @@ const SlugPage = () => {
     isLoading,
   } = useGetUserBySlug({ request: { slug } })
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: {
-      errors: { name, amount, message },
-    },
-  } = useForm({
-    resolver: zodResolver(schema),
-    defaultValues: {
-      name: user?.email ?? '',
-      amount: '',
-      message: '',
-    },
-  })
-
-  const onSubmit = async (formValues: DonateFormValues) => {
+  const handleSubmit = async (formValues: DonateFormValues) => {
+    setIsSuccess(false)
     const referenceNo = String(Date.now()).slice(-6)
     setReferenceNo(referenceNo)
-    const encoded = Buffer.from(formValues.message).toString('base64')
-    const combinedProductDetail = `${slug}/${encoded}/0xC3317062E170f5794825dC5D93D6b045f06Bf3a5`
+    const textEncoded = Buffer.from(formValues.message).toString('base64')
+    const nameEncoded = Buffer.from(formValues.name).toString('base64')
+    const combinedProductDetail = `${slug}/${textEncoded}/0xC3317062E170f5794825dC5D93D6b045f06Bf3a5/${nameEncoded}`
     // TODO: Get wallet from some where
 
     const payso: Record<string, string> = {
       merchantID: process.env.NEXT_PUBLIC_PAY_SOLUTIONS_MERCHANT_ID ?? '',
       productDetail: combinedProductDetail,
-      customerEmail: formValues.name,
-      customerName: formValues.name,
+      customerEmail: 'dome@gmailc.om',
+      customerName: 'dome',
       total: formValues.amount,
       referenceNo,
     }
@@ -142,7 +92,7 @@ const SlugPage = () => {
           setOpenPopup(true)
           setQrData('')
           setQrMessage('Donation successful!')
-          reset()
+          setIsSuccess(true)
           setReferenceNo('')
         }
       )
@@ -151,7 +101,7 @@ const SlugPage = () => {
     return () => {
       supabase.removeChannel(subscription)
     }
-  }, [referenceNo, reset])
+  }, [referenceNo])
 
   if (isLoading) {
     return (
@@ -259,7 +209,11 @@ const SlugPage = () => {
               <Card>
                 <Typography variant="h6">รายละเอียด</Typography>
                 <Typography variant="body1" sx={{ marginTop: 1 }}>
-                  สวัสดีครับ
+                  สวัสดีครับ ขอบคุณสำหรับการสนับสนุน{' '}
+                  <Typography component="span" color="secondary">
+                    {user.email}
+                  </Typography>{' '}
+                  ของคุณ
                 </Typography>
               </Card>
             </Grid2>
@@ -274,53 +228,16 @@ const SlugPage = () => {
                 <Typography variant="h6" sx={{ marginBottom: 2 }}>
                   มาเริ่มต้นการเปย์กับเรา
                 </Typography>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                  <Stack spacing={2}>
-                    <TextField
-                      label="Your name / ชื่อของคุณ"
-                      variant="outlined"
-                      fullWidth
-                      {...register('name')}
-                      error={!!name}
-                      helperText={name?.message}
-                    />
-                    <TextField
-                      label="Amount / จำนวนเงิน"
-                      variant="outlined"
-                      fullWidth
-                      {...register('amount')}
-                      slotProps={{
-                        input: {
-                          inputComponent: IMaskInput,
-                          inputProps: {
-                            mask: Number,
-                            min: 1,
-                          },
-                        },
-                      }}
-                      error={!!amount}
-                      helperText={amount?.message}
-                    />
-                    <TextField
-                      label="Message / ข้อความ"
-                      variant="outlined"
-                      fullWidth
-                      multiline
-                      rows={4}
-                      error={!!message}
-                      helperText={message?.message}
-                      {...register('message')}
-                    />
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      type="submit"
-                      disabled={loading}
-                    >
-                      เปย์เลย
-                    </Button>
-                  </Stack>
-                </form>
+                <DonateForm
+                  defaultValues={{
+                    name: user.email,
+                    amount: '',
+                    message: '',
+                  }}
+                  isLoading={loading}
+                  isSuccess={isSuccess}
+                  onSubmit={handleSubmit}
+                />
               </Card>
             </Grid2>
           </Grid2>
