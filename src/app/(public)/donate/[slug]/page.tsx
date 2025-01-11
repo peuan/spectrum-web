@@ -1,7 +1,15 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Box, Typography, TextField, Button, Stack, Grid2 } from '@mui/material'
+import {
+  Box,
+  Typography,
+  TextField,
+  Button,
+  Stack,
+  Grid2,
+  Card,
+} from '@mui/material'
 import axios from 'axios'
 import { useParams } from 'next/navigation'
 import { useState, useEffect } from 'react'
@@ -11,7 +19,6 @@ import { z } from 'zod'
 import IMaskInput from '@/components/IMaskInput'
 import QrCodePopup from '@/components/QrCodePopup'
 import { REQUIRED_ERROR } from '@/constants/message.constant'
-import theme from '@/theme'
 import { createClient } from '@/utils/supabase/client.util'
 
 const schema = z.object({
@@ -44,6 +51,7 @@ const SlugPage = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: {
       errors: { name, amount, message },
     },
@@ -58,10 +66,12 @@ const SlugPage = () => {
 
   const [openPopup, setOpenPopup] = useState(false)
   const [qrData, setQrData] = useState('')
+  const [qrMessage, setQrMessage] = useState('')
   const params = useParams()
   const [loading, setLoading] = useState(false)
   const [referenceNo, setReferenceNo] = useState('')
   const slug = params.slug
+
   const onSubmit = async (data: any) => {
     const referenceNo = String(Date.now()).slice(-6)
     setReferenceNo(referenceNo)
@@ -99,21 +109,35 @@ const SlugPage = () => {
       setLoading(false)
     }
   }
-
+  const handleClosePopup = () => {
+    setOpenPopup(false)
+    setQrMessage('')
+  }
   useEffect(() => {
     const subscription = supabase
-      .from('DonationTransaction')
-      .on('INSERT', (payload) => {
-        if (payload.new.referenceNo === referenceNo) {
-          toast.success('Donation successful!')
+      .channel('db-changes')
+      .on(
+        'postgres_changes',
+        {
+          event: 'INSERT',
+          schema: 'public',
+          table: 'DonationTransaction',
+          filter: `referenceNo=eq.${referenceNo}`,
+        },
+        () => {
+          setOpenPopup(true)
+          setQrData('')
+          setQrMessage('Donation successful!')
+          reset()
+          setReferenceNo('')
         }
-      })
+      )
       .subscribe()
 
     return () => {
-      supabase.removeSubscription(subscription)
+      supabase.removeChannel(subscription)
     }
-  }, [referenceNo])
+  }, [referenceNo, reset])
 
   return (
     <>
@@ -124,7 +148,7 @@ const SlugPage = () => {
           alignItems: 'center',
           flexDirection: 'column',
           minHeight: '100vh',
-          px: 3,
+          px: 4,
         }}
       >
         <Box
@@ -144,26 +168,18 @@ const SlugPage = () => {
           <Box
             sx={{
               position: 'absolute',
-              bottom: {
-                xs: 'un',
-                md: '-40px',
-                lg: '-40px',
-              },
-              left: {
-                xs: '50%',
-                md: '10%',
-                lg: '10%',
-              },
+
+              left: '50%',
               transform: 'translateX(-50%)',
               width: '150px',
               height: '150px',
               backgroundImage: 'url(/avatar.png)',
               backgroundSize: 'cover',
               borderRadius: '50%',
-              border: `4px solid ${theme.palette.common.black}`,
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
+              boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.5)',
             }}
           />
         </Box>
@@ -186,45 +202,27 @@ const SlugPage = () => {
               minWidth: '100%',
             }}
           >
-            {/* Left Section - รายละเอียด */}
             <Grid2
               size={{
                 xs: 12,
                 md: 6,
               }}
             >
-              <Box
-                sx={{
-                  width: '100%',
-                  padding: 3,
-                  border: '1px solid #444',
-                  borderRadius: '8px',
-                  backgroundColor: '#1A1A1A',
-                }}
-              >
+              <Card>
                 <Typography variant="h6">รายละเอียด</Typography>
                 <Typography variant="body1" sx={{ marginTop: 1 }}>
                   สวัสดีครับ
                 </Typography>
-              </Box>
+              </Card>
             </Grid2>
 
-            {/* Right Section - Form */}
             <Grid2
               size={{
                 xs: 12,
                 md: 6,
               }}
             >
-              <Box
-                sx={{
-                  width: '100%',
-                  padding: 3,
-                  border: '1px solid #444',
-                  borderRadius: '8px',
-                  backgroundColor: '#1A1A1A',
-                }}
-              >
+              <Card>
                 <Typography variant="h6" sx={{ marginBottom: 2 }}>
                   มาเริ่มต้นการเปย์กับเรา
                 </Typography>
@@ -268,11 +266,6 @@ const SlugPage = () => {
                     <Button
                       variant="contained"
                       color="primary"
-                      sx={{
-                        backgroundColor: '#536DFE',
-                        color: '#FFF',
-                        ':hover': { backgroundColor: '#304FFE' },
-                      }}
                       type="submit"
                       disabled={loading}
                     >
@@ -280,15 +273,16 @@ const SlugPage = () => {
                     </Button>
                   </Stack>
                 </form>
-              </Box>
+              </Card>
             </Grid2>
           </Grid2>
         </Box>
       </Box>
       <QrCodePopup
         open={openPopup}
-        onClose={() => setOpenPopup(false)}
+        onClose={() => handleClosePopup()}
         qrCodeImageUrl={qrData}
+        message={qrMessage}
       />
     </>
   )
