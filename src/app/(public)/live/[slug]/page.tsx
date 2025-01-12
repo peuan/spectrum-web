@@ -1,23 +1,20 @@
 'use client'
 
-import { Box, Typography, LinearProgress } from '@mui/material'
+import { Box, Typography, LinearProgress, Stack } from '@mui/material'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useParams } from 'next/navigation'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import Particles from 'react-particles'
-import { loadFull } from 'tsparticles'
-import type { Container, Engine } from 'tsparticles-engine'
+import Fireworks from 'react-canvas-confetti/dist/presets/fireworks'
 
 import useGetUserBySlug from '@/hooks/user/useGetUserBySlug'
 import { createClient } from '@/utils/supabase/client.util'
 
-const MIN_TTS_AMOUNT = 1
 const supabase = createClient()
 
 const LivePage = () => {
   const particlesContainer = useRef<any>(null)
   const param = useParams()
-  const [ttsDuration, setTtsDuration] = useState<number>(0) // TTS duration in milliseconds
+  const [progress, setProgress] = useState<number>(100) // Progress value
 
   const slug = param.slug as string
 
@@ -37,7 +34,59 @@ const LivePage = () => {
   const hideDonation = useCallback(() => {
     setCurrentDonation(null)
     particlesContainer.current?.stop()
+    setProgress(100) // Reset progress for next donation
   }, [])
+
+  const playTTS = useCallback(
+    async (message: string): Promise<void> =>
+      new Promise(async (resolve) => {
+        try {
+          const response = await fetch(
+            `/api/voice?text=${encodeURIComponent(message)}`
+          )
+          const data = await response.json()
+          const audio = new Audio(`data:audio/mp3;base64,${data.audioBase64}`)
+
+          audio.onloadedmetadata = () => {
+            const durationInMilliseconds = audio.duration * 1000
+            setProgress(100) // Start the progress at 100%
+
+            // Calculate the interval duration for decrementing progress by 5%
+            const stepInterval = durationInMilliseconds / 20 // 20 steps = 5% decrement each step
+
+            const interval = setInterval(() => {
+              setProgress((prev) => {
+                const nextProgress = prev - 5 // Decrease by 5%
+                if (nextProgress <= 0) {
+                  clearInterval(interval) // Stop when progress reaches 0
+                  return 0
+                }
+                return nextProgress
+              })
+            }, stepInterval)
+          }
+
+          audio.play()
+
+          audio.onended = () => {
+            setProgress(0) // Ensure progress reaches 0 when the audio ends
+            resolve() // Resolve the promise when audio finishes
+          }
+
+          audio.onerror = (error) => {
+            console.error('Error playing TTS audio:', error)
+            setProgress(0) // Immediately set progress to 0 in case of error
+            resolve() // Resolve the promise to prevent blocking
+          }
+        } catch (error) {
+          console.error('Error playing TTS audio:', error)
+          setProgress(0) // Reset progress in case of error
+          resolve() // Resolve the promise to prevent blocking
+        }
+      }),
+    []
+  )
+
   const showDonation = useCallback(
     async (donation: {
       timestamp: number
@@ -45,18 +94,18 @@ const LivePage = () => {
       name: string
       message: string
     }) => {
-      if (Number(donation.amount) >= MIN_TTS_AMOUNT) {
-        await playTTS(
-          `${donation.name} บริจาค ${donation.amount} บาท: ${donation.message}`
-        )
-      }
+      setCurrentDonation(donation) // Display the donation
+      particlesContainer.current?.start() // Start particles animation
 
-      // Start the progress bar animation
-      setTimeout(() => {
-        hideDonation() // Hide everything immediately after the progress bar reaches 0
-      }, ttsDuration) // Sync with TTS playback duration
+      // Wait for the TTS playback to finish
+      await playTTS(
+        `${donation.name} บริจาค ${donation.amount} บาท: ${donation.message}`
+      )
+
+      // Hide the donation after TTS playback duration
+      hideDonation()
     },
-    [hideDonation, ttsDuration]
+    [playTTS, hideDonation]
   )
 
   useEffect(() => {
@@ -90,44 +139,6 @@ const LivePage = () => {
     }
   }, [hideDonation, showDonation, user?.id])
 
-  const playTTS = async (message: string): Promise<void> =>
-    new Promise(async (resolve, _) => {
-      try {
-        const response = await fetch(
-          `/api/voice?text=${encodeURIComponent(message)}`
-        )
-        const data = await response.json()
-        const audio = new Audio(`data:audio/mp3;base64,${data.audioBase64}`)
-        audio.onloadedmetadata = () => {
-          setTtsDuration(audio.duration * 1000) // Duration in milliseconds
-        }
-
-        audio.play()
-
-        audio.onended = () => {
-          resolve() // Resolve the promise when audio finishes
-        }
-        audio.onerror = (error) => {
-          console.error('Error playing TTS audio:', error)
-          resolve() // Still resolve even if there's an error
-        }
-      } catch (error) {
-        console.error('Error playing TTS audio:', error)
-        resolve() // Resolve the promise to prevent blocking
-      }
-    })
-
-  const particlesInit = useCallback(async (engine: Engine) => {
-    await loadFull(engine)
-  }, [])
-
-  const particlesLoaded = useCallback(
-    async (container: Container | undefined) => {
-      container?.stop()
-    },
-    []
-  )
-
   isLoading && <div>Loading...</div>
   isError && <div>Error: {isError}</div>
   return (
@@ -137,10 +148,9 @@ const LivePage = () => {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'flex-end',
-        height: '100vh',
         color: 'white',
-        overflow: 'hidden',
+        height: '100vh',
+        width: '100vw',
       }}
     >
       <AnimatePresence>
@@ -153,14 +163,10 @@ const LivePage = () => {
             transition={{ duration: 0.5, ease: 'easeOut' }}
             style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
           >
-            <Box
+            <Stack
               sx={{
                 textAlign: 'center',
-                p: 3,
-                mb: 2,
-                width: '80vw',
-                maxWidth: '500px',
-                position: 'relative',
+                alignItems: 'center',
               }}
             >
               <Typography
@@ -168,6 +174,7 @@ const LivePage = () => {
                 sx={{
                   mb: 2,
                   fontWeight: 700,
+                  fontSize: '2em',
                   color: 'white',
                   textShadow: '0px 0px 10px rgba(255, 255, 255, 0.9)',
                 }}
@@ -179,6 +186,8 @@ const LivePage = () => {
                 <Typography
                   variant="body1"
                   sx={{
+                    fontSize: '2em',
+
                     fontStyle: 'italic',
                     color: '#E6E6E6',
                   }}
@@ -191,161 +200,29 @@ const LivePage = () => {
                 src="/cute-bear.gif"
                 alt="Donation Image"
                 sx={{
-                  width: '150px',
-                  height: 'auto',
                   mt: 2,
+                  width: '489px',
                   filter: 'drop-shadow(0px 0px 10px rgba(255, 255, 255, 0.8))',
                 }}
               />
               {/* Progress Bar */}
               <LinearProgress
                 variant="determinate"
-                value={100}
+                value={progress}
                 sx={{
-                  position: 'absolute',
-                  bottom: 0,
-                  left: 0,
-                  width: '100%',
-                  height: '8px',
+                  width: '489px',
+                  height: '20px',
                   bgcolor: 'rgba(255, 255, 255, 0.2)',
                   '& .MuiLinearProgress-bar': {
                     bgcolor: 'secondary.main',
-                    animation: `progress ${ttsDuration / 1000}s linear`,
-                  },
-                  '@keyframes progress': {
-                    from: { width: '100%' },
-                    to: { width: '0%' },
                   },
                 }}
               />
-            </Box>
+            </Stack>
           </motion.div>
         )}
       </AnimatePresence>
-      {/* Fire Sparkles */}
-      <Particles
-        container={particlesContainer}
-        id="tsparticles"
-        loaded={particlesLoaded}
-        init={particlesInit}
-        options={{
-          fullScreen: {
-            zIndex: 1,
-          },
-          emitters: {
-            position: {
-              x: 50,
-              y: 100,
-            },
-            rate: {
-              quantity: 5,
-              delay: 0.15,
-            },
-          },
-          particles: {
-            color: {
-              value: ['#1E00FF', '#FF0061', '#E1FF00', '#00FF9E'],
-            },
-            move: {
-              decay: 0.05,
-              direction: 'top',
-              enable: true,
-              gravity: {
-                enable: true,
-              },
-              outModes: {
-                top: 'none',
-                default: 'destroy',
-              },
-              speed: {
-                min: 50,
-                max: 100,
-              },
-            },
-            number: {
-              value: 0,
-            },
-            opacity: {
-              value: 1,
-            },
-            rotate: {
-              value: {
-                min: 0,
-                max: 360,
-              },
-              direction: 'random',
-              animation: {
-                enable: true,
-                speed: 30,
-              },
-            },
-            tilt: {
-              direction: 'random',
-              enable: true,
-              value: {
-                min: 0,
-                max: 360,
-              },
-              animation: {
-                enable: true,
-                speed: 30,
-              },
-            },
-            size: {
-              value: 3,
-              animation: {
-                enable: true,
-                startValue: 'min',
-                count: 1,
-                speed: 16,
-                sync: true,
-              },
-            },
-            roll: {
-              darken: {
-                enable: true,
-                value: 25,
-              },
-              enlighten: {
-                enable: true,
-                value: 25,
-              },
-              enable: true,
-              speed: {
-                min: 5,
-                max: 15,
-              },
-            },
-            wobble: {
-              distance: 30,
-              enable: true,
-              speed: {
-                min: -7,
-                max: 7,
-              },
-            },
-            shape: {
-              type: ['circle', 'square'],
-              options: {},
-            },
-          },
-          responsive: [
-            {
-              maxWidth: 1024,
-              options: {
-                particles: {
-                  move: {
-                    speed: {
-                      min: 33,
-                      max: 66,
-                    },
-                  },
-                },
-              },
-            },
-          ],
-        }}
-      />
+      {currentDonation && <Fireworks autorun={{ speed: 3 }} />}
     </Box>
   )
 }
