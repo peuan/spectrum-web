@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Button, Stack, TextField } from '@mui/material'
+import { Button, Stack, TextField, Typography } from '@mui/material'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import type { ZodType } from 'zod'
@@ -17,7 +17,8 @@ const schema: ZodType<DonateFormValues> = z.object({
       invalid_type_error: REQUIRED_ERROR,
     })
     .trim()
-    .min(1, REQUIRED_ERROR),
+    .min(1, REQUIRED_ERROR)
+    .max(30, 'Name must be 30 characters or less'),
   amount: z
     .string({
       required_error: REQUIRED_ERROR,
@@ -31,7 +32,8 @@ const schema: ZodType<DonateFormValues> = z.object({
       invalid_type_error: REQUIRED_ERROR,
     })
     .trim()
-    .min(1, REQUIRED_ERROR),
+    .min(1, REQUIRED_ERROR)
+    .max(30, 'Message must be 30 characters or less'),
 })
 
 interface DonateFormProps {
@@ -51,6 +53,7 @@ const DonateForm = ({
     register,
     handleSubmit,
     reset,
+    watch,
     formState: {
       errors: { name, amount, message },
     },
@@ -58,6 +61,9 @@ const DonateForm = ({
     resolver: zodResolver(schema),
     defaultValues,
   })
+
+  const messageValue = watch('message') || ''
+  const nameValue = watch('name') || ''
 
   useEffect(() => {
     if (isSuccess) {
@@ -69,7 +75,7 @@ const DonateForm = ({
     <form onSubmit={handleSubmit(onSubmit)}>
       <Stack spacing={2}>
         <TextField
-          label="Your name / ชื่อของคุณ"
+          label="Your name"
           variant="outlined"
           fullWidth
           {...register('name')}
@@ -83,8 +89,11 @@ const DonateForm = ({
           error={!!name}
           helperText={name?.message}
         />
+        <Typography variant="caption" color="textSecondary">
+          {nameValue?.length} / 30
+        </Typography>
         <TextField
-          label="Amount / จำนวนเงิน"
+          label="Amount"
           variant="outlined"
           fullWidth
           {...register('amount')}
@@ -101,15 +110,25 @@ const DonateForm = ({
           helperText={amount?.message}
         />
         <TextField
-          label="Message / ข้อความ"
+          label="Message"
           variant="outlined"
           fullWidth
           multiline
           rows={4}
+          {...register('message')}
           error={!!message}
           helperText={message?.message}
-          {...register('message')}
+          slotProps={{
+            input: {
+              inputProps: {
+                maxLength: 30,
+              },
+            },
+          }}
         />
+        <Typography variant="caption" color="textSecondary">
+          {messageValue.length} / 30
+        </Typography>
         <Button
           variant="contained"
           color="primary"

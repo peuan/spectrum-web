@@ -112,7 +112,6 @@ const SlugPage = () => {
           alignItems: 'center',
           flexDirection: 'column',
           minHeight: '100vh',
-          px: 4,
         }}
       >
         <PageLoading />
@@ -129,7 +128,6 @@ const SlugPage = () => {
           alignItems: 'center',
           flexDirection: 'column',
           minHeight: '100vh',
-          px: 4,
         }}
       >
         <NotFound />
@@ -146,7 +144,7 @@ const SlugPage = () => {
           alignItems: 'center',
           flexDirection: 'column',
           minHeight: '100vh',
-          px: 4,
+          mb: 2,
         }}
       >
         <Box
@@ -160,7 +158,10 @@ const SlugPage = () => {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            marginTop: 8,
+            mt: {
+              xs: 0,
+              md: 12,
+            },
           }}
         >
           <Box
@@ -168,6 +169,10 @@ const SlugPage = () => {
               position: 'absolute',
 
               left: '50%',
+              top: {
+                xs: '75px',
+                md: 'auto',
+              },
               transform: 'translateX(-50%)',
               width: '150px',
               height: '150px',
@@ -190,7 +195,8 @@ const SlugPage = () => {
             alignItems: 'center',
             flexDirection: 'column',
             width: '100%',
-            mt: 6,
+            mt: 2,
+            px: 4,
           }}
         >
           <Grid2
@@ -207,13 +213,13 @@ const SlugPage = () => {
               }}
             >
               <Card>
-                <Typography variant="h6">รายละเอียด</Typography>
+                <Typography variant="h6">Details</Typography>
                 <Typography variant="body1" sx={{ marginTop: 1 }}>
-                  สวัสดีครับ ขอบคุณสำหรับการสนับสนุน{' '}
+                  Hello, thank you for your support!
                   <Typography component="span" color="secondary">
+                    {' '}
                     {user.email}
                   </Typography>{' '}
-                  ของคุณ
                 </Typography>
               </Card>
             </Grid2>
@@ -226,7 +232,7 @@ const SlugPage = () => {
             >
               <Card>
                 <Typography variant="h6" sx={{ marginBottom: 2 }}>
-                  มาเริ่มต้นการเปย์กับเรา
+                  Let&apos;s start donating with us
                 </Typography>
                 <DonateForm
                   defaultValues={{
