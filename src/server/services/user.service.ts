@@ -26,6 +26,7 @@ export const createUserIfNotExists = async ({
     const newUser = await prisma.user.create({
       data: {
         donationSlug: generateDonationSlug(providerId),
+        liveSlug: generateDonationSlug(providerId, 6),
         providerId,
         email,
         role: Role.USER,

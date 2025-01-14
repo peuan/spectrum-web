@@ -24,6 +24,7 @@ model User {
   id                   Int                   @id @default(autoincrement())
   providerId           String                @db.Uuid // ID provided by the authentication provider
   donationSlug         String
+  liveSlug             String
   walletAddress        String?
   email                String?
   role                 Role                  @default(USER)

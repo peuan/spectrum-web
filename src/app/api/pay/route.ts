@@ -52,6 +52,7 @@ export async function POST(request: NextRequest) {
 
     const { slug, donatorWalletAddress, text, customerName } =
       splitAddress(productDetail)
+    console.log('donatorWalletAddress', donatorWalletAddress)
 
     const streamer = await getUserBySlug(slug)
 
