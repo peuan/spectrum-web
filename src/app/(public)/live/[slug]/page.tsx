@@ -6,7 +6,7 @@ import { useParams } from 'next/navigation'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Fireworks from 'react-canvas-confetti/dist/presets/fireworks'
 
-import useGetUserLiveBySlug from '@/hooks/user/useGetUserBySlug'
+import useGetUserLiveBySlug from '@/hooks/user/useGetUserByLiveSlug'
 import { createClient } from '@/utils/supabase/client.util'
 
 const supabase = createClient()
