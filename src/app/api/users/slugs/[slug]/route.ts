@@ -7,7 +7,7 @@ export async function GET(
   request: Request,
   { params }: { params: { slug: string } }
 ) {
-  const { slug } = params
+  const { slug } = await params
   try {
     return NextResponse.json(await getUserBySlug(slug))
   } catch (error) {

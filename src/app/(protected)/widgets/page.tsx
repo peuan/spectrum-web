@@ -58,13 +58,13 @@ const WidgetsPage = () => {
                 fontWeight="bold"
                 gutterBottom
               >
-                {process.env.NEXT_PUBLIC_BASE_URL}/live/{user.donationSlug}
+                {process.env.NEXT_PUBLIC_BASE_URL}/live/{user.liveSlug}
               </Typography>
               <Button
                 variant="contained"
                 onClick={() =>
                   handleCopy(
-                    `${process.env.NEXT_PUBLIC_BASE_URL}/live/${user.donationSlug}`
+                    `${process.env.NEXT_PUBLIC_BASE_URL}/live/${user.liveSlug}`
                   )
                 }
               >
