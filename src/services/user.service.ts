@@ -30,3 +30,17 @@ export const getUserBySlug = async (slug: string) => {
     throw error
   }
 }
+
+export const getUserByLiveSlug = async (slug: string) => {
+  try {
+    const { data } = await axiosClient.get<User>(`/users/slugs/lives/${slug}`)
+
+    return data
+  } catch (error) {
+    if (isAxiosError(error)) {
+      throw error.response?.data
+    }
+
+    throw error
+  }
+}

@@ -6,7 +6,7 @@ import { useParams } from 'next/navigation'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Fireworks from 'react-canvas-confetti/dist/presets/fireworks'
 
-import useGetUserBySlug from '@/hooks/user/useGetUserBySlug'
+import useGetUserLiveBySlug from '@/hooks/user/useGetUserBySlug'
 import { createClient } from '@/utils/supabase/client.util'
 
 const supabase = createClient()
@@ -22,7 +22,7 @@ const LivePage = () => {
     data: user,
     isError,
     isLoading,
-  } = useGetUserBySlug({ request: { slug } })
+  } = useGetUserLiveBySlug({ request: { slug } })
 
   const [currentDonation, setCurrentDonation] = useState<{
     timestamp: number
