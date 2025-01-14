@@ -37,7 +37,7 @@ const SlugPage = () => {
     setReferenceNo(referenceNo)
     const textEncoded = Buffer.from(formValues.message).toString('base64')
     const nameEncoded = Buffer.from(formValues.name).toString('base64')
-    const combinedProductDetail = `${slug}/${textEncoded}/0xC3317062E170f5794825dC5D93D6b045f06Bf3a5/${nameEncoded}`
+    const combinedProductDetail = `${slug}/${textEncoded}/${user?.walletAddress}/${nameEncoded}`
     // TODO: Get wallet from some where
 
     const payso: Record<string, string> = {
@@ -236,7 +236,7 @@ const SlugPage = () => {
                 </Typography>
                 <DonateForm
                   defaultValues={{
-                    name: user.email,
+                    name: user.email!,
                     amount: '',
                     message: '',
                   }}
