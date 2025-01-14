@@ -46,32 +46,6 @@ export const transferSPL = async (toAddress: string, amount: number) => {
   }
 }
 
-export const postDonationMessage = async ({
-  donorName,
-  donorMessage,
-  amount,
-  clientSecret,
-}: {
-  donorName: string
-  donorMessage: string
-  amount: number
-  clientSecret: string
-}) => {
-  try {
-    const urlMsg = 'https://dream.tk9.us/api/donations'
-    const response = await axios.post(urlMsg, {
-      donorName,
-      donorMessage,
-      amount: parseFloat(amount.toFixed(2)),
-      clientSecret,
-    })
-    return response.data
-  } catch (error) {
-    console.error('Message posting error:', error)
-    throw error // Rethrow to handle it in the calling function
-  }
-}
-
 export const createWallet = async () => {
   const localHeaders = {
     Authorization: `Bearer ${engineAuthorizationToken}`,
